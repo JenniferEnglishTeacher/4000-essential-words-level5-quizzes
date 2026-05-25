@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4000 Essential Words – Level 5 Unit 23 | Interactive Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+    --color-primary: #1a3a5c;
+    --color-accent: #c8962e;
+    --color-correct: #2d7a4f;
+    --color-incorrect: #b53a2f;
+    --color-clue: #fff3a3;
+    --color-surface: #faf8f5;
+    --color-card: #ffffff;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(26,58,92,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body);
+    background: var(--color-surface);
+    color: #1a2433;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 18px 24px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  }
+  .header-title { font-family: var(--font-heading); font-size: 1.15rem; line-height: 1.25; }
+  .header-sub { font-size: .78rem; opacity: .75; margin-top: 2px; }
+  .score-badge {
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-weight: 600;
+    font-size: .9rem;
+    white-space: nowrap;
+    min-width: 90px;
+    text-align: center;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap { margin-bottom: 18px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .82rem; color: #556; margin-bottom: 6px; }
+  .progress-bar-bg { background: #dde3ea; border-radius: 8px; height: 8px; }
+  .progress-bar-fill {
+    height: 8px; border-radius: 8px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    transition: width .35s ease;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px 28px 22px;
+    margin-bottom: 18px;
+  }
+
+  /* ── QUESTION TEXT ── */
+  .q-number {
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 8px;
+  }
+  .q-passage {
+    font-size: 1.04rem;
+    line-height: 1.75;
+    color: #1e2c3a;
+    margin-bottom: 16px;
+  }
+  .q-passage .word {
+    cursor: pointer;
+    border-bottom: 1px dotted #aab;
+    transition: background .15s;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+  .q-passage .word:hover { background: #e8f0fc; }
+  .clue-highlight { background: var(--color-clue) !important; border-radius: 3px; padding: 0 2px; }
+
+  /* TTS button */
+  .tts-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--color-primary); font-size: .95rem;
+    margin-right: 8px; vertical-align: middle;
+    opacity: .7; transition: opacity .15s;
+  }
+  .tts-btn:hover { opacity: 1; }
+
+  /* ── WORD HELPER ── */
+  .word-helper {
+    background: #eef4fb;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: .88rem;
+    margin-bottom: 14px;
+    display: none;
+    animation: fadeIn .2s;
+  }
+  .word-helper.visible { display: block; }
+  .word-helper strong { color: var(--color-primary); }
+  .word-helper .helper-phonetic { color: #778; font-style: italic; font-size: .82rem; }
+  .word-helper .helper-meaning { margin-top: 4px; }
+
+  /* ── OPTIONS ── */
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  @media(max-width:520px){ .options-grid { grid-template-columns: 1fr; } }
+
+  .opt-btn {
+    display: flex; align-items: center; gap: 10px;
+    background: #f0f4fa;
+    border: 2px solid transparent;
+    border-radius: 9px;
+    padding: 11px 14px;
+    font-family: var(--font-body);
+    font-size: .95rem;
+    color: #1a2433;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, transform .1s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .opt-btn:hover:not(:disabled) { background: #dde8f7; border-color: var(--color-primary); transform: translateY(-1px); }
+  .opt-btn .opt-label {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--color-primary); color: #fff;
+    font-weight: 700; font-size: .82rem; flex-shrink: 0;
+  }
+  .opt-btn.correct { background: #d4edda; border-color: var(--color-correct); }
+  .opt-btn.correct .opt-label { background: var(--color-correct); }
+  .opt-btn.incorrect { background: #f8d7da; border-color: var(--color-incorrect); }
+  .opt-btn.incorrect .opt-label { background: var(--color-incorrect); }
+  .opt-btn:disabled { cursor: default; transform: none; }
+
+  /* ── FEEDBACK BOX ── */
+  .feedback-box {
+    display: none;
+    margin-top: 16px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid #dde3ea;
+    animation: fadeIn .25s;
+  }
+  .feedback-box.visible { display: block; }
+  .feedback-header {
+    padding: 9px 16px;
+    font-weight: 600;
+    font-size: .88rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .feedback-header.correct-header { background: #d4edda; color: var(--color-correct); }
+  .feedback-header.incorrect-header { background: #f8d7da; color: var(--color-incorrect); }
+  .vocab-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  @media(max-width:540px){ .vocab-cards { grid-template-columns: 1fr; } }
+  .vocab-card {
+    padding: 12px 14px;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    font-size: .84rem;
+    line-height: 1.5;
+  }
+  .vocab-card:nth-child(2n){ border-right: none; }
+  .vocab-card .vc-word { font-weight: 700; color: var(--color-primary); font-size: .92rem; }
+  .vocab-card .vc-en { color: #334; margin: 2px 0; }
+  .vocab-card .vc-cn { color: #667; font-size: .82rem; }
+  .vocab-card .vc-ex { color: #445; font-style: italic; font-size: .82rem; margin-top: 3px; border-left: 2px solid var(--color-accent); padding-left: 7px; }
+
+  /* ── NAVIGATION ── */
+  .nav-row { display: flex; justify-content: flex-end; margin-top: 16px; }
+  .next-btn {
+    background: var(--color-primary); color: #fff;
+    border: none; border-radius: 9px; padding: 11px 26px;
+    font-family: var(--font-body); font-size: .95rem; font-weight: 600;
+    cursor: pointer; display: none; align-items: center; gap: 8px;
+    transition: background .15s, transform .1s;
+  }
+  .next-btn:hover { background: #244d7a; transform: translateY(-1px); }
+  .next-btn.visible { display: inline-flex; }
+
+  /* ── RESULTS SCREEN ── */
+  #results-screen {
+    display: none;
+    text-align: center;
+  }
+  #results-screen.visible { display: block; }
+  .results-card {
+    background: var(--color-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 48px 32px;
+    max-width: 500px;
+    margin: 40px auto;
+  }
+  .results-icon { font-size: 3.5rem; margin-bottom: 16px; }
+  .results-score { font-family: var(--font-heading); font-size: 3rem; color: var(--color-primary); }
+  .results-pct { font-size: 1.1rem; color: var(--color-accent); font-weight: 600; margin-bottom: 8px; }
+  .results-msg { font-size: 1.05rem; color: #334; margin-bottom: 8px; }
+  .results-msg-cn { font-size: .95rem; color: #667; }
+  .restart-btn {
+    margin-top: 28px;
+    background: var(--color-primary); color: #fff;
+    border: none; border-radius: 9px; padding: 13px 36px;
+    font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: background .15s;
+  }
+  .restart-btn:hover { background: #244d7a; }
+
+  /* ── GOOGLE FORM LINK BANNER ── */
+  .gform-banner {
+    background: linear-gradient(135deg,#1a3a5c,#244d7a);
+    color:#fff; border-radius: var(--radius);
+    padding: 18px 22px; margin-bottom: 22px;
+    display: flex; align-items: center; gap: 14px;
+    font-size: .9rem; line-height: 1.5;
+  }
+  .gform-banner i { font-size: 1.4rem; flex-shrink: 0; color: var(--color-accent); }
+  .gform-banner a { color: #a8d0ff; text-decoration: underline; }
+
+  /* ── SUBMIT SCORE FORM ── */
+  #submit-form { margin-top: 22px; }
+  #submit-form input {
+    border: 2px solid #dde3ea; border-radius: 8px;
+    padding: 10px 14px; font-family: var(--font-body); font-size: .95rem;
+    width: 100%; margin-bottom: 10px;
+    transition: border-color .15s;
+  }
+  #submit-form input:focus { outline: none; border-color: var(--color-primary); }
+  #submit-form .submit-btn {
+    background: var(--color-accent); color: #fff;
+    border: none; border-radius: 8px; padding: 11px 26px;
+    font-family: var(--font-body); font-size: .95rem; font-weight: 600;
+    cursor: pointer; width: 100%; transition: background .15s;
+  }
+  #submit-form .submit-btn:hover { background: #a87820; }
+  #submit-msg { font-size: .88rem; margin-top: 8px; color: var(--color-correct); }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-title">4000 Essential Words — Level 5, Unit 23</div>
+    <div class="header-sub">Interactive Vocabulary Quiz &nbsp;|&nbsp; 100 Questions</div>
+  </div>
+  <div class="score-badge" id="score-badge">Score: 0</div>
+</header>
+
+<main>
+  <!-- Google Sheets submission banner -->
+  <div class="gform-banner">
+    <i class="fa-brands fa-google"></i>
+    <div>
+      <strong>Submit your result to the teacher!</strong>
+      After finishing, enter your name and student ID to send your score automatically.
+      <br>
+      <span style="font-size:.82rem;opacity:.8;">完成後，輸入姓名與學號，成績將自動傳送給老師。</span>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="q-counter">Question 1 of 100</span>
+      <span id="q-pct">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill" style="width:1%"></div>
+    </div>
+  </div>
+
+  <!-- Question card -->
+  <div id="quiz-screen">
+    <div class="card">
+      <div class="q-number" id="q-number">Q1</div>
+
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <button class="tts-btn" id="tts-passage-btn" title="Read aloud" onclick="readPassage()">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+        <span style="font-size:.78rem;color:#889;">Click any word for definition</span>
+      </div>
+
+      <div class="q-passage" id="q-passage"></div>
+
+      <div class="word-helper" id="word-helper">
+        <strong id="helper-word"></strong>
+        <span class="helper-phonetic" id="helper-phonetic"></span>
+        <div class="helper-meaning" id="helper-meaning"></div>
+      </div>
+
+      <div class="options-grid" id="options-grid"></div>
+
+      <div class="feedback-box" id="feedback-box">
+        <div class="feedback-header" id="feedback-header"></div>
+        <div class="vocab-cards" id="vocab-cards"></div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="next-btn" id="next-btn" onclick="nextQuestion()">
+        Next Question <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Results screen -->
+  <div id="results-screen">
+    <div class="results-card">
+      <div class="results-icon" id="results-icon">🎉</div>
+      <div class="results-score" id="results-score">0 / 100</div>
+      <div class="results-pct" id="results-pct"></div>
+      <div class="results-msg" id="results-msg"></div>
+      <div class="results-msg-cn" id="results-msg-cn"></div>
+
+      <div id="submit-form">
+        <p style="font-weight:600;margin-bottom:10px;font-size:.92rem;">
+          <i class="fa-solid fa-paper-plane" style="color:var(--color-accent)"></i>
+          &nbsp;Send your score to the teacher:
+        </p>
+        <input type="text" id="student-name" placeholder="Your full name (姓名)" />
+        <input type="text" id="student-id" placeholder="Student ID / Class number (學號)" />
+        <button class="submit-btn" onclick="submitScore()">
+          <i class="fa-solid fa-cloud-arrow-up"></i> &nbsp;Submit Score
+        </button>
+        <div id="submit-msg"></div>
+      </div>
+
+      <button class="restart-btn" onclick="restartQuiz()">
+        <i class="fa-solid fa-rotate-right"></i> &nbsp;Try Again
+      </button>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   QUESTION DATA  — 100 MCQs from Unit 23
+   Answer key pattern (repeating every 20):
+   B C D A D | D A C B A | D B C A C | A D B C B
+═══════════════════════════════════════════════════ */
+
+const questions = [
+  // Q1–20
+  {q:"The scientist made sure that the data was completely __________ so that the experiment results would be reliable.",options:["analytical","accurate","genetic","identical"],answer:"accurate",clues:["data","experiment","reliable","completely"]},
+  {q:"The marketing team will __________ the consumer feedback to understand why the new product failed to sell.",options:["multiply","regulate","analyze","evolve"],answer:"analyze",clues:["consumer","feedback","understand","product"]},
+  {q:"Scientists are tracking a massive __________ that is passing near our solar system this month.",options:["asteroid","mammal","pesticide","crater"],answer:"asteroid",clues:["Scientists","tracking","massive","solar system"]},
+  {q:"The new government tax policy created a lot of public __________ and led to peaceful protests today.",options:["controversy","evolution","accuracy","offspring"],answer:"controversy",clues:["government","policy","public","protests"]},
+  {q:"Languages tend to __________ over centuries as people invent new words and adopt different phrases.",options:["multiply","strike","reinforce","evolve"],answer:"evolve",clues:["Languages","centuries","new words","phrases"]},
+  {q:"Diet is a major __________ that affects a person's long-term physical health and energy levels.",options:["intellect","analysis","pesticide","factor"],answer:"factor",clues:["Diet","affects","long-term","health"]},
+  {q:"Some medical conditions are purely __________, meaning they are passed down from parents to their children.",options:["genetic","accurate","vast","controversial"],answer:"genetic",clues:["medical","conditions","passed down","parents"]},
+  {q:"Scientists have successfully mapped the complete corn __________ to help farmers improve crop production and quality.",options:["crater","genome","controversy","factor"],answer:"genome",clues:["Scientists","mapped","corn","crop production"]},
+  {q:"The two luxury cars are completely __________ in design, except that one has red seats inside.",options:["analytical","identical","accurate","genetic"],answer:"identical",clues:["two","cars","completely","design","except"]},
+  {q:"Professor Higgins is considered a leading __________ who frequently publishes articles about complex philosophical topics.",options:["intellectual","mammal","analyst","regulator"],answer:"intellectual",clues:["Professor","leading","publishes","philosophical"]},
+  // Q11–20
+  {q:"The __________ of the students voted to have the graduation party at the beach restaurant next month.",options:["accuracy","evolution","offspring","majority"],answer:"majority",clues:["students","voted","graduation","party"]},
+  {q:"The whale is a unique marine __________ that looks like a fish but actually breathes air through lungs.",options:["pesticide","mammal","asteroid","factor"],answer:"mammal",clues:["whale","marine","fish","breathes","lungs"]},
+  {q:"If you do not clean the kitchen counter regularly, dangerous bacteria will quickly __________ and contaminate food.",options:["evolve","analyze","multiply","strike"],answer:"multiply",clues:["bacteria","quickly","contaminate","kitchen","regularly"]},
+  {q:"Animals in the wild spend a massive amount of energy trying to keep their vulnerable __________ safe from predators.",options:["offspring","majority","genetics","accuracy"],answer:"offspring",clues:["Animals","wild","vulnerable","safe","predators"]},
+  {q:"The farmer sprayed a chemical __________ over the crop fields to protect the tomatoes from destructive insects.",options:["genome","crater","pesticide","factor"],answer:"pesticide",clues:["farmer","sprayed","chemical","tomatoes","insects"]},
+  {q:"The government decided to introduce strict new laws to __________ the prices of essential medical drugs online.",options:["regulate","analyze","reinforce","multiply"],answer:"regulate",clues:["government","strict","laws","prices","medical"]},
+  {q:"The teacher used extra examples to __________ the grammar point so that all students could understand it well.",options:["evolve","strike","analyze","reinforce"],answer:"reinforce",clues:["teacher","examples","grammar","understand","students"]},
+  {q:"Lightning can __________ the same tall copper pole multiple times during a severe summer thunderstorm night.",options:["regulate","strike","multiply","evolve"],answer:"strike",clues:["Lightning","copper","pole","thunderstorm","multiple"]},
+  {q:"The Sahara is a __________ desert that covers millions of square kilometers across northern Africa.",options:["identical","biological","vast","accurate"],answer:"vast",clues:["Sahara","desert","millions","square kilometers","Africa"]},
+  {q:"Susan became a __________ last year because she wants to prevent animal cruelty and protect the environment.",options:["vegan","vegetarian","intellectual","analyst"],answer:"vegetarian",clues:["Susan","prevent","animal cruelty","environment"]},
+  // Q21–40
+  {q:"It is difficult to __________ predict the weather because atmospheric conditions change so rapidly and unpredictably.",options:["identically","accurately","vastly","genetically"],answer:"accurately",clues:["predict","weather","atmospheric","rapidly","unpredictably"]},
+  {q:"After a careful __________ of the blood sample, the doctor confirmed that the patient was healthy.",options:["accuracy","analysis","offspring","controversy"],answer:"analysis",clues:["careful","blood sample","doctor","confirmed","healthy"]},
+  {q:"Millions of space rocks are located within the __________ __________, which lies between Mars and Jupiter.",options:["marine mammal","human genome","asteroid belt","vegetarian diet"],answer:"asteroid belt",clues:["space rocks","Mars","Jupiter","located","between"]},
+  {q:"The author wrote a __________ book about politics, which was banned in several conservative countries worldwide.",options:["controversial","analytical","identical","accurate"],answer:"controversial",clues:["author","politics","banned","conservative","countries"]},
+  {q:"What started as a small family business has managed to __________ __________ a multi-million dollar global corporation.",options:["multiply quickly","analyze data","spray pesticide","evolve into"],answer:"evolve into",clues:["family business","multi-million","global","corporation","managed"]},
+  {q:"Hard work combined with good communication skills is a __________ __________ in achieving professional business success.",options:["genetic mutation","genome sequence","silent majority","key factor"],answer:"key factor",clues:["Hard work","communication","achieving","professional","business"]},
+  {q:"Scientists working in the field of __________ study how specific traits are inherited through family generations.",options:["genetics","accuracy","vastness","evolution"],answer:"genetics",clues:["Scientists","field","traits","inherited","generations"]},
+  {q:"The university opened a new __________ research laboratory to study how DNA sequencing can help cure illnesses.",options:["evolutionary","accurate","genomic","analytical"],answer:"genomic",clues:["university","laboratory","DNA","sequencing","cure"]},
+  {q:"The two sisters were dressed __________ for the wedding party, making it hard to tell them apart.",options:["accurately","identically","vastly","genetically"],answer:"identically",clues:["sisters","dressed","wedding","hard","tell apart"]},
+  {q:"Playing chess is an __________ activity that challenges your ability to plan ahead and think strategically.",options:["intellectual","identical","accurate","genetic"],answer:"intellectual",clues:["chess","challenges","plan ahead","strategically","activity"]},
+  // Q31–40
+  {q:"Traffic congestion remains a __________ problem in the city, causing daily delays for thousands of office commuters.",options:["vast","genomic","mammalian","major"],answer:"major",clues:["Traffic","congestion","city","daily","commuters"]},
+  {q:"Scientists discovered a rare __________ fossil that lived on Earth millions of years before dinosaurs became extinct.",options:["pesticide","mammalian","asteroid","accuracy"],answer:"mammalian",clues:["fossil","Earth","millions of years","dinosaurs","extinct"]},
+  {q:"Elementary school children are required to memorize the __________ table to solve basic math problems quickly.",options:["accurate","geological","multiplication","identical"],answer:"multiplication",clues:["Elementary","children","memorize","math","problems"]},
+  {q:"Most healthy adult animals have a strong natural instinct to __________ __________ and pass on genetic material.",options:["produce offspring","analyze data","spark controversy","regulate the temperature"],answer:"produce offspring",clues:["animals","instinct","pass on","genetic","material"]},
+  {q:"Rats are considered a dangerous __________ because they chew through electronic wires and spread harmful diseases in homes.",options:["genome","crater","pest","factor"],answer:"pest",clues:["Rats","dangerous","chew","electronic wires","diseases"]},
+  {q:"Safety __________ requires all construction workers to wear hard helmets and protective boots while on the site.",options:["regulation","accuracy","evolution","offspring"],answer:"regulation",clues:["Safety","construction","helmets","boots","site"]},
+  {q:"The structural engineers recommended building iron __________ for the old school walls before the typhoon season arrived.",options:["controversy","analysis","majority","reinforcement"],answer:"reinforcement",clues:["engineers","iron","walls","typhoon","old school"]},
+  {q:"The cancer-__________ patient remained incredibly brave throughout his long medical treatment at the university hospital.",options:["analytical","stricken","vast","identical"],answer:"stricken",clues:["cancer","patient","brave","medical treatment","hospital"]},
+  {q:"The internet has __________ improved our ability to share information and communicate across international borders instantly.",options:["accurately","identically","vastly","genetically"],answer:"vastly",clues:["internet","improved","share","communicate","international"]},
+  {q:"The restaurant offers a delicious __________ menu, featuring fresh salads, vegetable soups, and organic pasta dishes.",options:["analytical","vegetarian","genomic","accurate"],answer:"vegetarian",clues:["restaurant","menu","salads","vegetable","organic"]},
+  // Q41–60
+  {q:"The historical __________ of the movie was questioned by experts who noticed several major timeline mistakes.",options:["regulation","accuracy","evolution","factor"],answer:"accuracy",clues:["historical","movie","experts","timeline","mistakes"]},
+  {q:"As a professional data __________, Kevin spends his day looking at charts and writing business reports.",options:["mammal","intellect","analyst","crater"],answer:"analyst",clues:["professional","data","charts","business reports","Kevin"]},
+  {q:"Many geologists believe that a massive __________ __________ caused the extinction of dinosaurs millions of years ago.",options:["genetic mutation","silent majority","land mammal","asteroid impact"],answer:"asteroid impact",clues:["geologists","massive","extinction","dinosaurs","millions of years"]},
+  {q:"The celebrity's rude comments during the live interview are bound to __________ __________ among her fans.",options:["cause controversy","analyze data","multiply quickly","evolve into"],answer:"cause controversy",clues:["celebrity","rude","interview","bound to","fans"]},
+  {q:"Human cultures naturally __________ __________ __________ as technology advances and societies become more interconnected with others.",options:["critically analyze","spray pesticide","protect their offspring","evolve over time"],answer:"evolve over time",clues:["cultures","naturally","technology","advances","interconnected"]},
+  {q:"Heavy alcohol consumption was identified as a major __________ __________ in the fatal highway car accident.",options:["accurate explanation","genome project","identical twin","contributing factor"],answer:"contributing factor",clues:["alcohol","consumption","fatal","highway","accident"]},
+  {q:"These two types of plants look different, but they are __________ identical according to DNA analysis.",options:["genetically","accurately","vastly","identically"],answer:"genetically",clues:["plants","different","identical","DNA","analysis"]},
+  {q:"Mapping the entire __________ __________ was a historic milestone that changed the face of modern medical science.",options:["asteroid belt","vegetarian diet","human genome","marine mammal"],answer:"human genome",clues:["Mapping","historic","milestone","changed","medical science"]},
+  {q:"Because they are __________ __________, Kevin and his brother share the exact same physical features and blood type.",options:["chemical pesticides","identical twins","asteroid collisions","major factors"],answer:"identical twins",clues:["Kevin","brother","exact same","physical features","blood type"]},
+  {q:"The advanced seminar was __________ stimulating, forcing all participants to rethink their traditional research methods.",options:["intellectually","accurately","vastly","identically"],answer:"intellectually",clues:["advanced","seminar","stimulating","participants","rethink"]},
+  // Q51–60
+  {q:"The __________ __________ of citizens support the new environmental law because they want cleaner city air.",options:["accurate description","asteroid belt","marine mammal","vast majority"],answer:"vast majority",clues:["citizens","support","environmental","law","cleaner"]},
+  {q:"The dolphin is a highly intelligent __________ __________ that communicates with other members using complex clicking sounds.",options:["chemical pesticide","marine mammal","asteroid impact","key factor"],answer:"marine mammal",clues:["dolphin","intelligent","communicates","clicking sounds","members"]},
+  {q:"The car accident caused __________ injuries to the driver, requiring him to stay in hospital for weeks.",options:["identical","analytical","multiple","accurate"],answer:"multiple",clues:["car accident","injuries","driver","hospital","weeks"]},
+  {q:"Birds work together to build strong nests where they can safely lay eggs and __________ their __________.",options:["raise offspring","analyze data","spark controversy","regulate the temperature"],answer:"raise offspring",clues:["Birds","nests","lay eggs","safely","together"]},
+  {q:"Modern commercial agricultural farms routinely use massive airplanes to __________ __________ over vast fields of wheat.",options:["analyze data","evolve into","spray pesticide","critically analyze"],answer:"spray pesticide",clues:["agricultural","farms","airplanes","fields","wheat"]},
+  {q:"Financial __________ are investigating the major bank to determine whether it participated in illegal money activities.",options:["regulators","analysts","intellects","offspring"],answer:"regulators",clues:["Financial","investigating","bank","illegal","money"]},
+  {q:"The bank vault is constructed from thick __________ concrete to protect the cash from potential armed robbers.",options:["accurate","analytical","identical","reinforced"],answer:"reinforced",clues:["bank vault","thick","concrete","protect","armed robbers"]},
+  {q:"The __________ citizens ran out into the open streets when the massive earthquake began shaking the city buildings.",options:["analytical","panic-stricken","accurate","genomic"],answer:"panic-stricken",clues:["citizens","streets","earthquake","shaking","buildings"]},
+  {q:"Looking up at the starry night sky makes many humans realize the incredible __________ of our universe.",options:["accuracy","controversy","vastness","evolution"],answer:"vastness",clues:["starry","night sky","realize","incredible","universe"]},
+  {q:"As a strict __________, Kevin refuses to eat any dairy products, eggs, or wear leather clothing items.",options:["analyst","vegan","mammal","regulator"],answer:"vegan",clues:["strict","dairy products","eggs","leather","refuses"]},
+  // Q61–80
+  {q:"The new laboratory clock provides __________ __________ time measurements, which are essential for advanced physics experiments.",options:["completely identical","highly accurate","constantly evolving","strictly regulated"],answer:"highly accurate",clues:["laboratory","clock","time measurements","essential","physics"]},
+  {q:"Solving complex mathematical puzzles requires strong __________ skills and a great deal of patience over time.",options:["accurate","identical","analytical","genetic"],answer:"analytical",clues:["mathematical","puzzles","strong","patience","requires"]},
+  {q:"Telescopes scan the night sky daily to detect any potentially dangerous __________ __________ approaching our orbit.",options:["human genome","accurate measurement","vegetarian restaurant","near-Earth asteroid"],answer:"near-Earth asteroid",clues:["Telescopes","night sky","detect","dangerous","orbit"]},
+  {q:"The decision to build a chemical factory near the quiet residential neighborhood will definitely __________ __________.",options:["spark controversy","analyze data","multiply quickly","evolve into"],answer:"spark controversy",clues:["chemical factory","residential","neighborhood","definitely","decision"]},
+  {q:"Artificial intelligence technologies continue to __________ __________, creating new opportunities and challenges for modern workers.",options:["critically analyze","spray pesticide","protect their offspring","rapidly evolve"],answer:"rapidly evolve",clues:["Artificial intelligence","technologies","opportunities","challenges","modern"]},
+  {q:"High housing prices are a __________ __________ preventing young couples from purchasing apartments in the city.",options:["generic makeup","silent majority","land mammal","major factor"],answer:"major factor",clues:["housing prices","preventing","young couples","purchasing","apartments"]},
+  {q:"Many health-conscious consumers refuse to buy __________ food because they worry about long-term health consequences.",options:["genetically-modified","highly accurate","constantly evolving","strictly regulated"],answer:"genetically-modified",clues:["health-conscious","consumers","refuse","long-term","consequences"]},
+  {q:"By analyzing the __________ __________, researchers can identify which genes are responsible for specific hereditary conditions.",options:["asteroid belt","vegetarian diet","genome sequence","marine mammal"],answer:"genome sequence",clues:["analyzing","researchers","genes","responsible","hereditary"]},
+  {q:"The fake designer handbag looked __________ __________ to the original version, tricking many inexperienced buyers easily.",options:["highly accurate","almost identical","constantly evolving","strictly regulated"],answer:"almost identical",clues:["fake","designer","original","tricking","inexperienced buyers"]},
+  {q:"Albert Einstein was admired not only for his vast scientific knowledge but also for his extraordinary __________.",options:["intellect","accuracy","factor","crater"],answer:"intellect",clues:["Einstein","admired","scientific knowledge","vast","extraordinary"]},
+  // Q71–80
+  {q:"The newly elected mayor won the local political race because the __________ __________ __________ supported his economic plans.",options:["accurate measurements","asteroid belts","land mammals","majority of voters"],answer:"majority of voters",clues:["mayor","political race","supported","economic plans","elected"]},
+  {q:"The elephant is the largest __________ __________ currently living on land, requiring massive amounts of daily vegetation food.",options:["chemical pesticide","large mammal","asteroid impact","key factor"],answer:"large mammal",clues:["elephant","largest","land","vegetation","daily"]},
+  {q:"Insects tend to __________ __________ during hot humid summer days, causing major headaches for local farming communities.",options:["analyze data","evolve into","multiply quickly","critically analyze"],answer:"multiply quickly",clues:["Insects","hot","humid","summer","farming"]},
+  {q:"Providing animals with balanced nutrition ensures that they will give birth to strong and __________ __________.",options:["healthy offspring","key factors","silent majorities","identical twins"],answer:"healthy offspring",clues:["animals","balanced","nutrition","birth","strong"]},
+  {q:"Consumers should wash fruits thoroughly under running water to remove any harmful __________ __________ before eating them.",options:["genomic sequence","accurate description","pesticide residue","land mammal"],answer:"pesticide residue",clues:["Consumers","wash","fruits","harmful","eating"]},
+  {q:"The company must obtain approval from the official __________ agency before it can sell the new drug publicly.",options:["regulatory","accurate","analytical","identical"],answer:"regulatory",clues:["company","approval","official","sell","drug"]},
+  {q:"To prevent collapse during an earthquake, the city council passed a law to __________ every old __________.",options:["analyze data","produce offspring","spark controversy","reinforce a building"],answer:"reinforce a building",clues:["collapse","earthquake","city council","law","old"]},
+  {q:"The international charity group provides free hot meals and education programs for children living in __________ villages.",options:["accurate","poverty-stricken","analytical","genomic"],answer:"poverty-stricken",clues:["charity","free meals","education","children","villages"]},
+  {q:"The __________ __________ of the population prefers using smartphones to make quick mobile payments rather than carrying heavy cash.",options:["accurate description","asteroid belt","vast majority","marine mammal"],answer:"vast majority",clues:["population","smartphones","mobile payments","carrying","cash"]},
+  {q:"Following a balanced __________ __________ can lower blood pressure and reduce the risk of developing heart conditions.",options:["chemical pesticide","vegetarian diet","asteroid impact","key factor"],answer:"vegetarian diet",clues:["balanced","lower","blood pressure","heart","conditions"]},
+  // Q81–100
+  {q:"Journalists have a professional duty to provide __________ __________ to the public during times of crisis.",options:["accurate information","asteroid impact","land mammal","genome sequence"],answer:"accurate information",clues:["Journalists","professional","duty","public","crisis"]},
+  {q:"Computers are used to __________ __________ from space telescopes to look for signs of alien life.",options:["spray pesticide","critically analyze","analyze data","produce offspring"],answer:"analyze data",clues:["Computers","space telescopes","signs","alien life","look for"]},
+  {q:"The sci-fi movie features a dramatic scenario where Earth is threatened by an imminent __________ __________.",options:["genetic mutation","silent majority","land mammal","asteroid collision"],answer:"asteroid collision",clues:["sci-fi","dramatic","Earth","threatened","imminent"]},
+  {q:"The use of banned substances by the Olympic athlete turned into __________ __________ __________ across the sports world.",options:["a major controversy","an accurate description","a marine mammal","a key factor"],answer:"a major controversy",clues:["banned substances","Olympic","athlete","sports world","turned into"]},
+  {q:"The internet is a __________ __________ platform, meaning that website designers must update skills regularly.",options:["highly accurate","genetically-modified","almost identical","constantly evolving"],answer:"constantly evolving",clues:["internet","platform","designers","update","regularly"]},
+  {q:"The school's low tuition fee was the __________ __________ that made Linda choose it over others.",options:["genomic sequence","accurate description","near-Earth asteroid","deciding factor"],answer:"deciding factor",clues:["school","tuition fee","Linda","choose","over others"]},
+  {q:"A person's physical appearance, such as eye color, is determined entirely by their unique __________ __________.",options:["genetic makeup","asteroid belt","vast majority","marine mammal"],answer:"genetic makeup",clues:["physical appearance","eye color","determined","entirely","unique"]},
+  {q:"The international __________ __________ involved thousands of experts working together to decode human DNA blocks over years.",options:["chemical pesticide","accurate description","genome project","key factor"],answer:"genome project",clues:["international","thousands","experts","decode","DNA"]},
+  {q:"Although the two electronic devices __________ __________, their internal hardware components and processing speeds differ significantly.",options:["produce offspring","look identical","spray pesticide","analyze data"],answer:"look identical",clues:["electronic devices","internal","hardware","processing speeds","differ"]},
+  {q:"The tech company spent millions of dollars to protect its __________ __________ against illegal piracy overseas.",options:["intellectual property","asteroid impact","vast majority","marine mammal"],answer:"intellectual property",clues:["tech company","millions","protect","illegal","piracy"]},
+  // Q91–100
+  {q:"In a democratic society, decisions are typically made based on the principle of __________ __________ to ensure fairness.",options:["chemical pesticide","accurate description","land mammal","majority rule"],answer:"majority rule",clues:["democratic","society","decisions","principle","fairness"]},
+  {q:"The cheetah is a fast __________ __________ that can reach incredible speeds when chasing its prey across plains.",options:["chemical pesticide","land mammal","asteroid impact","key factor"],answer:"land mammal",clues:["cheetah","fast","incredible speeds","chasing","prey","plains"]},
+  {q:"In order to calculate the total square area of the room, you must __________ length __________ width.",options:["critically analyze","spray pesticide","multiply by","produce offspring"],answer:"multiply by",clues:["calculate","square area","room","length","width"]},
+  {q:"Bears are famously aggressive when they feel the need to __________ __________ __________ from nearby hiking humans.",options:["protect their offspring","analyze data","spark controversy","regulate the temperature"],answer:"protect their offspring",clues:["Bears","aggressive","hiking","humans","need"]},
+  {q:"The heavy use of __________ __________ has been criticized for polluting nearby rivers and harming useful bee populations.",options:["genomic sequence","accurate description","chemical pesticide","land mammal"],answer:"chemical pesticide",clues:["heavy use","criticized","polluting","rivers","bee populations"]},
+  {q:"Smart home air conditioners use advanced sensors to __________ __________ __________ automatically throughout the entire day.",options:["regulate the temperature","analyze data","spark controversy","produce offspring"],answer:"regulate the temperature",clues:["Smart home","air conditioners","sensors","automatically","entire day"]},
+  {q:"Reviewing your vocabulary flashcards every night is a highly recommended study habit to __________ __________ effectively.",options:["spray pesticide","critically analyze","multiply quickly","reinforce learning"],answer:"reinforce learning",clues:["vocabulary flashcards","every night","study habit","recommended","effectively"]},
+  {q:"The __________ mother wept bitterly at the church funeral service after losing her only son in a tragic accident.",options:["analytical","grief-stricken","accurate","identical"],answer:"grief-stricken",clues:["mother","wept","funeral","losing","son","tragic"]},
+  {q:"Building a high-speed railway system across the country requires a __________ __________ of government funding and labor.",options:["genomic sequence","accurate description","vast amount","land mammal"],answer:"vast amount",clues:["high-speed","railway","country","government funding","labor"]},
+  {q:"Being a __________ __________ means that you must carefully read food labels to ensure no hidden meat ingredients exist.",options:["chemical pesticide","strict vegetarian","asteroid impact","key factor"],answer:"strict vegetarian",clues:["food labels","hidden","meat","ingredients","carefully"]}
+];
+
+/* Vocab definitions for feedback panel */
+const vocabDef = {
+  "accurate":{"en":"Completely correct","cn":"準確的","ex":"The scientist made sure the data was accurate."},
+  "accurately":{"en":"In a correct manner","cn":"準確地","ex":"It is difficult to accurately predict the weather."},
+  "accuracy":{"en":"The state of being correct","cn":"準確性","ex":"The accuracy of the report was questioned by experts."},
+  "analyze":{"en":"To study something carefully","cn":"分析","ex":"The team will analyze the consumer feedback."},
+  "analysis":{"en":"Detailed examination","cn":"分析（名詞）","ex":"After a careful analysis of the sample, the doctor confirmed the patient was healthy."},
+  "analyst":{"en":"A person who analyzes","cn":"分析師","ex":"Kevin works as a professional data analyst."},
+  "analytical":{"en":"Relating to logical reasoning","cn":"分析的","ex":"Solving puzzles requires strong analytical skills."},
+  "asteroid":{"en":"A giant rock from space","cn":"小行星","ex":"Scientists are tracking a massive asteroid this month."},
+  "asteroid belt":{"en":"A region of space with many asteroids","cn":"小行星帶","ex":"The asteroid belt lies between Mars and Jupiter."},
+  "asteroid impact":{"en":"A crash from a space rock","cn":"小行星撞擊","ex":"A massive asteroid impact caused dinosaur extinction."},
+  "near-Earth asteroid":{"en":"A space rock close to our planet","cn":"近地小行星","ex":"Telescopes scan the sky to detect near-Earth asteroids."},
+  "asteroid collision":{"en":"A crash involving a space rock","cn":"小行星相撞","ex":"Earth is threatened by an imminent asteroid collision."},
+  "crater":{"en":"A bowl-shaped cavity in the ground","cn":"撞擊坑","ex":"The volcano has a huge crater at the top."},
+  "comet":{"en":"An icy celestial object with a long tail","cn":"彗星","ex":"Halley's comet is visible from Earth every 75 years."},
+  "meteoroid":{"en":"A small particle orbiting the sun","cn":"流星體","ex":"A tiny meteoroid can travel at incredible speeds."},
+  "meteor":{"en":"A streak of light from a burning particle","cn":"流星","ex":"We watched a beautiful meteor streak across the sky."},
+  "meteorite":{"en":"A piece of rock from space that hits the ground","cn":"隕石","ex":"The museum has a rare meteorite in its collection."},
+  "controversy":{"en":"A dispute about something affecting many","cn":"爭議","ex":"The new policy created a lot of public controversy."},
+  "controversial":{"en":"Causing a lot of disagreement","cn":"有爭議的","ex":"The author wrote a controversial book about politics."},
+  "cause controversy":{"en":"To create disagreement","cn":"引起爭議","ex":"The celebrity's rude comments caused controversy."},
+  "spark controversy":{"en":"To start a dispute","cn":"引發爭議","ex":"The factory decision will definitely spark controversy."},
+  "a major controversy":{"en":"A big public disagreement","cn":"重大爭議","ex":"The athlete's drug use turned into a major controversy."},
+  "evolve":{"en":"To change and develop over time","cn":"演化","ex":"Languages tend to evolve over centuries."},
+  "evolution":{"en":"The process of gradual development","cn":"演化（名詞）","ex":"Darwin wrote about the biological evolution of species."},
+  "evolutionary":{"en":"Relating to gradual development","cn":"演化的","ex":"Biologists study the evolutionary history of birds."},
+  "evolve into":{"en":"To develop into something else","cn":"演變成","ex":"The small business managed to evolve into a corporation."},
+  "evolve over time":{"en":"To change gradually","cn":"隨時間演變","ex":"Human cultures naturally evolve over time."},
+  "rapidly evolve":{"en":"To change quickly","cn":"快速發展","ex":"AI technologies continue to rapidly evolve."},
+  "constantly evolving":{"en":"Always changing","cn":"不斷演進的","ex":"The internet is a constantly evolving platform."},
+  "factor":{"en":"Something that has an effect on a result","cn":"因素","ex":"Diet is a major factor affecting health."},
+  "key factor":{"en":"A very important element","cn":"關鍵因素","ex":"Hard work is a key factor in business success."},
+  "contributing factor":{"en":"An element that helps cause something","cn":"促成因素","ex":"Alcohol was a contributing factor in the accident."},
+  "major factor":{"en":"A large or main cause","cn":"主要因素","ex":"High housing prices are a major factor preventing purchases."},
+  "deciding factor":{"en":"The element that makes the final choice","cn":"決定性因素","ex":"The tuition fee was the deciding factor for Linda."},
+  "genetic":{"en":"Related to genes","cn":"基因的","ex":"Some conditions are purely genetic."},
+  "genetics":{"en":"The study of genes","cn":"遺傳學","ex":"Scientists in genetics study inherited traits."},
+  "genetically":{"en":"In a way relating to genes","cn":"從遺傳學角度","ex":"These plants are genetically identical."},
+  "genetically-modified":{"en":"Changed using genetic engineering","cn":"基因改造的","ex":"Many consumers refuse to buy genetically-modified food."},
+  "genetic makeup":{"en":"The combination of genes in an organism","cn":"基因組成","ex":"Eye color is determined by a person's genetic makeup."},
+  "genetic mutation":{"en":"A change in genes","cn":"基因突變","ex":"Radiation can cause a harmful genetic mutation."},
+  "genetic disorder":{"en":"An illness caused by genes","cn":"遺傳疾病","ex":"Down syndrome is a well-known genetic disorder."},
+  "genetic engineering":{"en":"Changing an organism's genes","cn":"基因工程","ex":"Advanced genetic engineering helps create drought-resistant crops."},
+  "genome":{"en":"The collection of all genes in a living thing","cn":"基因組","ex":"Scientists mapped the complete corn genome."},
+  "genomic":{"en":"Relating to genomes","cn":"基因組的","ex":"The new genomic research lab studies DNA sequencing."},
+  "human genome":{"en":"All the genes in a human","cn":"人類基因組","ex":"Mapping the human genome was a historic milestone."},
+  "genome sequence":{"en":"The order of DNA","cn":"基因組序列","ex":"By analyzing the genome sequence, researchers identify hereditary conditions."},
+  "genome project":{"en":"A scientific study of genetic material","cn":"基因體計畫","ex":"The international genome project involved thousands of experts."},
+  "identical":{"en":"Exactly the same","cn":"完全相同的","ex":"The two luxury cars are completely identical in design."},
+  "identically":{"en":"In the exact same way","cn":"完全相同地","ex":"The sisters were dressed identically for the wedding."},
+  "identical twins":{"en":"Siblings that look exactly the same","cn":"同卵雙胞胎","ex":"Kevin and his brother are identical twins."},
+  "almost identical":{"en":"Very nearly the same","cn":"幾乎完全相同","ex":"The fake handbag looked almost identical to the real one."},
+  "look identical":{"en":"To appear exactly the same","cn":"看起來一模一樣","ex":"The two devices look identical but have different speeds."},
+  "identical copies":{"en":"Exact duplicates","cn":"一模一樣的複製品","ex":"The printer made thousands of identical copies."},
+  "intellectual":{"en":"A very smart person / relating to the mind","cn":"知識分子 / 智力的","ex":"Professor Higgins is a leading intellectual."},
+  "intellectually":{"en":"In a mental or smart way","cn":"智力上地","ex":"The seminar was intellectually stimulating."},
+  "intellect":{"en":"The ability to think and understand","cn":"智力","ex":"Einstein was admired for his extraordinary intellect."},
+  "intellectual property":{"en":"Ideas or inventions owned by someone","cn":"智慧財產權","ex":"The tech company protects its intellectual property."},
+  "majority":{"en":"More than half","cn":"多數","ex":"The majority of students voted for the beach party."},
+  "major":{"en":"Important or large","cn":"主要的","ex":"Traffic congestion is a major problem in the city."},
+  "vast majority":{"en":"Almost all","cn":"絕大多數","ex":"The vast majority support the new environmental law."},
+  "majority of voters":{"en":"Most of the people voting","cn":"多數選民","ex":"The majority of voters supported the mayor's plans."},
+  "majority rule":{"en":"Control by the larger group","cn":"多數決","ex":"Democratic societies use majority rule to ensure fairness."},
+  "mammal":{"en":"An animal with hair that is not born from an egg","cn":"哺乳動物","ex":"The whale is a unique marine mammal."},
+  "mammalian":{"en":"Relating to mammals","cn":"哺乳動物的","ex":"Scientists discovered a rare mammalian fossil."},
+  "marine mammal":{"en":"A mammal that lives in the ocean","cn":"海洋哺乳動物","ex":"The dolphin is a highly intelligent marine mammal."},
+  "large mammal":{"en":"A big warm-blooded animal","cn":"大型哺乳動物","ex":"The elephant is the largest large mammal on land."},
+  "land mammal":{"en":"A mammal that lives on land","cn":"陸生哺乳動物","ex":"The cheetah is a fast land mammal."},
+  "mammal species":{"en":"A type of warm-blooded animal","cn":"哺乳動物物種","ex":"Researchers identified a new mammal species in the rainforest."},
+  "multiply":{"en":"To increase in number","cn":"繁殖 / 增加","ex":"Bacteria will quickly multiply if you don't clean."},
+  "multiplication":{"en":"The act of increasing or calculating","cn":"乘法","ex":"Children memorize the multiplication table at school."},
+  "multiple":{"en":"Having several parts","cn":"多個的","ex":"The accident caused multiple injuries to the driver."},
+  "multiply quickly":{"en":"To increase fast","cn":"快速增加","ex":"Insects multiply quickly in hot humid weather."},
+  "multiply by":{"en":"To perform a math operation","cn":"乘以","ex":"Multiply length by width to find the area."},
+  "rapidly multiply":{"en":"To grow in number very fast","cn":"迅速繁殖","ex":"Stray cats rapidly multiply in urban areas."},
+  "offspring":{"en":"The children of a person or babies of an animal","cn":"後代","ex":"Animals protect their vulnerable offspring from predators."},
+  "produce offspring":{"en":"To have babies","cn":"繁衍後代","ex":"Animals have an instinct to produce offspring."},
+  "raise offspring":{"en":"To care for young","cn":"撫養後代","ex":"Birds raise their offspring in strong nests."},
+  "healthy offspring":{"en":"Young that are strong and well","cn":"健康的後代","ex":"Balanced nutrition ensures healthy offspring."},
+  "protect their offspring":{"en":"To keep babies safe","cn":"保護幼崽","ex":"Bears are aggressive when they protect their offspring."},
+  "multiple offspring":{"en":"Many babies at once","cn":"多個後代","ex":"Dogs give birth to multiple offspring in one pregnancy."},
+  "pesticide":{"en":"A substance used to kill insects","cn":"殺蟲劑 / 農藥","ex":"The farmer sprayed a chemical pesticide on the crops."},
+  "pest":{"en":"A destructive insect or animal","cn":"害蟲","ex":"Rats are considered a dangerous pest."},
+  "spray pesticide":{"en":"To apply bug killer","cn":"噴灑農藥","ex":"Farms use airplanes to spray pesticide over wheat fields."},
+  "pesticide residue":{"en":"Chemicals left on food","cn":"農藥殘留","ex":"Wash fruits to remove harmful pesticide residue."},
+  "chemical pesticide":{"en":"Artificial bug killer","cn":"化學農藥","ex":"Heavy use of chemical pesticide pollutes rivers."},
+  "pesticide-free":{"en":"Grown without bug-killing chemicals","cn":"無農藥的","ex":"This store sells pesticide-free fruits and vegetables."},
+  "organic farming":{"en":"Growing crops without artificial chemicals","cn":"有機農業","ex":"Many farmers are shifting toward organic farming."},
+  "fertile":{"en":"Able to produce a lot of healthy crops or offspring","cn":"肥沃的","ex":"The river valley has extremely fertile soil."},
+  "fertilizer":{"en":"A substance added to soil to increase fertility","cn":"肥料","ex":"The gardener added organic fertilizer to the soil."},
+  "artificial fertilizer":{"en":"A man-made substance to help plants grow","cn":"人工肥料","ex":"Overusing artificial fertilizer can damage soil."},
+  "natural fertilizer":{"en":"Organic matter used to enrich soil","cn":"天然肥料","ex":"Cow manure is a popular natural fertilizer."},
+  "regulate":{"en":"To control how something happens","cn":"規範 / 調節","ex":"The government will regulate the prices of medical drugs."},
+  "regulation":{"en":"A rule or law","cn":"規定 / 條例","ex":"Safety regulation requires construction workers to wear helmets."},
+  "regulator":{"en":"A person or device that controls","cn":"監管者","ex":"Financial regulators are investigating the bank."},
+  "regulatory":{"en":"Serving to control or govern","cn":"監管的","ex":"The company needs approval from the regulatory agency."},
+  "regulate the temperature":{"en":"To control the heat or cold","cn":"調節溫度","ex":"Smart air conditioners regulate the temperature automatically."},
+  "strictly regulated":{"en":"Controlled very tightly","cn":"嚴格管制的","ex":"Tobacco sales are strictly regulated by law."},
+  "government regulations":{"en":"Rules made by the state","cn":"政府法規","ex":"Small businesses often complain about complicated government regulations."},
+  "reinforce":{"en":"To make something stronger","cn":"加強 / 強化","ex":"The teacher used examples to reinforce the grammar point."},
+  "reinforcement":{"en":"The action of making something stronger","cn":"加固 / 增援","ex":"Engineers recommended iron reinforcement for the old walls."},
+  "reinforced":{"en":"Made stronger","cn":"加強的","ex":"The bank vault is made of thick reinforced concrete."},
+  "reinforce a building":{"en":"To make a structure stronger","cn":"加固建築物","ex":"The city passed a law to reinforce every old building."},
+  "reinforce learning":{"en":"To help remember knowledge","cn":"強化學習","ex":"Reviewing flashcards every night helps reinforce learning."},
+  "positive reinforcement":{"en":"A reward that encourages behavior","cn":"正向增強","ex":"Praising students is an example of positive reinforcement."},
+  "strike":{"en":"To hit or attack","cn":"打擊 / 襲擊","ex":"Lightning can strike the same pole multiple times."},
+  "stricken":{"en":"Badly affected by a disease or problem","cn":"遭受重創的","ex":"The cancer-stricken patient remained incredibly brave."},
+  "panic-stricken":{"en":"Severely affected by fear","cn":"驚慌失措的","ex":"Panic-stricken citizens ran into the streets during the earthquake."},
+  "poverty-stricken":{"en":"Extremely poor","cn":"貧困交加的","ex":"The charity provides meals for children in poverty-stricken villages."},
+  "grief-stricken":{"en":"Overwhelmed with sadness","cn":"極度悲傷的","ex":"The grief-stricken mother wept at the funeral."},
+  "vast":{"en":"Very large","cn":"廣闊的 / 巨大的","ex":"The Sahara is a vast desert covering millions of km²."},
+  "vastly":{"en":"To a very great extent","cn":"極大地","ex":"The internet has vastly improved communication."},
+  "vastness":{"en":"Very great size or extent","cn":"廣闊 / 巨大","ex":"The night sky shows the incredible vastness of the universe."},
+  "vast majority":{"en":"Almost all","cn":"絕大多數","ex":"The vast majority prefer mobile payments to cash."},
+  "vast amount":{"en":"A very large quantity","cn":"巨量","ex":"Building a railway requires a vast amount of funding."},
+  "vast ocean":{"en":"A very big sea","cn":"浩瀚的海洋","ex":"The ship sailed across the vast ocean for three months."},
+  "vast experience":{"en":"A lot of background knowledge","cn":"豐富的經驗","ex":"Mr. Vance has vast experience in international marketing."},
+  "vegetarian":{"en":"Someone who does not eat meat / consisting of no meat","cn":"素食者 / 素食的","ex":"Susan became a vegetarian to prevent animal cruelty."},
+  "vegan":{"en":"No animal products at all","cn":"全素者","ex":"As a strict vegan, Kevin refuses dairy products."},
+  "vegetarian diet":{"en":"A meal plan with no meat","cn":"素食飲食","ex":"A balanced vegetarian diet can lower blood pressure."},
+  "strict vegetarian":{"en":"Someone who eats absolutely no meat","cn":"嚴格的素食者","ex":"A strict vegetarian must read food labels carefully."},
+  "vegetarian restaurant":{"en":"A place that serves no meat","cn":"素食餐廳","ex":"We dined at a local vegetarian restaurant last night."},
+  "a natural disaster strikes a region":{"en":"A catastrophic event hitting an area","cn":"天災襲擊某個地區","ex":"When a natural disaster strikes a region, charities send aid."},
+  "analyze data":{"en":"To examine information carefully","cn":"分析數據","ex":"Computers analyze data from space telescopes."},
+  "analyze a situation":{"en":"To examine circumstances","cn":"分析情況","ex":"A good leader must carefully analyze a situation."},
+  "critically analyze":{"en":"To examine with deep judgment","cn":"批判性分析","ex":"Students are encouraged to critically analyze historical texts."},
+  "detailed analysis":{"en":"A very careful and comprehensive study","cn":"詳細分析","ex":"The financial expert conducted a thorough analysis of market trends."},
+  "accurate information":{"en":"Correct details","cn":"準確的資訊","ex":"Journalists must provide accurate information during a crisis."},
+  "accurate description":{"en":"A correct explanation","cn":"準確的描述","ex":"The witness gave an accurate description of the suspect."},
+  "accurate measurement":{"en":"A correct size or amount finding","cn":"精確的測量","ex":"Architects must take an accurate measurement of the land."},
+  "highly accurate":{"en":"Very correct","cn":"高度準確的","ex":"The new clock provides highly accurate time measurements."},
+  "impact crater":{"en":"A circular depression caused by a collision","cn":"撞擊坑","ex":"Astronauts studied the massive impact crater on the moon."},
+  "intellectual challenge":{"en":"A hard mental task","cn":"智力挑戰","ex":"Learning to code provides an intellectual challenge for older adults."},
+  "intellectual development":{"en":"Growth of the mind","cn":"智力發展","ex":"Reading plays a vital role in a child's intellectual development."},
+  "silent majority":{"en":"The large group that doesn't express opinions","cn":"沉默的多數","ex":"Politicians try to appeal to the silent majority."},
+  "in the majority":{"en":"Being part of the larger group","cn":"佔多數","ex":"Those who prefer online studying are in the majority."},
+  "surrounded by controversy":{"en":"Involving a lot of debate","cn":"備受爭議","ex":"The politician's career has been surrounded by controversy."}
+};
+
+/* ═══════════════════════════════════════════════════
+   QUIZ STATE
+═══════════════════════════════════════════════════ */
+let currentQ = 0;
+let score = 0;
+let answered = false;
+
+/* Google Apps Script Web App URL — teacher fills this in */
+const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+/* ═══════════════════════════════════════════════════
+   RENDER QUESTION
+═══════════════════════════════════════════════════ */
+function renderQuestion() {
+  answered = false;
+  const q = questions[currentQ];
+  const total = questions.length;
+
+  // Progress
+  document.getElementById("q-counter").textContent = `Question ${currentQ + 1} of ${total}`;
+  document.getElementById("q-pct").textContent = Math.round((currentQ / total) * 100) + "%";
+  document.getElementById("progress-fill").style.width = ((currentQ / total) * 100) + "%";
+  document.getElementById("q-number").textContent = `Q${currentQ + 1}`;
+  document.getElementById("score-badge").textContent = `Score: ${score}`;
+
+  // Passage with clickable words
+  const passageDiv = document.getElementById("q-passage");
+  const words = q.q.split(/(\s+)/);
+  passageDiv.innerHTML = words.map(token => {
+    if (/\s+/.test(token)) return token;
+    if (token === "__________") return `<strong style="color:var(--color-primary);font-size:1.05em;">__________</strong>`;
+    const clean = token.replace(/[^a-zA-Z'-]/g, "");
+    return `<span class="word" data-word="${clean}" onclick="lookupWord('${clean}')">${token}</span>`;
+  }).join("");
+
+  // Clear word helper
+  const helper = document.getElementById("word-helper");
+  helper.classList.remove("visible");
+
+  // Options
+  const grid = document.getElementById("options-grid");
+  const labels = ["A","B","C","D"];
+  grid.innerHTML = q.options.map((opt, i) => `
+    <button class="opt-btn" onclick="selectAnswer(${i})">
+      <span class="opt-label">${labels[i]}</span>
+      ${opt}
+    </button>
+  `).join("");
+
+  // Feedback
+  const fb = document.getElementById("feedback-box");
+  fb.classList.remove("visible");
+  const nextBtn = document.getElementById("next-btn");
+  nextBtn.classList.remove("visible");
+}
+
+/* ═══════════════════════════════════════════════════
+   ANSWER SELECTION
+═══════════════════════════════════════════════════ */
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQ];
+  const btns = document.querySelectorAll(".opt-btn");
+
+  btns.forEach((btn, i) => {
+    btn.disabled = true;
+    if (q.options[i] === q.answer) btn.classList.add("correct");
+    else if (i === idx) btn.classList.add("incorrect");
+  });
+
+  if (q.options[idx] === q.answer) score++;
+
+  // Clue highlighting
+  const passageDiv = document.getElementById("q-passage");
+  passageDiv.querySelectorAll(".word").forEach(span => {
+    const w = span.getAttribute("data-word").toLowerCase();
+    if (q.clues && q.clues.some(c => w.includes(c.toLowerCase()) || c.toLowerCase().includes(w))) {
+      span.classList.add("clue-highlight");
+    }
+  });
+
+  // Feedback panel
+  showFeedback(idx);
+
+  document.getElementById("next-btn").classList.add("visible");
+  document.getElementById("score-badge").textContent = `Score: ${score}`;
+}
+
+function showFeedback(chosenIdx) {
+  const q = questions[currentQ];
+  const correct = q.options[chosenIdx] === q.answer;
+  const fb = document.getElementById("feedback-box");
+  const fh = document.getElementById("feedback-header");
+
+  fh.className = "feedback-header " + (correct ? "correct-header" : "incorrect-header");
+  fh.innerHTML = correct
+    ? `<i class="fa-solid fa-circle-check"></i> Correct! The answer is "<strong>${q.answer}</strong>"`
+    : `<i class="fa-solid fa-circle-xmark"></i> The correct answer is "<strong>${q.answer}</strong>"`;
+
+  const cardsDiv = document.getElementById("vocab-cards");
+  cardsDiv.innerHTML = q.options.map(opt => {
+    const def = vocabDef[opt] || {en:"—",cn:"—",ex:"—"};
+    return `
+      <div class="vocab-card">
+        <div class="vc-word">${opt}
+          <button class="tts-btn" onclick="speak('${opt}')" title="Pronounce"><i class="fa-solid fa-volume-low"></i></button>
+        </div>
+        <div class="vc-en">${def.en}</div>
+        <div class="vc-cn">${def.cn}</div>
+        <div class="vc-ex">${def.ex}
+          <button class="tts-btn" onclick="speak(\`${def.ex.replace(/`/g,"'")}\`)" title="Read example"><i class="fa-solid fa-volume-low"></i></button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  fb.classList.add("visible");
+}
+
+/* ═══════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════ */
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= questions.length) {
+    showResults();
+  } else {
+    document.getElementById("word-helper").classList.remove("visible");
+    renderQuestion();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   RESULTS
+═══════════════════════════════════════════════════ */
+function showResults() {
+  document.getElementById("quiz-screen").style.display = "none";
+  const rs = document.getElementById("results-screen");
+  rs.classList.add("visible");
+
+  const pct = Math.round((score / questions.length) * 100);
+  document.getElementById("results-score").textContent = `${score} / ${questions.length}`;
+  document.getElementById("results-pct").textContent = `${pct}%`;
+  document.getElementById("progress-fill").style.width = "100%";
+  document.getElementById("q-pct").textContent = "100%";
+
+  let icon, msg, msgCn;
+  if (pct >= 90) { icon="🏆"; msg="Outstanding! You've mastered Unit 23."; msgCn="太棒了！你已精通第23單元！"; }
+  else if (pct >= 75) { icon="🎉"; msg="Great work! Keep reviewing the tricky ones."; msgCn="表現優異！繼續複習難的字詞。"; }
+  else if (pct >= 60) { icon="📚"; msg="Good effort! A bit more practice will get you there."; msgCn="很努力！再多練習幾次就會更好。"; }
+  else { icon="💪"; msg="Keep going! Review the word list and try again."; msgCn="繼續加油！複習字彙表後再試一次。"; }
+
+  document.getElementById("results-icon").textContent = icon;
+  document.getElementById("results-msg").textContent = msg;
+  document.getElementById("results-msg-cn").textContent = msgCn;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESTART
+═══════════════════════════════════════════════════ */
+function restartQuiz() {
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById("results-screen").classList.remove("visible");
+  document.getElementById("quiz-screen").style.display = "";
+  document.getElementById("submit-msg").textContent = "";
+  renderQuestion();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ═══════════════════════════════════════════════════
+   TTS
+═══════════════════════════════════════════════════ */
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US"; u.rate = 0.9;
+  const voices = window.speechSynthesis.getVoices();
+  const female = voices.find(v => v.lang.startsWith("en") && /female|zira|samantha/i.test(v.name));
+  if (female) u.voice = female;
+  window.speechSynthesis.speak(u);
+}
+
+function readPassage() {
+  const q = questions[currentQ];
+  const text = q.q.replace(/__________/g, "blank");
+  speak(text);
+}
+
+/* ═══════════════════════════════════════════════════
+   DICTIONARY LOOKUP
+═══════════════════════════════════════════════════ */
+async function lookupWord(word) {
+  if (!word || word.length < 2) return;
+  const helper = document.getElementById("word-helper");
+  document.getElementById("helper-word").textContent = word;
+  document.getElementById("helper-phonetic").textContent = "";
+  document.getElementById("helper-meaning").textContent = "Looking up…";
+  helper.classList.add("visible");
+
+  try {
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word.toLowerCase()}`);
+    if (!res.ok) throw new Error("not found");
+    const data = await res.json();
+    const entry = data[0];
+    const phonetic = entry.phonetic || entry.phonetics?.find(p => p.text)?.text || "";
+    const meaning = entry.meanings?.[0]?.definitions?.[0]?.definition || "Definition not found.";
+    document.getElementById("helper-phonetic").textContent = phonetic ? ` ${phonetic}` : "";
+    document.getElementById("helper-meaning").textContent = meaning;
+  } catch {
+    document.getElementById("helper-meaning").textContent = "Definition not found. Try another word.";
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   GOOGLE SHEETS SUBMISSION
+═══════════════════════════════════════════════════ */
+async function submitScore() {
+  const name = document.getElementById("student-name").value.trim();
+  const sid = document.getElementById("student-id").value.trim();
+  const msgEl = document.getElementById("submit-msg");
+
+  if (!name || !sid) {
+    msgEl.style.color = "var(--color-incorrect)";
+    msgEl.textContent = "Please enter both your name and student ID.";
+    return;
+  }
+  if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+    msgEl.style.color = "var(--color-incorrect)";
+    msgEl.textContent = "⚠️ Teacher: please set the Google Apps Script URL in the HTML file.";
+    return;
+  }
+
+  msgEl.style.color = "#334";
+  msgEl.textContent = "Submitting…";
+
+  try {
+    const payload = {
+      name, studentId: sid,
+      score, total: questions.length,
+      percentage: Math.round((score / questions.length) * 100),
+      unit: "Level 5 Unit 23",
+      timestamp: new Date().toLocaleString("zh-TW", {timeZone:"Asia/Taipei"})
+    };
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload)
+    });
+    msgEl.style.color = "var(--color-correct)";
+    msgEl.textContent = `✅ Score submitted! ${name} — ${score}/${questions.length} (${payload.percentage}%)`;
+  } catch(e) {
+    msgEl.style.color = "var(--color-incorrect)";
+    msgEl.textContent = "Submission failed. Please check your internet connection.";
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════ */
+window.speechSynthesis.onvoiceschanged = () => {};
+renderQuestion();
+</script>
+</body>
+</html>
