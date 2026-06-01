@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4000 Essential Words – Level 5 Unit 24 | Interactive Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--font-heading:'Playfair Display',Georgia,serif;--font-body:'DM Sans','Segoe UI',sans-serif;--color-primary:#1a3a5c;--color-accent:#c8962e;--color-correct:#2d7a4f;--color-incorrect:#b53a2f;--color-clue:#fff3a3;--color-surface:#faf8f5;--color-card:#ffffff;--radius:12px;--shadow:0 4px 24px rgba(26,58,92,0.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--color-surface);color:#1a2433;min-height:100vh}
+header{background:var(--color-primary);color:#fff;padding:18px 24px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.header-title{font-family:var(--font-heading);font-size:1.15rem;line-height:1.25}
+.header-sub{font-size:.78rem;opacity:.75;margin-top:2px}
+.score-badge{background:var(--color-accent);color:#fff;border-radius:20px;padding:6px 16px;font-weight:600;font-size:.9rem;white-space:nowrap;min-width:90px;text-align:center}
+main{max-width:820px;margin:0 auto;padding:28px 16px 60px}
+.progress-wrap{margin-bottom:18px}
+.progress-label{display:flex;justify-content:space-between;font-size:.82rem;color:#556;margin-bottom:6px}
+.progress-bar-bg{background:#dde3ea;border-radius:8px;height:8px}
+.progress-bar-fill{height:8px;border-radius:8px;background:linear-gradient(90deg,var(--color-primary),var(--color-accent));transition:width .35s ease}
+.card{background:var(--color-card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 28px 22px;margin-bottom:18px}
+.q-number{font-size:.78rem;font-weight:600;color:var(--color-accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.q-passage{font-size:1.04rem;line-height:1.75;color:#1e2c3a;margin-bottom:16px}
+.q-passage .word{cursor:pointer;border-bottom:1px dotted #aab;transition:background .15s;border-radius:2px;padding:0 1px}
+.q-passage .word:hover{background:#e8f0fc}
+.clue-highlight{background:var(--color-clue)!important;border-radius:3px;padding:0 2px}
+.tts-btn{background:none;border:none;cursor:pointer;color:var(--color-primary);font-size:.95rem;margin-right:8px;vertical-align:middle;opacity:.7;transition:opacity .15s}
+.tts-btn:hover{opacity:1}
+.word-helper{background:#eef4fb;border-left:4px solid var(--color-primary);border-radius:0 8px 8px 0;padding:10px 14px;font-size:.88rem;margin-bottom:14px;display:none;animation:fadeIn .2s}
+.word-helper.visible{display:block}
+.word-helper strong{color:var(--color-primary)}
+.helper-phonetic{color:#778;font-style:italic;font-size:.82rem}
+.helper-meaning{margin-top:4px}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+@media(max-width:520px){.options-grid{grid-template-columns:1fr}}
+.opt-btn{display:flex;align-items:center;gap:10px;background:#f0f4fa;border:2px solid transparent;border-radius:9px;padding:11px 14px;font-family:var(--font-body);font-size:.95rem;color:#1a2433;cursor:pointer;transition:background .15s,border-color .15s,transform .1s;text-align:left;line-height:1.4}
+.opt-btn:hover:not(:disabled){background:#dde8f7;border-color:var(--color-primary);transform:translateY(-1px)}
+.opt-btn .opt-label{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--color-primary);color:#fff;font-weight:700;font-size:.82rem;flex-shrink:0}
+.opt-btn.correct{background:#d4edda;border-color:var(--color-correct)}
+.opt-btn.correct .opt-label{background:var(--color-correct)}
+.opt-btn.incorrect{background:#f8d7da;border-color:var(--color-incorrect)}
+.opt-btn.incorrect .opt-label{background:var(--color-incorrect)}
+.opt-btn:disabled{cursor:default;transform:none}
+.feedback-box{display:none;margin-top:16px;border-radius:var(--radius);overflow:hidden;border:1px solid #dde3ea;animation:fadeIn .25s}
+.feedback-box.visible{display:block}
+.feedback-header{padding:9px 16px;font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:8px}
+.feedback-header.correct-header{background:#d4edda;color:var(--color-correct)}
+.feedback-header.incorrect-header{background:#f8d7da;color:var(--color-incorrect)}
+.vocab-cards{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:540px){.vocab-cards{grid-template-columns:1fr}}
+.vocab-card{padding:12px 14px;border-right:1px solid #eee;border-bottom:1px solid #eee;font-size:.84rem;line-height:1.5}
+.vocab-card:nth-child(2n){border-right:none}
+.vocab-card .vc-word{font-weight:700;color:var(--color-primary);font-size:.92rem}
+.vocab-card .vc-en{color:#334;margin:2px 0}
+.vocab-card .vc-cn{color:#667;font-size:.82rem}
+.vocab-card .vc-ex{color:#445;font-style:italic;font-size:.82rem;margin-top:3px;border-left:2px solid var(--color-accent);padding-left:7px}
+.nav-row{display:flex;justify-content:flex-end;margin-top:16px}
+.next-btn{background:var(--color-primary);color:#fff;border:none;border-radius:9px;padding:11px 26px;font-family:var(--font-body);font-size:.95rem;font-weight:600;cursor:pointer;display:none;align-items:center;gap:8px;transition:background .15s,transform .1s}
+.next-btn:hover{background:#244d7a;transform:translateY(-1px)}
+.next-btn.visible{display:inline-flex}
+#results-screen{display:none;text-align:center}
+#results-screen.visible{display:block}
+.results-card{background:var(--color-card);border-radius:var(--radius);box-shadow:var(--shadow);padding:48px 32px;max-width:500px;margin:40px auto}
+.results-icon{font-size:3.5rem;margin-bottom:16px}
+.results-score{font-family:var(--font-heading);font-size:3rem;color:var(--color-primary)}
+.results-pct{font-size:1.1rem;color:var(--color-accent);font-weight:600;margin-bottom:8px}
+.results-msg{font-size:1.05rem;color:#334;margin-bottom:8px}
+.results-msg-cn{font-size:.95rem;color:#667}
+.restart-btn{margin-top:28px;background:var(--color-primary);color:#fff;border:none;border-radius:9px;padding:13px 36px;font-family:var(--font-body);font-size:1rem;font-weight:600;cursor:pointer;transition:background .15s}
+.restart-btn:hover{background:#244d7a}
+.gform-banner{background:linear-gradient(135deg,#1a3a5c,#244d7a);color:#fff;border-radius:var(--radius);padding:18px 22px;margin-bottom:22px;display:flex;align-items:center;gap:14px;font-size:.9rem;line-height:1.5}
+.gform-banner i{font-size:1.4rem;flex-shrink:0;color:var(--color-accent)}
+#submit-form{margin-top:22px}
+#submit-form input{border:2px solid #dde3ea;border-radius:8px;padding:10px 14px;font-family:var(--font-body);font-size:.95rem;width:100%;margin-bottom:10px;transition:border-color .15s}
+#submit-form input:focus{outline:none;border-color:var(--color-primary)}
+#submit-form .submit-btn{background:var(--color-accent);color:#fff;border:none;border-radius:8px;padding:11px 26px;font-family:var(--font-body);font-size:.95rem;font-weight:600;cursor:pointer;width:100%;transition:background .15s}
+#submit-form .submit-btn:hover{background:#a87820}
+#submit-msg{font-size:.88rem;margin-top:8px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="header-title">4000 Essential Words — Level 5, Unit 24</div>
+    <div class="header-sub">Interactive Vocabulary Quiz &nbsp;|&nbsp; 100 Questions</div>
+  </div>
+  <div class="score-badge" id="score-badge">Score: 0</div>
+</header>
+<main>
+  <div class="gform-banner">
+    <i class="fa-brands fa-google"></i>
+    <div>
+      <strong>Submit your result to the teacher!</strong> After finishing, enter your name and student ID.
+      <br><span style="font-size:.82rem;opacity:.8;">完成後輸入姓名與學號，成績將自動傳送給老師。</span>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="q-counter">Question 1 of 100</span><span id="q-pct">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:1%"></div></div>
+  </div>
+  <div id="quiz-screen">
+    <div class="card">
+      <div class="q-number" id="q-number">Q1</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <button class="tts-btn" onclick="readPassage()" title="Read aloud"><i class="fa-solid fa-volume-high"></i></button>
+        <span style="font-size:.78rem;color:#889;">Click any word for definition</span>
+      </div>
+      <div class="q-passage" id="q-passage"></div>
+      <div class="word-helper" id="word-helper">
+        <strong id="helper-word"></strong><span class="helper-phonetic" id="helper-phonetic"></span>
+        <div class="helper-meaning" id="helper-meaning"></div>
+      </div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="feedback-box" id="feedback-box">
+        <div class="feedback-header" id="feedback-header"></div>
+        <div class="vocab-cards" id="vocab-cards"></div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question <i class="fa-solid fa-arrow-right"></i></button></div>
+  </div>
+  <div id="results-screen">
+    <div class="results-card">
+      <div class="results-icon" id="results-icon">🎉</div>
+      <div class="results-score" id="results-score">0 / 100</div>
+      <div class="results-pct" id="results-pct"></div>
+      <div class="results-msg" id="results-msg"></div>
+      <div class="results-msg-cn" id="results-msg-cn"></div>
+      <div id="submit-form">
+        <p style="font-weight:600;margin-bottom:10px;font-size:.92rem;"><i class="fa-solid fa-paper-plane" style="color:var(--color-accent)"></i> &nbsp;Send your score to the teacher:</p>
+        <input type="text" id="student-name" placeholder="Your full name (姓名)" />
+        <input type="text" id="student-id" placeholder="Student ID / Class number (學號)" />
+        <button class="submit-btn" onclick="submitScore()"><i class="fa-solid fa-cloud-arrow-up"></i> &nbsp;Submit Score</button>
+        <div id="submit-msg"></div>
+      </div>
+      <button class="restart-btn" onclick="restartQuiz()"><i class="fa-solid fa-rotate-right"></i> &nbsp;Try Again</button>
+    </div>
+  </div>
+</main>
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwN0JbQwvPmsAphNhq9F0nWY8s5Ttr_NLeVofihnI1BqNU_2L4-aa3SRavPkEyUKC7trg/exec";
+
+/* Answer key pattern (repeating every 20): B C D A D | D A C B A | D B C A C | A D B C B */
+const questions = [
+  // Q1-20
+  {q:"The chef placed a ceramic __________ on the counter and filled it with fresh ingredients.",options:["peeler","bowl","shortage","progress"],answer:"bowl",clues:["chef","ceramic","counter","filled","ingredients"]},
+  {q:"The hikers got lost trying to walk through the __________ bushes without a map in the tropical forest.",options:["sandy","hostile","dense","obscure"],answer:"dense",clues:["hikers","lost","bushes","thick","tropical"]},
+  {q:"Even after losing his job, he maintained his __________ and left the office calmly without saying a harsh word.",options:["shortage","progress","dignity","intake"],answer:"dignity",clues:["losing","maintained","calmly","harsh"]},
+  {q:"The tech giant continues to __________ the software market by developing innovative products competitors cannot match.",options:["oppress","peel","dominate","prescribe"],answer:"dominate",clues:["tech","giant","software","innovative","competitors"]},
+  {q:"Archaeologists discovered an ancient __________ pot filled with centuries-old copper coins deep underground.",options:["sandy","earthen","hostile","incorrect"],answer:"earthen",clues:["archaeologists","ancient","copper","coins","underground"]},
+  {q:"The striking workers became __________ when the manager refused to discuss raising their hourly salary during negotiations.",options:["obscure","skillful","dense","hostile"],answer:"hostile",clues:["striking","workers","manager","refused","salary","negotiations"]},
+  {q:"The teacher marked the math answer as __________ because the student made a simple calculation mistake on the test.",options:["incorrect","sandy","earthen","dense"],answer:"incorrect",clues:["teacher","marked","math","calculation","mistake","test"]},
+  {q:"Medical doctors advise adults to reduce their salt __________ to maintain healthy blood pressure and avoid heart disease.",options:["shortage","progress","dignity","intake"],answer:"intake",clues:["doctors","advise","reduce","salt","blood pressure","heart"]},
+  {q:"Sarah voted against the new corporate policy, and most of her office coworkers did __________ at the annual meeting.",options:["likewise","obscure","skillful","hostile"],answer:"likewise",clues:["Sarah","voted","corporate","policy","coworkers","annual"]},
+  {q:"The factory installed a modern __________ that can pack hundreds of grocery boxes within a single minute automatically.",options:["shortage","machine","peeler","bowl"],answer:"machine",clues:["factory","installed","pack","hundreds","grocery","automatically"]},
+  // Q11-20
+  {q:"The senior patient needs to take her heart __________ twice a day to maintain stable health.",options:["medication","shortage","progress","intake"],answer:"medication",clues:["senior","patient","heart","twice","stable"]},
+  {q:"The history professor specializes in __________ documents written by medieval monks centuries ago in Europe.",options:["dense","sandy","hostile","obscure"],answer:"obscure",clues:["professor","medieval","monks","centuries","Europe"]},
+  {q:"Dictators often use their military power to __________ the citizens and prevent any peaceful public protests.",options:["oppress","peel","dominate","prescribe"],answer:"oppress",clues:["dictators","military","citizens","prevent","peaceful","protests"]},
+  {q:"You need to __________ the potatoes carefully before adding them to the boiling vegetable soup for tonight's dinner.",options:["peel","dominate","oppress","prescribe"],answer:"peel",clues:["potatoes","carefully","boiling","vegetable","soup","dinner"]},
+  {q:"After diagnosing the patient with a severe lung infection, the physician decided to __________ a strong course of antibiotics.",options:["oppress","peel","dominate","prescribe"],answer:"prescribe",clues:["diagnosing","severe","lung","infection","physician","antibiotics"]},
+  {q:"The engineering team made excellent __________ on the new application, finishing it two weeks ahead of the planned schedule.",options:["progress","shortage","intake","dignity"],answer:"progress",clues:["engineering","team","application","finishing","ahead","schedule"]},
+  {q:"The children spent the afternoon playing on the __________ beach, building massive castles near the ocean waves.",options:["obscure","hostile","dense","sandy"],answer:"sandy",clues:["children","afternoon","playing","beach","castles","ocean","waves"]},
+  {q:"The severe drought caused a serious water __________ in the agricultural region, ruining the annual rice crop production.",options:["shortage","progress","intake","dignity"],answer:"shortage",clues:["drought","serious","water","agricultural","ruining","rice","crop"]},
+  {q:"The __________ surgeon performed the complex heart operation flawlessly, saving the patient's life in under two hours.",options:["skillful","sandy","dense","incorrect"],answer:"skillful",clues:["surgeon","complex","heart","operation","flawlessly","saving","patient"]},
+  {q:"We purchased a modern electric pressure __________ that can prepare brown rice perfectly in just fifteen minutes at home.",options:["bowl","peeler","machine","cooker"],answer:"cooker",clues:["purchased","electric","pressure","brown rice","fifteen","minutes"]},
+  // Q21-40
+  {q:"After walking in the freezing rain for hours, she enjoyed a warm __________ of soup to warm herself up quickly.",options:["sandy beach","bowl","dense forest","hostile crowd"],answer:"bowl",clues:["walking","freezing","rain","warm","herself"]},
+  {q:"Scientists measured the high population __________ of the capital city to plan better public transportation routes.",options:["shortage","progress","density","intake"],answer:"density",clues:["scientists","population","capital","transportation","routes"]},
+  {q:"The judge handled the complicated criminal case with __________, earning the respect of everyone in the courtroom.",options:["dignity","shortage","progress","intake"],answer:"dignity",clues:["judge","complicated","criminal","earning","respect","courtroom"]},
+  {q:"During the group project meeting, Arthur tended to __________ the conversation, leaving no time for others to speak.",options:["dominate","oppress","peel","prescribe"],answer:"dominate",clues:["group","project","meeting","Arthur","time","others","speak"]},
+  {q:"Cow manure is a popular __________ fertilizer that farmers have used for centuries to enrich farming fields safely.",options:["natural","sandy","dense","hostile"],answer:"natural",clues:["cow","manure","farmers","centuries","enrich","farming","safely"]},
+  {q:"The corporate board members successfully blocked a __________ takeover by purchasing their own shares back from investors.",options:["hostile","sandy","dense","obscure"],answer:"hostile",clues:["corporate","board","blocked","purchasing","shares","investors"]},
+  {q:"If you spell the password __________, the computer system will automatically lock your account for security.",options:["incorrectly","densely","skillfully","likewise"]},
+  {q:"Plants use their green leaves to __________ sunlight and carbon dioxide to produce essential nutrients naturally.",options:["take in","peel off","run short","make progress"],answer:"take in",clues:["plants","green","leaves","sunlight","carbon dioxide","nutrients","naturally"]},
+  {q:"When our neighbors greeted us with a warm smile, we decided to respond __________ with a friendly wave goodbye.",options:["likewise","incorrectly","skillfully","densely"],answer:"likewise",clues:["neighbors","greeted","warm","smile","decided","friendly","wave"]},
+  {q:"Agricultural workers use heavy __________, such as tractors and harvesters, to manage vast farming fields efficiently.",options:["machinery","shortage","progress","intake"],answer:"machinery",clues:["agricultural","workers","tractors","harvesters","vast","farming","efficiently"]},
+  // Q31-40
+  {q:"We had to call an experienced auto __________ when our family car suddenly stopped running on the busy highway.",options:["mechanic","cooker","peeler","bowl"],answer:"mechanic",clues:["experienced","auto","family","car","suddenly","stopped","highway"]},
+  {q:"The grandfather clock stopped ticking because of a minor __________ problem inside its complex brass gears mechanism.",options:["sandy","dense","hostile","mechanical"],answer:"mechanical",clues:["grandfather","clock","stopped","minor","brass","gears","mechanism"]},
+  {q:"Elementary school children are required to memorize the __________ table to solve basic math problems quickly and accurately.",options:["shortage","progress","multiplication","intake"],answer:"multiplication",clues:["elementary","children","memorize","math","problems","quickly","accurately"]},
+  {q:"Most healthy adult animals have a strong natural instinct to produce __________ and pass on genetic material to future generations.",options:["offspring","shortage","progress","intake"],answer:"offspring",clues:["healthy","animals","instinct","genetic","material","future","generations"]},
+  {q:"Rats are considered a dangerous __________ because they chew through electronic wires and spread harmful diseases in homes.",options:["bowl","machine","pest","cooker"],answer:"pest",clues:["rats","dangerous","chew","electronic","wires","spread","diseases"]},
+  {q:"Safety __________ requires all construction workers to wear hard helmets and protective boots while working on the site.",options:["shortage","regulation","progress","intake"],answer:"regulation",clues:["safety","construction","workers","helmets","protective","boots","site"]},
+  {q:"The structural engineers recommended building iron __________ for the old school walls before the typhoon season arrived.",options:["shortage","progress","reinforcement","intake"],answer:"reinforcement",clues:["structural","engineers","iron","old school","walls","typhoon","season"]},
+  {q:"The cancer-__________ patient remained incredibly brave throughout his long medical treatment at the university hospital.",options:["sandy","dense","hostile","stricken"],answer:"stricken",clues:["cancer","patient","brave","medical","treatment","university","hospital"]},
+  {q:"The internet has __________ improved our ability to share information and communicate across international borders instantly.",options:["likewise","incorrectly","skillfully","vastly"],answer:"vastly",clues:["internet","improved","share","communicate","international","borders","instantly"]},
+  {q:"The restaurant offers a delicious __________ menu, featuring fresh salads, vegetable soups, and organic pasta dishes every day.",options:["dense","sandy","hostile","vegetarian"],answer:"vegetarian",clues:["restaurant","delicious","fresh","salads","vegetable","organic","pasta"]},
+  // Q41-60
+  {q:"The historical __________ of the movie was questioned by experts who noticed several major timeline mistakes in the film.",options:["shortage","accuracy","progress","intake"],answer:"accuracy",clues:["historical","movie","questioned","experts","timeline","mistakes","film"]},
+  {q:"As a professional data __________, Kevin spends his day looking at charts and writing detailed business reports for clients.",options:["cooker","bowl","mechanic","analyst"],answer:"analyst",clues:["professional","data","Kevin","charts","detailed","business","reports"]},
+  {q:"To lose weight successfully, you must lower your calorie __________ and exercise for at least thirty minutes daily.",options:["shortage","progress","victory","intake"],answer:"intake",clues:["lose","weight","successfully","lower","exercise","thirty","minutes"]},
+  {q:"Heavy alcohol consumption was identified as a major __________ in the fatal highway car accident last night.",options:["sandy beach","dense fog","hostile environment","contributing factor"],answer:"contributing factor",clues:["alcohol","consumption","major","fatal","highway","car","accident"]},
+  {q:"These two types of plants look different, but they are __________ identical according to careful DNA analysis by scientists.",options:["likewise","incorrectly","vastly","genetically"],answer:"genetically",clues:["plants","different","identical","DNA","analysis","scientists","careful"]},
+  {q:"Mapping the entire human genome was a historic __________ that changed the face of modern medical science forever.",options:["shortage","progress","milestone","intake"],answer:"milestone",clues:["mapping","human","genome","historic","changed","modern","medical","science"]},
+  {q:"Because they are __________ twins, Kevin and his brother share the exact same physical features and blood type.",options:["hostile","sandy","dense","identical"],answer:"identical",clues:["Kevin","brother","exact","same","physical","features","blood type"]},
+  {q:"The advanced seminar was __________ stimulating, forcing all participants to rethink their traditional research methods and approaches.",options:["likewise","incorrectly","intellectually","vastly"],answer:"intellectually",clues:["advanced","seminar","stimulating","participants","rethink","traditional","research"]},
+  {q:"The school held a bake sale last weekend to raise money for __________ and improve local school libraries.",options:["charity","shortage","progress","intake"],answer:"charity",clues:["school","bake sale","weekend","improve","local","libraries"]},
+  {q:"The doctor took out his medical pad to write a __________ for some powerful pain-relief pills after the diagnosis.",options:["bowl","machine","prescription","cooker"],answer:"prescription",clues:["doctor","medical","pad","powerful","pain-relief","pills","diagnosis"]},
+  // Q61-80
+  {q:"The company hired a famous celebrity to __________ their new skincare line on various social media platforms worldwide.",options:["oppress","peel","dominate","promote"],answer:"promote",clues:["company","celebrity","skincare","social media","platforms","worldwide"]},
+  {q:"New trade agreements were signed to eliminate tariffs and encourage __________ commerce between both nations effectively.",options:["sandy","dense","hostile","international"],answer:"international",clues:["trade","agreements","eliminate","tariffs","encourage","nations","effectively"]},
+  {q:"The national football team celebrated their historic __________ after scoring a winning goal in the final minutes of the match.",options:["shortage","progress","victory","intake"],answer:"victory",clues:["national","football","celebrated","historic","winning","goal","final"]},
+  {q:"The __________ army marched through the capital city streets, greeted by thousands of cheering citizens waving national flags.",options:["dense","sandy","hostile","victorious"],answer:"victorious",clues:["army","marched","capital","streets","cheering","citizens","flags"]},
+  {q:"Overcoming his physical disabilities to win an Olympic gold medal was a truly magnificent __________ of human willpower.",options:["shortage","progress","triumph","intake"],answer:"triumph",clues:["physical","disabilities","Olympic","gold medal","magnificent","human","willpower"]},
+  {q:"The __________ scientists held a press conference to announce their successful development of a safe vaccine for the new disease.",options:["dense","sandy","hostile","triumphant"],answer:"triumphant",clues:["scientists","press conference","successful","development","safe","vaccine","disease"]},
+  {q:"It is incredibly impolite and disrespectful to __________ someone's accent when they are trying their best to speak a new language.",options:["oppress","peel","dominate","mock"],answer:"mock",clues:["impolite","disrespectful","trying","best","speak","new","language"]},
+  {q:"The major charity groups decided to __________ their efforts in order to collect emergency winter clothing for all disaster victims.",options:["oppress","peel","dominate","unite"],answer:"unite",clues:["charity","groups","efforts","collect","emergency","winter","victims"]},
+  {q:"Following the sudden passing of the beloved queen, the eldest prince prepared to take the __________ as the new monarch.",options:["shortage","progress","throne","intake"],answer:"throne",clues:["sudden","passing","beloved","queen","eldest","prince","monarch"]},
+  {q:"Journalists have a professional duty to provide __________ information to the public during times of national crisis and emergency.",options:["sandy","dense","hostile","accurate"],answer:"accurate",clues:["journalists","professional","duty","provide","public","national","crisis"]},
+  // Q81-100
+  {q:"The government established a new department to oversee __________ and industry and protect the rights of all workers.",options:["progress","commerce","intake","shortage"],answer:"commerce",clues:["government","department","oversee","protect","rights","workers"]},
+  {q:"Environmental organizations worldwide issued a warning to __________ the illegal dumping of toxic chemical waste in rivers.",options:["oppress","peel","dominate","condemn"],answer:"condemn",clues:["environmental","organizations","warning","illegal","dumping","toxic","rivers"]},
+  {q:"International treaties were signed to ban harmful chemicals that are responsible for causing atmospheric ozone __________ globally.",options:["shortage","progress","depletion","intake"],answer:"depletion",clues:["international","treaties","signed","ban","harmful","chemicals","atmospheric"]},
+  {q:"To prepare for the difficult university entrance examination, students are required to take a __________ exam every month.",options:["sandy","dense","hostile","mock"],answer:"mock",clues:["prepare","university","entrance","examination","students","required","every month"]},
+  {q:"A person's physical appearance, such as eye color, is determined entirely by their unique __________ makeup.",options:["sandy","dense","hostile","genetic"],answer:"genetic",clues:["physical","appearance","eye color","determined","entirely","unique"]},
+  {q:"The company board decided to __________ the CEO's inappropriate comments to protect their valuable corporate reputation publicly.",options:["oppress","peel","dominate","condemn"],answer:"condemn",clues:["board","CEO","inappropriate","comments","protect","corporate","reputation"]},
+  {q:"Royal guests from forty different countries arrived at the cathedral to attend the coronation of the __________ today.",options:["bowl","machine","king","cooker"],answer:"king",clues:["royal","guests","countries","cathedral","attend","coronation"]},
+  {q:"You must hand over this medical __________ to the local pharmacist in order to obtain the necessary pain-relief drugs.",options:["shortage","progress","prescription","intake"],answer:"prescription",clues:["hand over","medical","pharmacist","obtain","necessary","pain-relief","drugs"]},
+  {q:"The __________ of the students voted to hold the graduation ceremony at the beach resort next month.",options:["accuracy","shortage","majority","progress"],answer:"majority",clues:["students","voted","hold","graduation","ceremony","beach","resort"]},
+  {q:"The ancient Roman __________ controlled vast territories stretching across Europe, North Africa, and parts of Asia for centuries.",options:["bowl","machine","empire","cooker"],answer:"empire",clues:["ancient","Roman","territories","stretching","Europe","Africa","Asia","centuries"]},
+];
+
+// Fix Q27 which had missing answer
+questions[26].answer = "incorrectly";
+
+const vocabDef = {
+  "bowl":{"en":"A round deep dish","cn":"碗","ex":"The chef filled the bowl with ingredients."},
+  "cooker":{"en":"An appliance for heating food","cn":"爐具/鍋","ex":"We bought an electric pressure cooker."},
+  "dense":{"en":"Packed closely together","cn":"密集的/茂密的","ex":"The hikers got lost in the dense forest."},
+  "density":{"en":"The degree of compactness","cn":"密度","ex":"Scientists measured the population density."},
+  "dignity":{"en":"The quality of being worthy of respect","cn":"尊嚴","ex":"He left the office with dignity."},
+  "dominate":{"en":"To control or have power over","cn":"支配/控制","ex":"The tech giant dominates the software market."},
+  "earthen":{"en":"Made of clay or soil","cn":"陶製的","ex":"Archaeologists found an ancient earthen pot."},
+  "hostile":{"en":"Angry and unfriendly","cn":"有敵意的","ex":"The workers became hostile during negotiations."},
+  "incorrect":{"en":"Not accurate or right","cn":"不正確的","ex":"The teacher marked the answer as incorrect."},
+  "incorrectly":{"en":"In a wrong manner","cn":"不正確地","ex":"If you spell it incorrectly, the system will lock."},
+  "intake":{"en":"The amount consumed","cn":"攝取量","ex":"Doctors advise reducing salt intake."},
+  "likewise":{"en":"In the same way; also","cn":"同樣地","ex":"Sarah voted against it; her coworkers did likewise."},
+  "machine":{"en":"A piece of equipment with moving parts","cn":"機器","ex":"The factory installed a modern machine."},
+  "machinery":{"en":"Machines in general","cn":"機械","ex":"Agricultural workers use heavy machinery."},
+  "mechanic":{"en":"A person who repairs machines","cn":"技工","ex":"We called an experienced auto mechanic."},
+  "mechanical":{"en":"Relating to machines or machinery","cn":"機械的","ex":"The clock had a minor mechanical problem."},
+  "medication":{"en":"Medicine taken to treat illness","cn":"藥物","ex":"The patient takes heart medication twice daily."},
+  "obscure":{"en":"Not well-known or hard to understand","cn":"鮮為人知的","ex":"The professor researches obscure documents."},
+  "oppress":{"en":"To treat people cruelly and unfairly","cn":"壓迫","ex":"Dictators oppress citizens to prevent protests."},
+  "peel":{"en":"To remove the outer skin of fruit or vegetables","cn":"剝皮","ex":"Peel the potatoes before adding to the soup."},
+  "prescribe":{"en":"To officially authorize medicine for someone","cn":"開處方","ex":"The doctor prescribed a strong antibiotic."},
+  "prescription":{"en":"A written medical authorization for medicine","cn":"處方箋","ex":"Hand the prescription to the pharmacist."},
+  "progress":{"en":"Forward movement or improvement","cn":"進步/進展","ex":"The team made excellent progress on the app."},
+  "sandy":{"en":"Covered with or containing sand","cn":"沙的/鋪滿沙子的","ex":"The children played on the sandy beach."},
+  "shortage":{"en":"A lack of something needed","cn":"短缺","ex":"The drought caused a serious water shortage."},
+  "skillful":{"en":"Very good at something due to practice","cn":"熟練的","ex":"The skillful surgeon saved the patient."},
+  "pest":{"en":"A harmful insect or animal","cn":"害蟲","ex":"Rats are considered a dangerous pest."},
+  "regulation":{"en":"An official rule or law","cn":"規定/條例","ex":"Safety regulation requires helmets on site."},
+  "reinforcement":{"en":"The act of making something stronger","cn":"加固","ex":"Engineers recommended iron reinforcement."},
+  "stricken":{"en":"Seriously affected by illness or misfortune","cn":"遭受重創的","ex":"The cancer-stricken patient stayed brave."},
+  "vegetarian":{"en":"Someone who does not eat meat","cn":"素食者","ex":"The restaurant offers a vegetarian menu."},
+  "accuracy":{"en":"The quality of being correct","cn":"準確性","ex":"Experts questioned the film's historical accuracy."},
+  "analyst":{"en":"A person who analyzes data","cn":"分析師","ex":"Kevin is a professional data analyst."},
+  "victory":{"en":"Success in a contest or battle","cn":"勝利","ex":"The team celebrated their historic victory."},
+  "triumph":{"en":"A great victory or achievement","cn":"勝利/凱旋","ex":"Winning the gold medal was a magnificent triumph."},
+  "promote":{"en":"To publicize or advance something","cn":"推廣/晉升","ex":"The company promoted their new skincare line."},
+  "unite":{"en":"To bring together for a common purpose","cn":"團結/聯合","ex":"The charity groups united their efforts."},
+  "throne":{"en":"The ceremonial seat of a king or queen","cn":"王座","ex":"The prince prepared to take the throne."},
+  "accurate":{"en":"Completely correct and precise","cn":"準確的","ex":"Journalists must provide accurate information."},
+  "commerce":{"en":"The activity of buying and selling","cn":"商業","ex":"The government oversees commerce and industry."},
+  "condemn":{"en":"To express strong disapproval of","cn":"譴責","ex":"Organizations condemned the illegal dumping."},
+  "depletion":{"en":"The using up of a resource","cn":"耗盡/消耗","ex":"Treaties banned chemicals causing ozone depletion."},
+  "mock":{"en":"To tease someone in a cruel way","cn":"嘲笑","ex":"It is rude to mock someone's accent."},
+  "genetic":{"en":"Related to genes or heredity","cn":"基因的/遺傳的","ex":"Eye color is determined by genetic makeup."},
+  "king":{"en":"A male ruler of a kingdom","cn":"國王","ex":"Royal guests attended the coronation of the king."},
+  "empire":{"en":"A group of countries under one ruler","cn":"帝國","ex":"The Roman empire controlled vast territories."},
+  "majority":{"en":"More than half of a group","cn":"多數","ex":"The majority of students voted for the beach."},
+  "identical":{"en":"Exactly the same","cn":"完全相同的","ex":"The twins share identical physical features."},
+  "intellectually":{"en":"In a way that involves the mind","cn":"智力上地","ex":"The seminar was intellectually stimulating."},
+  "charity":{"en":"Giving help or money to those in need","cn":"慈善","ex":"The school raised money for charity."},
+  "victorious":{"en":"Having won a victory","cn":"勝利的","ex":"The victorious army marched through the city."},
+  "triumphant":{"en":"Feeling or expressing great happiness at a victory","cn":"勝利的/得意洋洋的","ex":"The triumphant scientists announced their vaccine."},
+  "contribute":{"en":"To give something to achieve a result","cn":"貢獻/促成","ex":"Alcohol contributed to the accident."},
+  "genetically":{"en":"In a way relating to genes","cn":"從遺傳學角度","ex":"The plants are genetically identical."},
+  "milestone":{"en":"An important event or achievement","cn":"里程碑","ex":"Mapping the genome was a historic milestone."},
+  "contributing factor":{"en":"Something that helps to cause an event","cn":"促成因素","ex":"Alcohol was a contributing factor in the accident."},
+  "natural":{"en":"Existing in or derived from nature","cn":"天然的","ex":"Cow manure is a natural fertilizer."},
+  "international":{"en":"Relating to two or more countries","cn":"國際的","ex":"New agreements encouraged international commerce."},
+  "vastly":{"en":"To a very great degree","cn":"極大地","ex":"The internet has vastly improved communication."},
+  "take in":{"en":"To absorb or consume","cn":"吸收/攝入","ex":"Plants take in sunlight to produce nutrients."},
+  "offspring":{"en":"The young of an animal or person","cn":"後代","ex":"Animals protect their vulnerable offspring."},
+  "multiplication":{"en":"The process of multiplying numbers","cn":"乘法","ex":"Children memorize the multiplication table."},
+};
+
+let currentQ=0, score=0, answered=false;
+let studentAnswers=new Array(questions.length).fill(null);
+let lookedUpWords=new Set();
+
+function renderQuestion(){
+  answered=false;
+  const q=questions[currentQ],total=questions.length;
+  document.getElementById("q-counter").textContent=`Question ${currentQ+1} of ${total}`;
+  document.getElementById("q-pct").textContent=Math.round((currentQ/total)*100)+"%";
+  document.getElementById("progress-fill").style.width=((currentQ/total)*100)+"%";
+  document.getElementById("q-number").textContent=`Q${currentQ+1}`;
+  document.getElementById("score-badge").textContent=`Score: ${score}`;
+  const passageDiv=document.getElementById("q-passage");
+  const words=q.q.split(/(\s+)/);
+  passageDiv.innerHTML=words.map(token=>{
+    if(/\s+/.test(token))return token;
+    if(token==="__________")return`<strong style="color:var(--color-primary);font-size:1.05em;">__________</strong>`;
+    const clean=token.replace(/[^a-zA-Z'-]/g,"");
+    return`<span class="word" data-word="${clean}" onclick="lookupWord('${clean}')">${token}</span>`;
+  }).join("");
+  document.getElementById("word-helper").classList.remove("visible");
+  const grid=document.getElementById("options-grid");
+  const labels=["A","B","C","D"];
+  grid.innerHTML=q.options.map((opt,i)=>`<button class="opt-btn" onclick="selectAnswer(${i})"><span class="opt-label">${labels[i]}</span>${opt}</button>`).join("");
+  document.getElementById("feedback-box").classList.remove("visible");
+  document.getElementById("next-btn").classList.remove("visible");
+}
+
+function selectAnswer(idx){
+  if(answered)return;
+  answered=true;
+  const q=questions[currentQ];
+  studentAnswers[currentQ]=q.options[idx];
+  const btns=document.querySelectorAll(".opt-btn");
+  btns.forEach((btn,i)=>{
+    btn.disabled=true;
+    if(q.options[i]===q.answer)btn.classList.add("correct");
+    else if(i===idx)btn.classList.add("incorrect");
+  });
+  if(q.options[idx]===q.answer)score++;
+  const passageDiv=document.getElementById("q-passage");
+  passageDiv.querySelectorAll(".word").forEach(span=>{
+    const w=span.getAttribute("data-word").toLowerCase();
+    if(q.clues&&q.clues.some(c=>w.includes(c.toLowerCase())||c.toLowerCase().includes(w)))span.classList.add("clue-highlight");
+  });
+  showFeedback(idx);
+  document.getElementById("next-btn").classList.add("visible");
+  document.getElementById("score-badge").textContent=`Score: ${score}`;
+}
+
+function showFeedback(chosenIdx){
+  const q=questions[currentQ];
+  const correct=q.options[chosenIdx]===q.answer;
+  const fb=document.getElementById("feedback-box");
+  const fh=document.getElementById("feedback-header");
+  fh.className="feedback-header "+(correct?"correct-header":"incorrect-header");
+  fh.innerHTML=correct?`<i class="fa-solid fa-circle-check"></i> Correct! The answer is "<strong>${q.answer}</strong>"`:`<i class="fa-solid fa-circle-xmark"></i> The correct answer is "<strong>${q.answer}</strong>"`;
+  const cardsDiv=document.getElementById("vocab-cards");
+  cardsDiv.innerHTML=q.options.map(opt=>{
+    const def=vocabDef[opt]||{en:"—",cn:"—",ex:"—"};
+    return`<div class="vocab-card"><div class="vc-word">${opt}<button class="tts-btn" onclick="speak('${opt.replace(/'/g,"\\'")}')"><i class="fa-solid fa-volume-low"></i></button></div><div class="vc-en">${def.en}</div><div class="vc-cn">${def.cn}</div><div class="vc-ex">${def.ex}<button class="tts-btn" onclick="speak(\`${def.ex.replace(/`/g,"'")}\`)"><i class="fa-solid fa-volume-low"></i></button></div></div>`;
+  }).join("");
+  fb.classList.add("visible");
+}
+
+function nextQuestion(){
+  currentQ++;
+  if(currentQ>=questions.length)showResults();
+  else{document.getElementById("word-helper").classList.remove("visible");renderQuestion();window.scrollTo({top:0,behavior:"smooth"});}
+}
+
+function showResults(){
+  document.getElementById("quiz-screen").style.display="none";
+  document.getElementById("results-screen").classList.add("visible");
+  const pct=Math.round((score/questions.length)*100);
+  document.getElementById("results-score").textContent=`${score} / ${questions.length}`;
+  document.getElementById("results-pct").textContent=`${pct}%`;
+  document.getElementById("progress-fill").style.width="100%";
+  document.getElementById("q-pct").textContent="100%";
+  let icon,msg,msgCn;
+  if(pct>=90){icon="🏆";msg="Outstanding! You've mastered Unit 24.";msgCn="太棒了！你已精通第24單元！";}
+  else if(pct>=75){icon="🎉";msg="Great work! Keep reviewing the tricky ones.";msgCn="表現優異！繼續複習難的字詞。";}
+  else if(pct>=60){icon="📚";msg="Good effort! A bit more practice will help.";msgCn="很努力！再多練習幾次就會更好。";}
+  else{icon="💪";msg="Keep going! Review the word list and try again.";msgCn="繼續加油！複習字彙表後再試一次。";}
+  document.getElementById("results-icon").textContent=icon;
+  document.getElementById("results-msg").textContent=msg;
+  document.getElementById("results-msg-cn").textContent=msgCn;
+}
+
+function restartQuiz(){
+  currentQ=0;score=0;answered=false;
+  studentAnswers=new Array(questions.length).fill(null);
+  lookedUpWords=new Set();
+  document.getElementById("results-screen").classList.remove("visible");
+  document.getElementById("quiz-screen").style.display="";
+  document.getElementById("submit-msg").textContent="";
+  renderQuestion();window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function speak(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";u.rate=0.9;
+  const voices=window.speechSynthesis.getVoices();
+  const female=voices.find(v=>v.lang.startsWith("en")&&/female|zira|samantha/i.test(v.name));
+  if(female)u.voice=female;
+  window.speechSynthesis.speak(u);
+}
+
+function readPassage(){speak(questions[currentQ].q.replace(/__________/g,"blank"));}
+
+async function lookupWord(word){
+  if(!word||word.length<2)return;
+  lookedUpWords.add(word);
+  const helper=document.getElementById("word-helper");
+  document.getElementById("helper-word").textContent=word;
+  document.getElementById("helper-phonetic").textContent="";
+  document.getElementById("helper-meaning").textContent="Looking up…";
+  helper.classList.add("visible");
+  try{
+    const res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word.toLowerCase()}`);
+    if(!res.ok)throw new Error("not found");
+    const data=await res.json();
+    const entry=data[0];
+    const phonetic=entry.phonetic||entry.phonetics?.find(p=>p.text)?.text||"";
+    const meaning=entry.meanings?.[0]?.definitions?.[0]?.definition||"Definition not found.";
+    document.getElementById("helper-phonetic").textContent=phonetic?` ${phonetic}`:"";
+    document.getElementById("helper-meaning").textContent=meaning;
+  }catch{document.getElementById("helper-meaning").textContent="Definition not found. Try another word.";}
+}
+
+async function submitScore(){
+  const name=document.getElementById("student-name").value.trim();
+  const sid=document.getElementById("student-id").value.trim();
+  const msgEl=document.getElementById("submit-msg");
+  if(!name||!sid){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="Please enter both your name and student ID.";return;}
+  msgEl.style.color="#334";msgEl.textContent="Submitting…";
+  const pct=Math.round((score/questions.length)*100);
+  const wrongList=questions.filter((q,i)=>studentAnswers[i]!==q.answer).map(q=>q.answer).join(", ");
+  const lookedList=Array.from(lookedUpWords).join(", ");
+  try{
+    const payload={
+      testDateTime:new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"}),
+      studentName:name+" ("+sid+")",
+      unitName:"Level 5 Unit 24",
+      percentage:pct+"%",
+      wrongWords:wrongList||"none",
+      lookUpWords:lookedList||"none"
+    };
+    await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    msgEl.style.color="var(--color-correct)";
+    msgEl.textContent=`✅ Submitted! ${name} — ${pct}%`;
+  }catch(e){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="Submission failed. Check your internet connection.";}
+}
+
+window.speechSynthesis.onvoiceschanged=()=>{};
+renderQuestion();
+</script>
+</body>
+</html>
