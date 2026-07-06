@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 21 Vocabulary Quiz — 4000 Essential Words Level 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#1a3a5c; --accent:#c8962e; --correct:#2d7a4f; --wrong:#b53a2f;
+  --clue:#fff3a3; --bg:#f4f2ef; --card:#fff; --border:#e2ddd8;
+  --muted:#6b7280; --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#1a1a1a;min-height:100vh;padding-bottom:60px}
+#splash{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;text-align:center}
+.tag{display:inline-block;background:var(--accent);color:#fff;border-radius:20px;padding:3px 14px;font-size:.8rem;font-weight:700;margin-bottom:14px}
+#splash h1{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.6rem);color:var(--primary);margin-bottom:8px}
+.sub{color:var(--muted);font-size:.9rem;max-width:500px;margin-bottom:20px;line-height:1.6}
+.fields{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+.fields input{border:1.5px solid var(--border);border-radius:8px;padding:9px 14px;font-size:.9rem;font-family:'DM Sans',sans-serif;width:180px;background:#fff;color:#1a1a1a}
+.fields input:focus{outline:none;border-color:var(--primary)}
+.start-btn{background:var(--primary);color:#fff;border:none;padding:13px 40px;border-radius:30px;font-size:1rem;font-weight:700;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif}
+.start-btn:hover{background:#2a5080;transform:translateY(-1px)}
+#qwrap{display:none;max-width:780px;margin:0 auto;padding:16px}
+.topbar{background:var(--primary);color:#fff;border-radius:var(--radius);padding:10px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;font-size:.88rem}
+.score-badge{background:var(--accent);border-radius:20px;padding:3px 14px;font-weight:700;font-size:.85rem}
+.prog-outer{height:5px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden;margin-top:6px}
+.prog-inner{height:100%;background:var(--accent);transition:width .4s}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:0 2px 18px rgba(0,0,0,.07);padding:22px;margin-bottom:10px}
+.qnum{font-size:.75rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.passage{font-size:1rem;line-height:1.85;color:#1a1a1a}
+.ws{cursor:pointer;border-bottom:1px dotted #bbb;transition:.1s}
+.ws:hover{color:var(--primary);border-bottom-color:var(--primary)}
+.blank{background:#e8e4de;padding:0 14px;border-radius:4px;font-weight:700}
+.clue{background:var(--clue)!important;border-bottom:none!important;border-radius:2px;padding:1px 0}
+.tts{background:none;border:none;cursor:pointer;font-size:1.05rem;margin-left:6px;color:var(--muted);vertical-align:middle;padding:0;line-height:1}
+.tts:hover{color:var(--primary)}
+.dbox{margin-top:12px;background:#eef2ff;border-left:3px solid var(--primary);border-radius:0 8px 8px 0;padding:10px 14px;font-size:.84rem;display:none}
+.dbox .dw{font-weight:700;color:var(--primary);font-size:.9rem}
+.dbox .dc{color:#b00;font-weight:600;margin-left:8px}
+.dbox .de{color:#333;margin-top:2px}
+.dbox .dx{color:#555;font-style:italic;margin-top:3px;font-size:.8rem}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.opt{background:#f8f7f4;border:2px solid var(--border);border-radius:var(--radius);padding:11px 16px;cursor:pointer;font-size:.92rem;font-weight:500;transition:.15s;text-align:left;font-family:'DM Sans',sans-serif}
+.opt:hover:not(:disabled){border-color:var(--primary);background:#eef2ff}
+.opt.correct{background:#d4edda;border-color:var(--correct);color:var(--correct)}
+.opt.wrong{background:#fde8e8;border-color:var(--wrong);color:var(--wrong)}
+.opt:disabled{cursor:default}
+.feedback{margin-top:14px;border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);display:none}
+.fb-hdr{background:var(--primary);color:#fff;padding:8px 14px;font-size:.78rem;font-weight:700;letter-spacing:.06em}
+.fb-grid{display:grid;grid-template-columns:1fr 1fr}
+.fb-cell{padding:10px 14px;border-bottom:1px solid var(--border)}
+.fb-cell:nth-child(odd){border-right:1px solid var(--border)}
+.fb-word{font-weight:700;font-size:.88rem}
+.fb-cn{color:#c00;font-size:.82rem;margin-left:4px}
+.fb-en{color:var(--muted);font-size:.8rem;margin-top:2px}
+.fb-ex{font-style:italic;font-size:.78rem;color:#444;margin-top:3px}
+.nxt{display:none;width:100%;background:var(--primary);color:#fff;border:none;padding:13px;border-radius:var(--radius);font-size:1rem;font-weight:700;cursor:pointer;margin-top:12px;font-family:'DM Sans',sans-serif}
+.nxt:hover{background:#2a5080}
+#results{display:none;max-width:600px;margin:40px auto;padding:20px;text-align:center}
+.trophy{font-size:4rem;margin-bottom:10px}
+#results h2{font-family:'Playfair Display',serif;color:var(--primary);font-size:2rem;margin-bottom:8px}
+.gc{display:inline-flex;align-items:center;justify-content:center;width:88px;height:88px;border-radius:50%;background:var(--primary);color:#fff;font-size:2.2rem;font-weight:700;margin:14px auto}
+#results p{color:var(--muted);margin-bottom:6px}
+.rbtns{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.rbtns button{padding:12px 32px;border-radius:30px;border:none;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif}
+.bsub{background:var(--correct);color:#fff}
+.bret{background:var(--primary);color:#fff}
+.ok{background:#d4edda;color:var(--correct);border-radius:8px;padding:10px;margin-top:12px;font-size:.88rem}
+.err{background:#fde8e8;color:var(--wrong);border-radius:8px;padding:10px;margin-top:12px;font-size:.88rem}
+@media(max-width:520px){.opts{grid-template-columns:1fr}.fb-grid{grid-template-columns:1fr}.fb-cell:nth-child(odd){border-right:none}.fields input{width:140px}}
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <span class="tag">4000 Essential Words · Level 5</span>
+  <h1>Unit 21 Vocabulary Quiz</h1>
+  <p class="sub">background · bait · chronicle · copper · disease · folklore · infect · itch · literature · millennium · myth · promote · relate · religion · sum · teller · trustworthy · update · vein · venom<br><br>
+  <strong>100 MCQs</strong> &nbsp;·&nbsp; Click any word for instant definition &nbsp;·&nbsp; Clues highlight after each answer</p>
+  <div class="fields">
+    <input id="nm" placeholder="Your Name" autocomplete="off">
+    <input id="sid" placeholder="Student ID" autocomplete="off">
+    <input id="cls" placeholder="Class" autocomplete="off">
+  </div>
+  <button class="start-btn" onclick="startQuiz()">Start Quiz &#x2192;</button>
+</div>
+
+<div id="qwrap">
+  <div class="topbar">
+    <div><span id="qctr" style="font-weight:700"></span>
+      <div class="prog-outer"><div class="prog-inner" id="pbar"></div></div>
+    </div>
+    <div>Score: <span class="score-badge" id="scdisp">0</span></div>
+  </div>
+  <div class="card">
+    <div class="qnum" id="qnl"></div>
+    <div class="passage" id="passage"></div>
+    <div class="dbox" id="dbox"></div>
+    <div class="opts" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <button class="nxt" id="nxtbtn" onclick="nextQ()">Next Question &#x2192;</button>
+  </div>
+</div>
+
+<div id="results">
+  <div class="trophy" id="trophy">&#127942;</div>
+  <h2>Quiz Complete!</h2>
+  <div class="gc" id="gcirc">A</div>
+  <p id="scline"></p><p id="cnmsg"></p>
+  <div id="statusarea"></div>
+  <div class="rbtns">
+    <button class="bsub" onclick="submitResults()">&#128202; Submit to Google Sheets</button>
+    <button class="bret" onclick="location.reload()">&#x1F504; Try Again</button>
+  </div>
+</div>
+
+<script>
+const GAS='https://script.google.com/macros/s/AKfycbxeh5H1s2jL72hFWeVYzZCQnZy6Rcze0zL3DLstjPYngmgOgGA7oaC8xtj2735isHORiw/exec';
+const D={
+"background":["a person\'s education, family history, and past experience","背景","Her diverse background helped her understand many cultures."],
+"bait":["food or object used to lure fish or trick someone","誘餌；裝誘餌","The fisherman put a worm on the hook as bait."],
+"chronicle":["a written record of events in order; to record events","編年史；記錄","She wrote a chronicle of the town\'s history."],
+"copper":["a reddish-brown metal that conducts electricity well","銅；銅製的","Electrical wires are made of copper."],
+"disease":["an illness or disorder affecting the body or mind","疾病","The doctors worked to cure the rare disease."],
+"folklore":["traditional stories, beliefs, and customs of a culture","民間傳說","Local folklore says a dragon lives in the lake."],
+"infect":["to pass a disease or germ to another person","感染；傳染","You can infect others if you sneeze without covering your mouth."],
+"itch":["an uncomfortable skin sensation that makes you want to scratch","發癢","My arm began to itch after the insect bite."],
+"literature":["written works such as novels, plays, and poetry","文學","She studied French literature at university."],
+"millennium":["a period of one thousand years","千年；千禧年","The castle has stood for more than a millennium."],
+"myth":["a traditional story or a widely-held false belief","神話；迷思","It is a myth that eating carrots dramatically improves eyesight."],
+"promote":["to raise someone to a higher job; to advertise or encourage","晉升；推廣","The manager decided to promote her to team leader."],
+"relate":["to connect to or have an understanding of something","有關聯；認同","I can relate to the character\'s struggle in the novel."],
+"religion":["a system of faith and worship involving a god or gods","宗教","Buddhism is a major religion practiced across Asia."],
+"sum":["a total amount of money; the total when numbers are added","總數；金額","He donated a large sum of money to charity."],
+"teller":["a bank employee who handles cash; a person who tells","銀行櫃員；敘述者","The bank teller processed my deposit quickly."],
+"trustworthy":["honest and reliable; worthy of trust","值得信賴的","A good leader must be trustworthy."],
+"update":["to make more current; new information about something","更新；最新消息","Please update the software before the meeting."],
+"vein":["a blood vessel carrying blood back to the heart","靜脈","The nurse found a vein in my arm to draw blood."],
+"venom":["poisonous liquid produced by snakes, spiders, or other animals","毒液","The cobra\'s venom can kill within minutes."],
+"infection":["being contaminated by germs or bacteria","感染（名詞）","She had an ear infection and needed antibiotics."],
+"infectious":["easily spread from person to person","傳染性的","Her laughter was so infectious that everyone smiled."],
+"infected":["affected by disease-causing germs","受感染的","The doctor cleaned the infected wound carefully."],
+"contagious":["easily passed from person to person through contact","具傳染性的","Chickenpox is highly contagious among children."],
+"itchy":["causing an uncomfortable urge to scratch","癢的","The rash on her arm was very itchy."],
+"literary":["relating to literature or the writing of books","文學的","She won a prestigious literary award for her novel."],
+"literate":["able to read and write","識字的","The charity helped adults become literate."],
+"illiterate":["unable to read or write","不識字的；文盲","In ancient times many peasants were illiterate."],
+"literacy":["the ability to read and write","讀寫能力","Improving literacy rates is key to development."],
+"millennial":["relating to 1,000 years; a person born roughly 1981-1996","千禧世代的","Many millennial consumers prefer shopping online."],
+"millennia":["plural of millennium; thousands of years","數千年","This culture has existed for several millennia."],
+"mythical":["found in myths; imaginary or legendary","神話的；虛構的","The unicorn is a mythical creature."],
+"mythology":["a collection of myths from a culture or religion","神話學；神話體系","Greek mythology includes stories about Zeus and Athena."],
+"promotion":["moving to a higher job rank; advertising of a product","晉升；促銷","After three years she earned a promotion to manager."],
+"promotional":["relating to advertising or publicising a product","促銷的；宣傳的","The store handed out promotional flyers."],
+"relationship":["the way two or more people or things are connected","關係","Trust is the foundation of any good relationship."],
+"relation":["a connection between things; also a family member","關係；親戚","There is a clear relation between diet and health."],
+"relative":["a member of your family","親戚","We invited every relative to the reunion dinner."],
+"religious":["relating to religion; having strong religious belief","宗教的；虔誠的","They performed a religious ceremony at the temple."],
+"religiously":["in a devout way; very consistently","虔誠地；固定地","He exercised religiously every morning at six."],
+"summary":["a short statement of the main points of something","摘要；總結","Please write a brief summary of the article."],
+"summarize":["to give a short account of the main points","總結；概括","Let me summarize the key decisions from today\'s meeting."],
+"trustworthiness":["the quality of being honest and reliable","可信賴性；誠信","Her trustworthiness made her ideal for the job."],
+"untrustworthy":["not able to be trusted or relied on","不可靠的","Avoid sharing personal data with untrustworthy websites."],
+"updated":["made more modern or current","已更新的","Please check the updated schedule in this email."],
+"venomous":["producing or full of venom; poisonous","有毒的","Several venomous snakes live in the desert."],
+"clickbait":["online content using misleading titles to attract clicks","誘餌式標題","I avoid articles with obvious clickbait headlines."],
+"folktale":["a traditional story passed down through generations","民間故事","My grandmother told me a folktale about a clever fox."],
+"chronological":["arranged in the order that events happened in time","按時間順序的","The professor asked us to list events in chronological order."],
+"chronologically":["in order of when things happened","按時間順序地","The photographs are arranged chronologically in the album."],
+"chronology":["the arrangement of events in the order they occurred","年代學；時間順序","Historians studied the chronology of the ancient empire."],
+"diseased":["suffering from or affected by a disease","染病的","Cut off the diseased branch before it spreads."],
+"thesis":["a long essay based on original research for a degree","論文","Linda wrote a fifty-page thesis on renewable energy."],
+"abstract":["a brief summary of a research paper; existing only in thought","摘要；抽象的","Read the abstract before deciding to read the full paper."],
+"antivenom":["a medicine used to treat poisoning from a venomous bite","抗毒血清","The hospital kept anti-venom for snake bite cases."],
+"decease":["to die; the act of dying","去世；死亡","Upon his decease, the estate was divided among his children."],
+"deceased":["a person who has recently died","死者；已故的","The family honored the memory of the deceased."],
+"even":["used to emphasise something surprising; level or smooth","甚至；即使","Even experienced doctors make mistakes sometimes."],
+"though":["despite the fact that; however","雖然；儘管","Though it was raining, they continued the match."],
+"humble":["having a modest opinion of yourself; of low social status","謙遜的；出身卑微的","Despite his success, he remained humble."],
+"determination":["the quality of continuing firmly toward a goal","決心；毅力","Her determination helped her finish the marathon."],
+"outstanding":["extremely good; clearly better than average","傑出的；優秀的","She received an award for outstanding performance."],
+"intelligence":["the ability to learn, think, and understand","智力；智慧","High intelligence alone does not guarantee success."],
+"competitive":["involving strong competition; very eager to win","競爭性的；好勝的","The technology industry is highly competitive."],
+"industry":["a type of business or manufacturing activity","行業；產業","She built a career in the fashion industry."],
+"clever":["quick to learn and understand; intelligent","聰明的；機靈的","That was a very clever solution to the problem."],
+"realized":["became aware of or understood something","意識到；了解到","She realized she had left her keys at home."],
+"hunters":["people who chase and kill animals for food or sport","獵人們","The hunters set traps along the forest trail."],
+"newly":["recently; not long ago","最近；新近地","The newly opened café became popular quickly."],
+"biography":["a written account of someone\'s life","傳記","The biography described the musician\'s difficult childhood."],
+"thoroughly":["completely and carefully; in great detail","徹底地；仔細地","She thoroughly reviewed every page of the report."],
+"childhood":["the period of your life when you are a child","童年；兒時","She had a happy childhood in the countryside."],
+"struggles":["serious efforts made against difficulties","掙扎；奮鬥","The biography described his financial struggles."],
+"struggle":["to work hard against difficulty; a difficult effort","掙扎；努力","Many students struggle with grammar at first."],
+"subsequent":["coming after something else in time or order","隨後的；後來的","The first experiment failed but subsequent attempts succeeded."],
+"legendary":["very famous and talked about by many people","傳奇的；著名的","She became a legendary figure in jazz music."],
+"monument":["a building or statue built to honour a person or event","紀念碑；歷史遺跡","The ancient monument attracts many tourists each year."],
+"dome":["a rounded roof on a building shaped like an upside-down bowl","圓頂；穹頂","The cathedral had a magnificent golden dome."],
+"weathering":["the wearing away of rock or materials by weather over time","風化；侵蝕","Weathering turned the copper dome green over decades."],
+"specialist":["a person with expert knowledge in a particular field","專家；專科醫生","She saw a specialist about her heart condition."],
+"tirelessly":["with a great deal of energy and without getting tired","不知疲倦地","Researchers worked tirelessly to find a cure."],
+"eliminate":["to completely remove or get rid of something","消除；消滅","The program aims to eliminate poverty."],
+"spread":["to move or cause to move over a larger area","傳播；蔓延","The disease began to spread through the village."],
+"continent":["one of the seven main large land areas on Earth","大洲；洲","Africa is the second largest continent."],
+"mysterious":["strange and not fully understood or explained","神秘的","A mysterious figure appeared at midnight."],
+"creature":["a living being, especially an animal","生物；動物","Scientists discovered a new deep-sea creature."],
+"scientific":["relating to science and its methods","科學的","The team conducted a scientific study on climate change."],
+"accidentally":["without meaning to; by mistake","意外地；不小心地","He accidentally deleted the wrong file."],
+"classmates":["students who are in the same class","同學們","She studied with her classmates every evening."],
+"bitten":["past participle of bite; hurt by teeth or a sting","被咬了","She was bitten by a mosquito during the hike."],
+"mosquitoes":["small flying insects that bite and can spread disease","蚊子們","Mosquitoes are most active at dawn and dusk."],
+"camping":["sleeping outdoors in a tent for recreation","露營","They went camping in the forest for the weekend."],
+"professor":["a senior teacher at a university or college","教授","The professor gave an inspiring lecture on history."],
+"academic":["relating to education, schools, and universities","學術的","Her academic career focused on medieval history."],
+"poems":["pieces of writing that express feelings with rhythm or rhyme","詩歌們","He wrote poems about nature and loss."],
+"victorian":["relating to the reign of Queen Victoria (1837-1901)","維多利亞時代的","Victorian novels often dealt with social class."],
+"survived":["continued to live or exist after a dangerous event","倖存了","The ancient bridge has survived for centuries."],
+"sacred":["connected to God or religion; treated with great respect","神聖的","The river is considered sacred by the local people."],
+"pilgrims":["people who travel to a holy place as a religious act","朝聖者們","Pilgrims travel to Mecca from all over the world."],
+"camels":["large animals with humps that live in desert regions","駱駝們","Camels can survive days without water."],
+"marketing":["activities used to promote and sell products","行銷","The marketing campaign reached millions of people."],
+"attract":["to draw the interest or attention of someone","吸引","The museum attracts thousands of visitors each year."],
+"consumers":["people who buy and use goods and services","消費者們","Young consumers prefer eco-friendly products."],
+"police":["the organisation responsible for maintaining law and order","警察；警方","The police investigated the report immediately."],
+"increase":["to become or make larger in amount or number","增加；上升","Sales increased by twenty percent this quarter."],
+"accidents":["unexpected events that cause harm or damage","事故；意外","Road accidents often happen in poor weather."],
+"connected":["joined or linked together","連接的；相關聯的","The two events are directly connected."],
+"heavy":["weighing a lot; large in amount or degree","沉重的；大量的","Heavy rain fell throughout the night."],
+"celebrate":["to do something enjoyable to mark a special event","慶祝","They celebrated the team\'s victory with dinner."],
+"heritage":["the traditions and history passed down from past generations","遺產；文化傳承","The festival celebrated the region\'s cultural heritage."],
+"wealthy":["having a large amount of money; rich","富有的；有錢的","A wealthy businessman donated to the school."],
+"philanthropist":["a person who donates money and time to help others","慈善家","The philanthropist funded a new children\'s library."],
+"donate":["to give money or goods to help a cause","捐贈；捐款","She decided to donate half her salary to charity."],
+"fund":["money set aside for a purpose; to provide money for something","資金；資助","The government will fund the research project."],
+"hospital":["a building where doctors and nurses treat patients","醫院","She spent three days in hospital after the accident."],
+"account":["a record of financial transactions with a bank","帳戶；賬目","He opened a new bank account online."],
+"transaction":["an instance of buying, selling, or exchanging money","交易；事務","Every bank transaction is recorded automatically."],
+"accurate":["correct in every detail; free from errors","準確的；精確的","Weather forecasts are not always accurate."],
+"proven":["shown to be true through evidence or testing","已被證明的","She has proven her ability many times."],
+"manager":["a person who is in charge of a business or team","經理；管理者","The manager approved the new budget plan."],
+"security":["safety; measures taken to protect people or places","安全；保安","Airport security checks all baggage carefully."],
+"regularly":["at fixed and repeated intervals; often","定期地；經常地","She exercises regularly to stay healthy."],
+"software":["computer programs and operating systems","軟體；程式","Update your software to fix the security issue."],
+"smartphone":["a mobile phone with computer and internet features","智慧型手機","Most teenagers own a smartphone today."],
+"prominent":["important and well known; easily noticeable","顯著的；突出的","The vein on his forearm was prominent after exercise."],
+"patient":["a person receiving medical care; able to wait calmly","病人；有耐心的","The nurse reassured the anxious patient."],
+"lethal":["causing or able to cause death","致命的","The snake\'s lethal venom acts within minutes."],
+"inject":["to push a liquid into something using a needle","注射；注入","The doctor needs to inject the medicine into the vein."],
+"rodent":["a small mammal with sharp front teeth, such as a rat or mouse","囓齒動物","Rats are common urban rodents."],
+"paralyzing":["making unable to move","使癱瘓；使麻痺","The spider\'s bite delivered a paralyzing toxin."],
+"relaxing":["making you feel calm and free from tension","放鬆的；令人輕鬆的","A warm bath can be very relaxing after work."],
+"atmosphere":["the feeling or mood of a place","氣氛；大氣層","The restaurant had a warm and cozy atmosphere."],
+"tabloid":["a newspaper with small pages, often with sensational stories","小報；八卦報","Tabloid headlines are often exaggerated."],
+"sensational":["causing great public excitement, often exaggerated","聳人聽聞的；轟動的","The story was written in a sensational style."],
+"headlines":["titles of newspaper articles printed in large text","頭條新聞；標題","The scandal dominated the headlines for weeks."],
+"trick":["to deceive someone cleverly; a clever action","欺騙；詭計","The advertisement was designed to trick consumers."],
+"online":["connected to or available on the internet","線上的；網路上的","Online shopping has grown rapidly in recent years."],
+"eradicated":["completely destroyed or removed","被根除了","Smallpox was eradicated through global vaccination."],
+"worldwide":["in or affecting the whole world","全球地；世界範圍內","The company has offices worldwide."],
+"vaccination":["giving a vaccine to prevent disease","疫苗接種","Vaccination has saved millions of lives."],
+"grandmother":["the mother of one\'s parent","祖母；外祖母","Her grandmother told her bedtime stories every night."],
+"outsmarted":["gained an advantage over someone by being cleverer","智勝了","The rabbit outsmarted the wolf in the folktale."],
+"fierce":["very strong, violent, or aggressive","兇猛的；激烈的","A fierce storm hit the coast overnight."],
+"jungle":["a dense tropical forest with thick vegetation","叢林；密林","The explorers hiked through the dense jungle."],
+"severe":["very serious, extreme, or strict","嚴重的；嚴厲的","She suffered a severe reaction to the medication."],
+"bacterial":["caused by or relating to bacteria","細菌性的","Antibiotics treat bacterial infections effectively."],
+"antibiotics":["medicines that kill bacteria and treat infections","抗生素","He was prescribed antibiotics for the ear infection."],
+"poisonous":["causing illness or death if swallowed or touched","有毒的","Some poisonous plants look harmless."],
+"hiker":["a person who walks long distances in the countryside","徒步旅行者","The hiker followed the trail through the mountains."],
+"metaphors":["figures of speech comparing one thing to another","隱喻們；比喻","Poets use metaphors to paint vivid pictures."],
+"symbols":["things that represent or stand for something else","符號；象徵","Doves are symbols of peace."],
+"digital":["relating to computers and electronic technology","數位的；數字的","The digital age has changed how we communicate."],
+"exceptional":["unusually good; outstanding","優秀的；傑出的","She showed exceptional skill at an early age."],
+"performance":["how well someone does a task; a show or concert","表現；演出","Her sales performance exceeded all targets."],
+"leadership":["the ability and skill to lead and guide others","領導力；領導能力","Strong leadership is essential in a crisis."],
+"complex":["made of many connected parts; difficult to understand","複雜的","The city\'s transport system is very complex."],
+"political":["relating to government and how a country is run","政治的","The political situation in the region is tense."],
+"cunning":["clever at achieving goals in a sly way","狡猾的；狡詐的","The cunning thief avoided every security camera."],
+"salesman":["a man whose job is to sell products or services","銷售員；推銷員","The salesman offered a very attractive deal."],
+"contract":["a legal agreement between two or more parties","合約；合同","Both sides signed the contract after negotiation."],
+"historians":["people who study and write about history","歷史學家們","Historians disagree about the cause of the war."],
+"empire":["a group of countries or states ruled by one government","帝國","The Roman Empire covered much of Europe."],
+"collapse":["a sudden failure; to fall down or break apart suddenly","崩潰；倒塌","The collapse of the bridge injured many people."],
+"backyard":["the outdoor area behind a house","後院","The children played in the backyard all afternoon."],
+"minted":["officially made into coins","被鑄造的","The ancient coin was minted over two centuries ago."],
+"cancer":["a serious disease where abnormal cells grow uncontrollably","癌症","Cancer research has advanced significantly this decade."],
+"annually":["every year; once per year","每年","The festival is held annually in the spring."],
+"festival":["a special celebration or event, often cultural or religious","節日；節慶","The harvest festival attracts visitors from many towns."],
+"preserve":["to keep something in its original or existing condition","保護；保存","They want to preserve the old buildings in the city center."],
+"citizens":["official members of a country or city","市民們；公民們","Citizens have both rights and responsibilities."],
+"ancestral":["relating to your ancestors or family history","祖先的；世代相傳的","They returned to their ancestral homeland."],
+"generations":["groups of people born and living around the same time","世代；一代","The story was passed down through generations."],
+"warned":["told someone about a possible danger","警告了；提醒了","The weather service warned of heavy snow."],
+"strain":["a variety of a virus or bacteria; pressure or effort","變異株；壓力","A new strain of the virus emerged last winter."],
+"respiratory":["relating to breathing and the lungs","呼吸的；呼吸系統的","Respiratory infections are common in winter."],
+"virus":["a tiny agent that causes disease","病毒","The flu virus mutates every year."],
+"rapidly":["very quickly; at high speed","迅速地；快速地","The company grew rapidly in its first year."],
+"launched":["started; officially began","啟動了；推出了","The company launched its new app last week."],
+"nationwide":["happening throughout an entire country","全國性的","A nationwide campaign promoted road safety."],
+"indigenous":["naturally belonging to a particular place; native","土著的；原住民的","The museum displays indigenous artwork."],
+"tribe":["a group of people with shared ancestry and culture","部落；氏族","The tribe has preserved its language for centuries."],
+"lifestyle":["the way a person or group lives","生活方式","A healthy lifestyle includes exercise and good diet."],
+"customs":["traditional practices and habits of a community","習俗；風俗","Local customs vary from village to village."],
+"dragon":["a large imaginary creature that breathes fire","龍","The dragon appears in many Asian folktales."],
+"supermarket":["a large self-service shop selling food and household goods","超市","She bought fresh vegetables at the supermarket."],
+"flyers":["printed sheets of paper used for advertising","傳單；廣告單","Volunteers handed out flyers for the charity event."],
+"residents":["people who live in a particular place","居民們","Local residents complained about the noise."],
+"discount":["a reduction in the original price of something","折扣","Students get a discount at the cinema."],
+"reunion":["a gathering of people who have not seen each other for some time","重聚；聚會","The family held a reunion every summer."],
+"distant":["far away in space or time; not close","遙遠的；疏遠的","They found a distant relative through DNA testing."],
+"immigrated":["moved to a new country to live permanently","移民了","His grandparents immigrated from Europe."],
+"harmony":["a state of peaceful cooperation and agreement","和諧；和睦","The two communities lived in harmony."],
+"diverse":["showing great variety; including many different types","多樣的；多元的","The city has a diverse population."],
+"multicultural":["including people of many different cultures","多元文化的","The school celebrates its multicultural community."],
+"auditors":["people who officially examine financial records","審計員們","External auditors reviewed the company accounts."],
+"taxes":["money paid to the government based on income or purchases","稅；稅款","He filed his taxes online this year."],
+"palms":["the inner surfaces of the hands","手掌","The fortune teller examined the lines on her palms."],
+"overseas":["in or to a foreign country across the sea","在海外；去國外","She studied overseas for two years."],
+"loyalty":["the quality of being faithful and supportive","忠誠；忠心","His loyalty to the company was well known."],
+"crisis":["a time of serious difficulty, danger, or uncertainty","危機；緊急情況","The country faced an economic crisis."],
+"president":["the elected leader of a country or organisation","總統；主席；董事長","The president addressed the nation on television."],
+"progress":["movement toward a better or more advanced state","進度；進展；進步","The construction project is making good progress."],
+"construction":["the process of building something","建築；施工","Construction on the new bridge begins next month."],
+"professionals":["people who do skilled jobs that require training","專業人士們","Medical professionals worked through the night."],
+"administered":["gave or applied something officially","施予了；給予了","The nurse administered the vaccine carefully."],
+"cobra":["a large venomous snake that can spread its neck into a hood","眼鏡蛇","The cobra spread its hood as a warning sign."],
+"preferred":["liked or wanted more than alternatives","更偏好的；首選的","She preferred working early in the morning."],
+"applicants":["people who formally apply for a job or course","申請者們","Over two hundred applicants applied for the role."],
+"position":["a job or role; a place or location","職位；位置","She applied for the position of head teacher."],
+"mouse":["a small rodent; also a computer pointing device","老鼠；滑鼠","The mouse ignored the cheese in the trap."],
+"ignoring":["paying no attention to someone or something","忽視著","He walked past, ignoring the warning signs."],
+"cheese":["a food made from pressed and aged milk","起司；乳酪","She added cheese to the pasta."],
+"medieval":["relating to the Middle Ages, roughly 500-1500 AD","中世紀的","Medieval castles still stand across Europe."],
+"cookware":["pots, pans, and other tools used for cooking food","炊具；廚具","This cookware set is made of solid copper."],
+"evenly":["in equal amounts or at equal distances","均勻地","Spread the butter evenly across the bread."],
+"diabetes":["a disease where the body cannot regulate blood sugar properly","糖尿病","A healthy diet helps manage diabetes."],
+"chronic":["lasting for a long time; persistent","慢性的；長期的","He suffers from a chronic back condition."],
+"monitor":["to watch something carefully over time; a screen","監測；螢幕","Nurses monitor patients throughout the night."],
+"scholars":["people with deep knowledge gained through study","學者們","Scholars debated the poem\'s meaning for years."],
+"lawyer":["a person trained in law who advises and represents clients","律師","She hired a lawyer to handle the contract."],
+"robbery":["the crime of taking property by force or threat","搶劫；盜竊案","The bank robbery was caught on security cameras."],
+"counterfeit":["fake; made to look genuine but not real","偽造的；仿冒的","Police seized thousands of counterfeit banknotes."],
+"biologist":["a scientist who studies living organisms","生物學家","The biologist studied the migration of salmon."],
+"deoxygenated":["with oxygen removed; carrying used blood back to the heart","去氧的","Veins carry deoxygenated blood to the heart."],
+"artery":["a blood vessel that carries blood away from the heart","動脈","The artery supplies blood to the heart muscle."],
+"oxygenated":["supplied with or containing oxygen","含氧的","Arteries carry oxygenated blood to the body."],
+"extracted":["removed from or taken out of something","提取了；抽出了","The dentist extracted the damaged tooth."],
+"jellyfish":["a sea creature with a soft body and long tentacles","水母","Some species of jellyfish are highly venomous."],
+"potent":["having great power or effect; strong","強效的；強力的","The medicine is potent and must be used carefully."],
+"cardiovascular":["relating to the heart and blood vessels","心血管的","Regular exercise improves cardiovascular health."],
+"complications":["problems that make something more difficult or dangerous","併發症","The surgery went well with no complications."],
+"the":["definite article used before a specific noun","（定冠詞）",""],
+"a":["indefinite article used before a singular noun","（不定冠詞）一個",""],
+"an":["indefinite article used before a vowel sound","（不定冠詞）一個",""],
+"is":["third-person singular present of \'be\'","是；（be動詞）",""],
+"are":["plural or second-person present of \'be\'","是；（be動詞複數）",""],
+"was":["past tense of \'be\' (singular)","是；（be動詞過去式）",""],
+"were":["past tense of \'be\' (plural)","是；（be動詞過去式複數）",""],
+"have":["to own or possess; auxiliary verb for perfect tenses","有；（助動詞）",""],
+"has":["third-person singular of \'have\'","有；（助動詞第三人稱）",""],
+"had":["past tense of \'have\'","有；（過去式）",""],
+"will":["expresses future tense or a firm intention","將；（助動詞）將會",""],
+"would":["past of \'will\'; used in conditional sentences","會；（條件句助動詞）",""],
+"can":["to be able to; to have permission","能夠；可以",""],
+"could":["past of \'can\'; polite or tentative possibility","能夠；可以（過去式）",""],
+"may":["expresses permission or possibility","可以；可能",""],
+"might":["past of \'may\'; uncertain possibility","可能；也許",""],
+"should":["expresses duty, advice, or expectation","應該；應當",""],
+"do":["to perform an action; auxiliary verb","做；（助動詞）",""],
+"does":["third-person singular of \'do\'","做；（助動詞）",""],
+"did":["past tense of \'do\'","做了；（助動詞過去式）",""],
+"not":["used to make a sentence negative","不；沒有",""],
+"no":["used to give a negative answer; not any","不；沒有",""],
+"in":["inside a place; during a period","在...裡；在...期間",""],
+"on":["above and touching; about a subject","在...上；關於",""],
+"at":["used to show location, time, or direction","在；於",""],
+"by":["near; through; before a deadline","由；通過；靠近",""],
+"for":["intended for; because of; during a period","為了；對於",""],
+"with":["accompanied by; using; having","和；用；帶著",""],
+"from":["showing a starting point or origin","從；來自",""],
+"to":["toward; until; part of an infinitive verb","到；向；（不定詞）",""],
+"of":["belonging to; relating to; made of","的；屬於",""],
+"and":["used to join words, phrases, or clauses","和；並且",""],
+"or":["used to express a choice between alternatives","或者；否則",""],
+"but":["except; however; in contrast","但是；然而",""],
+"that":["used to identify something; because","那；那個；因為",""],
+"this":["refers to something near or just mentioned","這；這個",""],
+"it":["refers to a thing, animal, or idea","它；（代名詞）",""],
+"he":["refers to a male person or animal","他",""],
+"she":["refers to a female person or animal","她",""],
+"they":["refers to two or more people or things","他們；她們",""],
+"we":["the speaker and one or more others","我們",""],
+"you":["the person or people being spoken to","你；您；你們",""],
+"who":["refers to a person; asks about a person","誰；...的人",""],
+"which":["used to identify one thing from a group","哪個；（關係代詞）",""],
+"what":["asks about the identity or nature of something","什麼；哪些",""],
+"how":["in what way; to what degree","如何；怎麼",""],
+"when":["at what time; at the time that","何時；當...時候",""],
+"where":["in what place","哪裡；在哪",""],
+"why":["for what reason or purpose","為什麼；原因",""],
+"if":["on the condition that; whether","如果；是否",""],
+"as":["while; in the role of; because","當；作為；因為",""],
+"all":["every part or member; the complete amount","所有的；全部",""],
+"some":["an unspecified amount or number","一些；某些",""],
+"many":["a large number of people or things","許多；很多",""],
+"much":["a large amount (uncountable)","許多；很多（不可數）",""],
+"more":["a greater amount or degree","更多；更",""],
+"most":["the greatest amount; almost all","最多；大多數",""],
+"other":["additional; different; the remaining one","其他的；另外的",""],
+"also":["in addition; too; as well","也；還；此外",""],
+"so":["therefore; to such a degree; very","所以；如此；非常",""],
+"very":["used to emphasise an adjective or adverb","非常；很",""],
+"just":["only; very recently; exactly","只是；剛剛；恰好",""],
+"only":["no others; no more than","只；僅僅",""],
+"then":["at that time; next; in that case","然後；那時；那麼",""],
+"now":["at the present time; immediately","現在；立刻",""],
+"after":["following in time or order","在...之後",""],
+"before":["earlier than; in front of","在...之前；以前",""],
+"over":["above; more than; finished","在...上方；超過",""],
+"out":["away from the inside; not in","出去；外面",""],
+"back":["toward the original place; the rear part","回；後面；背部",""],
+"into":["entering a place or state","進入；變成",""],
+"about":["on the subject of; approximately","關於；大約",""],
+"between":["in the space separating two things","在...之間",""],
+"through":["from one side to the other; because of","穿過；通過",""],
+"during":["throughout the whole of a period","在...期間",""],
+"without":["not having; lacking","沒有；不帶",""],
+"because":["for the reason that","因為；由於",""],
+"since":["from a past time until now; because","從...以來；因為",""],
+"while":["during the time that; although","當...的時候；雖然",""],
+"both":["two things or people together","兩者；都",""],
+"each":["every one of a group individually","每個；各自",""],
+"such":["of the type just mentioned","這樣的；如此的",""],
+"own":["belonging to oneself; to possess","自己的；擁有",""],
+"too":["also; more than desired","也；太；過於",""],
+"however":["despite that; in whatever way","然而；不管怎樣",""],
+"therefore":["for that reason; as a result","因此；所以",""],
+"already":["before the expected time; previously","已經；早已",""],
+"still":["continuing; not moving","仍然；靜止的",""],
+"always":["at all times; forever","總是；一直",""],
+"never":["not at any time","從不；決不",""],
+"often":["many times; frequently","經常；常常",""],
+"usually":["in most cases; generally","通常；一般",""],
+"well":["in a good or satisfactory way; in good health","好；妥善地；健康",""],
+"away":["to or at a distance from a place","遠離；離開",""],
+"around":["on all sides of; approximately","周圍；大約",""],
+"near":["not far away from","靠近；附近",""],
+"long":["having great length; for a long time","長的；長時間的",""],
+"new":["recently made, discovered, or experienced","新的；新鮮的",""],
+"good":["of a high standard; positive; kind","好的；善良的",""],
+"high":["at a great distance above; above average level","高的；高水準的",""],
+"small":["little in size or amount","小的；少的",""],
+"right":["correct; the direction opposite of left","正確的；右邊",""],
+"same":["not different; identical","相同的；同樣的",""],
+"able":["having the power or skill to do something","能夠的；有能力的",""],
+"help":["to make it easier for someone to do something","幫助；幫忙",""],
+"know":["to have information or awareness about something","知道；了解",""],
+"think":["to use the mind to consider ideas","想；認為；思考",""],
+"come":["to move toward a place or person","來；到來",""],
+"get":["to obtain or receive; to become","得到；變得",""],
+"give":["to transfer something to another person","給；給予",""],
+"make":["to produce or create something","做；製作；使",""],
+"say":["to speak words; to express in words","說；表達",""],
+"see":["to perceive with the eyes","看見；明白",""],
+"go":["to move from one place to another","去；前往",""],
+"try":["to attempt or make an effort to do something","嘗試；努力",""],
+"use":["to employ for a purpose","使用；利用",""],
+"find":["to locate or discover","找到；發現",""],
+"tell":["to give information to someone","告訴；告知",""],
+"put":["to place something in a position","放；放置",""],
+"start":["to begin","開始；啟動",""],
+"show":["to display or demonstrate","展示；顯示",""],
+"feel":["to be aware through senses or emotions","感覺；感到",""],
+"keep":["to continue to have; to maintain","保持；保留",""],
+"let":["to allow something to happen","讓；允許",""],
+"become":["to start to be something","成為；變得",""],
+"happen":["to occur or take place","發生；碰巧",""],
+"write":["to form letters or words on a surface","寫；書寫",""],
+"run":["to move quickly on foot; to manage","跑；運行；管理",""],
+"move":["to change position; to affect emotionally","移動；感動",""],
+"live":["to be alive; to have a home somewhere","活著；居住",""],
+"believe":["to accept something as true","相信；認為",""],
+"next":["immediately following the present","下一個；緊接著的",""],
+"last":["final; most recent; to continue","最後的；上一個",""],
+"first":["before all others in time or order","第一；首先",""],
+"another":["one more; a different one","另一個；再一個",""],
+"those":["plural of \'that\'; the ones over there","那些",""],
+"these":["plural of \'this\'; the ones here","這些",""],
+"any":["one or some; no matter which","任何；一些",""],
+"few":["a small number; not many","少數；幾個",""],
+"take":["to get or carry; to accept","拿；帶；花（時間）",""],
+"something":["an unknown or unnamed thing","某事；某物",""],
+"anything":["any thing at all","任何事；任何東西",""],
+"nothing":["not anything; zero","沒有什麼",""],
+"everything":["all things","一切；每件事",""],
+"someone":["an unknown person","某人；有人",""],
+"anyone":["any person at all","任何人",""],
+"everyone":["every person","每個人；所有人",""],
+"person":["a human being","人；個人",""],
+"place":["a particular location; to put something somewhere","地方；地點",""],
+"thing":["an object, fact, idea, or event","事情；東西",""],
+"area":["a part of a place; a field of activity","地區；面積；領域",""],
+"system":["a set of things working together in an organised way","系統；制度",""],
+"problem":["a matter that is difficult to deal with","問題；難題",""],
+"group":["a number of people or things together","群；組；小組",""],
+"city":["a large and important town","城市；都市",""],
+"country":["a nation with its own government","國家；農村",""],
+"school":["a place where children are educated","學校",""],
+"family":["a group of people related by blood or marriage","家庭；家族",""],
+"year":["a period of twelve months","年；歲",""],
+"day":["a period of twenty-four hours","天；日",""],
+"week":["a period of seven days","週；星期",""],
+"month":["one of the twelve parts of a year","月份",""],
+"night":["the time of darkness between sunset and sunrise","夜晚；夜間",""],
+"morning":["the part of the day from midnight or sunrise to noon","早晨；上午",""],
+"home":["the place where someone lives","家；住所",""],
+"hand":["the end part of the arm with fingers","手",""],
+"eye":["the organ of sight","眼睛",""],
+"face":["the front of the head; to confront","臉；面對",""],
+"head":["the top part of the body; to lead","頭；首領",""],
+"heart":["the organ that pumps blood; the centre of feelings","心臟；心",""],
+"life":["the existence of a living thing","生命；生活",""],
+"word":["a unit of language with meaning","詞；單字",""],
+"power":["the ability to act; energy; authority","力量；權力",""],
+"money":["currency used to buy things","金錢；錢",""],
+"water":["the liquid that falls as rain; H2O","水",""],
+"land":["solid ground; a country; to arrive","陸地；土地",""],
+"time":["the measured progression of events","時間；次數",""],
+"way":["a method or manner; a road","方法；道路",""],
+"world":["the Earth and all life on it","世界；地球",""],
+"people":["human beings in general","人們；人民",""],
+"body":["the physical structure of a person or animal","身體",""],
+"name":["a word used to identify a person or thing","名字；名稱",""],
+"once":["one time; as soon as","一次；一旦",""],
+"among":["in the middle of; shared by many","在...之中",""],
+"across":["from one side to the other","穿過；在對面",""],
+"along":["beside; forward on a path","沿著；一起",""],
+"behind":["at the back of; responsible for","在...後面",""],
+"below":["lower than; under","在...下面；以下",""],
+"above":["higher than; over","在...上方；超過",""],
+"under":["lower than; less than","在...下面",""],
+"off":["away from; not on; not operating","離開；脫落",""],
+"almost":["very nearly but not completely","幾乎；差不多",""],
+"together":["with each other; at the same time","一起；共同",""],
+"really":["in fact; truly; very","真的；非常；實際上",""],
+"quite":["fairly; to some degree; completely","相當；頗為",""],
+"rather":["quite; instead of; preferably","相當；而不是",""],
+"nearly":["almost but not quite","幾乎；接近",""],
+"perhaps":["maybe; possibly","也許；可能",""],
+"probably":["almost certainly; very likely","大概；可能",""],
+"certainly":["definitely; without any doubt","當然；確實",""],
+"clearly":["without any doubt; easy to understand","清楚地；顯然",""],
+"simply":["in a plain way; only; just","簡單地；只不過",""],
+"especially":["more than usual; in particular","特別；尤其",""],
+"instead":["in place of something else","代替；反而",""],
+"despite":["without being affected by; in spite of","儘管；不管",""],
+"unless":["except if; only if something does not happen","除非；如果不",""],
+"until":["up to the time that","直到；在...之前",""],
+"again":["one more time; back to a previous state","再次；又",""],
+"quickly":["at a fast pace; without delay","快速地；迅速地",""],
+"carefully":["with great attention to avoid mistakes","仔細地；小心地",""],
+"immediately":["at once; without any delay","立即；馬上",""],
+"completely":["to the full extent; totally","完全地；徹底地",""],
+"directly":["immediately; in a straight line","直接地；正好",""],
+"recently":["not long ago; lately","最近；近來",""],
+"successfully":["in a way that achieves the intended aim","成功地",""],
+"automatically":["without human control; by itself","自動地",""],
+"constantly":["all the time; without stopping","不斷地；持續地",""],
+"heavily":["to a great degree; with great weight or force","大量地；沉重地",""],
+"fully":["completely; to the greatest possible degree","完全地；充分地",""],
+"properly":["in the correct or appropriate way","適當地；正確地",""],
+"eventually":["at last; after a long time","最終；終於",""],
+"highly":["to a great degree; very much","非常；高度地",""],
+"widely":["over a large area; by many people","廣泛地；普遍地",""]
+};
+const ANS='BCDADDACBADBCACADBCBBCDADDACBADBCACADBCBBCDADDACBADBCACADBCBBCDADDACBADBCACADBCBBCDADDACBADBCACADBCB';
+const QS=[{"q": "Even though she came from a humble __________, her determination and outstanding intelligence helped her become a successful business leader in a highly competitive industry.", "o": ["literature", "background", "religion", "folklore"], "c": ["humble", "determination", "intelligence", "business leader"]}, {"q": "The clever fox refused to touch the meat in the cage because it realized it was just a __________ set by the hunters.", "o": ["sum", "copper", "bait", "vein"], "c": ["clever", "refused", "touch", "cage", "hunters"]}, {"q": "The newly published biography will thoroughly __________ the early childhood struggles and the subsequent rise of the legendary musician.", "o": ["update", "promote", "infect", "chronicle"], "c": ["biography", "thoroughly", "struggles", "rise", "legendary"]}, {"q": "The historical monument features a massive dome made of __________, which has turned green over the decades due to natural weathering.", "o": ["copper", "teller", "myth", "millennium"], "c": ["dome", "turned green", "weathering", "metal"]}, {"q": "Medical specialists are working tirelessly to eliminate the deadly __________ before it spreads further across the continent.", "o": ["background", "bait", "literature", "disease"], "c": ["medical", "eliminate", "deadly", "spreads", "continent"]}, {"q": "According to local __________, a mysterious creature lives deep inside the lake, but no scientific evidence has ever been found.", "o": ["copper", "chronicle", "sum", "folklore"], "c": ["mysterious", "creature", "lake", "no scientific evidence"]}, {"q": "If you go to school while you are sick, you might accidentally __________ your classmates with the flu virus.", "o": ["infect", "update", "relate", "promote"], "c": ["sick", "accidentally", "classmates", "flu virus"]}, {"q": "He felt an intense __________ on his back after being bitten by mosquitoes during the evening camping trip in the woods.", "o": ["bait", "millennium", "itch", "venom"], "c": ["intense", "back", "bitten", "mosquitoes", "camping"]}, {"q": "Professor Vance has spent his entire academic career studying English __________, focusing mainly on the poems written in the Victorian era.", "o": ["background", "literature", "teller", "myth"], "c": ["academic career", "poems", "Victorian era", "studying"]}, {"q": "The ancient temple has survived for more than a __________, remaining a sacred site for pilgrims throughout history.", "o": ["millennium", "disease", "copper", "folklore"], "c": ["ancient", "survived", "thousand years", "sacred", "pilgrims"]}, {"q": "It is a common __________ that camels store water in their humps, whereas they actually store fat for energy.", "o": ["background", "sum", "literature", "myth"], "c": ["common", "camels", "humps", "actually", "fat", "false belief"]}, {"q": "The marketing department worked overtime to __________ the new product line, hoping to attract younger consumers through social media.", "o": ["infect", "promote", "update", "chronicle"], "c": ["marketing", "product line", "attract", "consumers", "social media"]}, {"q": "The police officer explained that the sudden increase in local car accidents is directly __________ to the recent heavy rain and poor road conditions.", "o": ["copper", "background", "related", "religion"], "c": ["increase", "accidents", "directly", "connected", "heavy rain"]}, {"q": "People from various parts of the world gather at the cultural center to celebrate their heritage and practice their __________.", "o": ["religion", "teller", "bait", "vein"], "c": ["various", "cultural", "celebrate", "heritage", "faith"]}, {"q": "The wealthy philanthropist donated a large __________ of money to the hospital to fund research on childhood illnesses.", "o": ["folklore", "literature", "sum", "myth"], "c": ["donated", "large", "money", "hospital", "fund"]}, {"q": "The polite bank __________ double-checked the account number before transferring the funds to ensure the transaction was accurate.", "o": ["teller", "copper", "background", "venom"], "c": ["bank", "account number", "transferring", "funds", "transaction"]}, {"q": "Since Arthur has proven himself to be completely __________ over the years, the manager trusted him with the keys to the safe.", "o": ["infectious", "chronological", "venomous", "trustworthy"], "c": ["proven", "completely", "manager", "trusted", "safe"]}, {"q": "You should regularly __________ the software on your smartphone to ensure that all security features are working properly.", "o": ["infect", "update", "promote", "chronicle"], "c": ["regularly", "software", "smartphone", "security features"]}, {"q": "The nurse carefully located a prominent __________ in the patient's arm to draw blood for the annual laboratory test.", "o": ["bait", "sum", "vein", "millennium"], "c": ["nurse", "patient", "arm", "draw blood", "laboratory"]}, {"q": "The dangerous snake injected its deadly __________ into the small rodent, paralyzing it within a matter of seconds.", "o": ["literature", "venom", "folklore", "background"], "c": ["snake", "injected", "deadly", "rodent", "paralyzing", "seconds"]}, {"q": "The restaurant plays soft __________ __________ to create a relaxing and comfortable dining atmosphere for its customers.", "o": ["copper wire", "background music", "classic literature", "infectious disease"], "c": ["restaurant", "soft", "relaxing", "comfortable", "dining", "atmosphere"]}, {"q": "Many tabloid newspapers publish sensational headlines that act as __________ to trick online users into clicking on the links.", "o": ["folklore", "myth", "clickbait", "background"], "c": ["tabloid", "sensational", "headlines", "trick", "online users"]}, {"q": "The professor requested that the historical events in our final research papers be arranged in strict __________ order.", "o": ["infectious", "trustworthy", "venomous", "chronological"], "c": ["historical events", "research papers", "arranged", "strict", "time order"]}, {"q": "The old factory was filled with tons of __________ __________, which thieves tried to steal due to its high value in recycling markets.", "o": ["copper wire", "background music", "infectious disease", "bank teller"], "c": ["factory", "tons", "thieves", "steal", "high value", "recycling"]}, {"q": "Smallpox is a highly __________ __________ that was successfully eradicated worldwide thanks to global vaccination programs.", "o": ["classic literature", "background music", "clickbait", "infectious disease"], "c": ["Smallpox", "eradicated", "worldwide", "vaccination programs"]}, {"q": "My grandmother loves to share an old __________ about a clever rabbit that outsmarted a fierce tiger in the jungle.", "o": ["copper", "background", "update", "folktale"], "c": ["grandmother", "share", "clever rabbit", "outsmarted", "traditional story"]}, {"q": "The laboratory results confirmed that the patient had a severe bacterial __________, requiring immediate treatment with antibiotics.", "o": ["infection", "literature", "religion", "vein"], "c": ["laboratory", "severe", "bacterial", "immediate treatment", "antibiotics"]}, {"q": "After walking through the poisonous plants, the hiker developed an __________ rash that kept him awake all night.", "o": ["abstract", "organic", "itchy", "economic"], "c": ["poisonous plants", "hiker", "rash", "awake all night"]}, {"q": "The author used various __________ devices, such as metaphors and symbols, to add deeper meaning to her latest novel.", "o": ["chronological", "literary", "venomous", "trustworthy"], "c": ["author", "metaphors", "symbols", "deeper meaning", "novel"]}, {"q": "Many __________ individuals who grew up in the digital age prefer reading e-books on tablets rather than traditional paper books.", "o": ["millennial", "infectious", "abstract", "toxic"], "c": ["digital age", "e-books", "tablets", "traditional paper books", "generation"]}, {"q": "Students who take the advanced course will explore ancient Greek __________ and its profound influence on Western art.", "o": ["literature", "background", "chronicle", "mythology"], "c": ["ancient Greek", "profound", "influence", "Western art", "myths about gods"]}, {"q": "Because of her exceptional performance and leadership skills, Karen received a well-deserved __________ to senior manager.", "o": ["religion", "promotion", "copper", "folklore"], "c": ["exceptional performance", "leadership", "well-deserved", "senior manager"]}, {"q": "Building a strong __________ with your clients requires excellent communication skills and a high level of mutual trust.", "o": ["literature", "background", "relationship", "millennium"], "c": ["building", "clients", "communication skills", "mutual trust"]}, {"q": "The historic cathedral is still used today for various __________ ceremonies and community gatherings during holidays.", "o": ["religious", "infectious", "venomous", "chronological"], "c": ["cathedral", "ceremonies", "community gatherings", "faith", "worship"]}, {"q": "At the end of each chapter, the author provides a brief __________ to help readers quickly review the main points.", "o": ["folklore", "clickbait", "summary", "copper"], "c": ["chapter", "brief", "help readers", "review", "main points"]}, {"q": "Instead of using the automated machine outside, the elderly gentleman preferred talking directly to a __________ __________.", "o": ["bank teller", "copper wire", "classic literature", "background music"], "c": ["automated machine", "elderly gentleman", "preferred", "directly", "bank employee"]}, {"q": "You should avoid getting financial advice from __________ sources on the internet who promise unrealistic returns on investments.", "o": ["chronological", "infectious", "trustworthy", "untrustworthy"], "c": ["avoid", "financial advice", "internet", "unrealistic", "cannot be trusted"]}, {"q": "The IT department announced that a critical __________ __________ will be installed tonight, so all computers must remain turned on.", "o": ["background music", "software update", "infectious disease", "copper wire"], "c": ["IT department", "installed", "computers", "new version", "fix bugs"]}, {"q": "After lifting heavy weights at the gym for two hours, the athlete noticed the __________ __________ on his arms.", "o": ["classic literature", "background music", "bulging veins", "bank teller"], "c": ["lifting heavy weights", "gym", "athlete", "noticed", "arms", "stick out"]}, {"q": "The zookeeper wore specialized protective gloves because he was handling a highly __________ species of desert scorpion.", "o": ["chronological", "venomous", "literate", "detailed"], "c": ["zookeeper", "protective gloves", "handling", "scorpion", "poisonous"]}, {"q": "To understand this complex political issue, you must first gather enough __________ __________ regarding the country's history.", "o": ["copper wire", "background information", "infectious disease", "bank teller"], "c": ["complex", "political issue", "gather", "history", "context", "details"]}, {"q": "The cunning salesman offered a free smartphone, hoping the customer would __________ __________ __________ and sign the expensive contract.", "o": ["cure a disease", "scratch an itch", "take the bait", "chronicle the events"], "c": ["cunning", "salesman", "free smartphone", "trick", "sign", "expensive contract"]}, {"q": "Historians study the __________ of the ancient empire to determine the exact sequence of events that led to its sudden collapse.", "o": ["literature", "folklore", "religion", "chronology"], "c": ["historians", "sequence of events", "ancient empire", "sudden collapse", "time order"]}, {"q": "While digging in his backyard, the young boy discovered an old __________ __________ that was minted more than a century ago.", "o": ["copper coin", "background music", "bank teller", "classic literature"], "c": ["digging", "backyard", "discovered", "minted", "century ago", "metal money"]}, {"q": "Cancer remains a __________ __________ that claims millions of lives annually, prompting governments to invest heavily in medical research.", "o": ["background music", "copper wire", "bank teller", "deadly disease"], "c": ["Cancer", "claims millions of lives", "annually", "medical research", "causes death"]}, {"q": "The cultural festival aims to preserve __________ __________ by inviting elderly citizens to share ancestral stories with younger generations.", "o": ["clickbait", "copper wire", "bank teller", "traditional folklore"], "c": ["cultural festival", "preserve", "elderly citizens", "ancestral stories", "traditional beliefs"]}, {"q": "Health officials warned that the new strain of the respiratory virus is __________ __________ and can spread rapidly through air.", "o": ["highly infectious", "chronological", "venomous", "literate"], "c": ["health officials", "new strain", "respiratory", "spread rapidly", "through air"]}, {"q": "The child used a wooden stick to __________ __________ __________ on his back because he could not reach it with his own hands.", "o": ["take the bait", "cure a disease", "scratch an itch", "chronicle the events"], "c": ["wooden stick", "back", "could not reach", "relieve itching"]}, {"q": "The government launched a nationwide educational program to ensure that all adults in rural communities become fully __________.", "o": ["chronological", "literate", "venomous", "infectious"], "c": ["educational program", "adults", "rural communities", "read and write"]}, {"q": "The indigenous tribe has inhabited these sacred lands for several __________, preserving their ancient lifestyle and customs.", "o": ["millennia", "background", "literature", "copper"], "c": ["indigenous tribe", "sacred lands", "ancient lifestyle", "thousands of years"]}, {"q": "The dragon is a __________ creature that appears in the traditional stories of many different cultures around the world.", "o": ["chronological", "infectious", "literate", "mythical"], "c": ["dragon", "creature", "traditional stories", "cultures", "not real", "legendary"]}, {"q": "The supermarket distributed __________ flyers to local residents, offering massive discounts on groceries for the grand opening.", "o": ["chronological", "promotional", "venomous", "infectious"], "c": ["supermarket", "flyers", "local residents", "discounts", "grand opening", "advertising"]}, {"q": "During the family reunion, Uncle Albert told us stories about our distant __________ who immigrated to this country a century ago.", "o": ["background", "literature", "relative", "religion"], "c": ["family reunion", "stories", "distant", "immigrated", "century ago", "family member"]}, {"q": "Respecting different __________ __________ is essential for maintaining social harmony in a diverse and multicultural nation.", "o": ["religious beliefs", "copper wires", "bank tellers", "background music"], "c": ["respecting", "different", "social harmony", "diverse", "multicultural", "faith-based"]}, {"q": "The company was fined a massive __________ of money after the auditors discovered that they had failed to pay their taxes.", "o": ["folklore", "literature", "sum", "myth"], "c": ["company", "fined", "massive", "money", "auditors", "taxes"]}, {"q": "The mysterious __________ __________ looked at the palms of my hands and claimed that I would travel overseas very soon.", "o": ["fortune teller", "copper wire", "classic literature", "background music"], "c": ["mysterious", "palms", "claimed", "travel overseas", "predicts future"]}, {"q": "A leader must demonstrate high __________ to earn the loyalty and respect of the citizens during times of national crisis.", "o": ["clickbait", "folklore", "sum", "trustworthiness"], "c": ["leader", "demonstrate", "loyalty", "respect", "national crisis"]}, {"q": "The company president provided a __________ __________ during the meeting to explain the current progress of the construction project.", "o": ["background music", "status update", "copper wire", "classic literature"], "c": ["president", "meeting", "current progress", "construction", "how things are going"]}, {"q": "The author's second novel is written __________ __________ __________ __________ to his first book, featuring similar dark themes and complex characters.", "o": ["to take the bait", "to cure a disease", "in a similar vein", "to chronicle the events"], "c": ["second novel", "similar", "dark themes", "complex characters", "in the same manner"]}, {"q": "Medical professionals immediately administered an __________ to the patient who had been bitten by a venomous cobra in the jungle.", "o": ["update", "anti-venom", "literature", "background"], "c": ["medical professionals", "administered", "bitten", "venomous cobra", "antiserum", "antidote"]}, {"q": "Applicants with a strong academic __________ in computer science are highly preferred for this advanced software engineering position.", "o": ["religion", "background", "folklore", "literature"], "c": ["applicants", "academic", "computer science", "preferred", "software engineering", "education and experience"]}, {"q": "The mouse was too smart to walk into the trap, completely ignoring the cheese used as __________.", "o": ["sum", "copper", "bait", "vein"], "c": ["mouse", "smart", "trap", "cheese", "ignoring", "lure"]}, {"q": "The old museum contains a fascinating __________ that details the daily lives of European kings during the Middle Ages.", "o": ["update", "promote", "infect", "chronicle"], "c": ["museum", "details", "daily lives", "European kings", "Middle Ages", "factual account"]}, {"q": "This vintage kitchen cookware set is crafted from solid __________, which makes it excellent for distributing heat evenly while cooking.", "o": ["copper", "teller", "myth", "millennium"], "c": ["cookware", "crafted", "solid", "distributing heat evenly", "reddish-brown metal"]}, {"q": "Diabetes is a chronic __________ that requires patients to monitor their blood sugar levels daily and maintain a healthy diet.", "o": ["background", "bait", "literature", "disease"], "c": ["Diabetes", "chronic", "monitor", "blood sugar levels", "healthy diet"]}, {"q": "Scholars travel to remote mountain villages to document the local __________ before these traditional oral stories are forgotten forever.", "o": ["copper", "chronicle", "sum", "folklore"], "c": ["scholars", "document", "traditional oral stories", "forgotten", "local beliefs"]}, {"q": "Wearing a mask when you have a cold is an effective way to avoid __________ other people around you.", "o": ["infecting", "updating", "relating", "promoting"], "c": ["mask", "cold", "effective", "avoid", "spread illness"]}, {"q": "The wool sweater made my skin __________ so much that I had to take it off and change into a soft cotton shirt.", "o": ["bait", "millennium", "itch", "venom"], "c": ["wool sweater", "skin", "had to take it off", "uncomfortable sensation", "scratch"]}, {"q": "High school students are required to read classic English __________, including plays written by William Shakespeare.", "o": ["background", "literature", "teller", "myth"], "c": ["high school", "read", "classic English", "plays", "William Shakespeare", "written works"]}, {"q": "As we celebrate the arrival of a new __________, we must reflect on the historical achievements of the past thousand years.", "o": ["millennium", "disease", "copper", "folklore"], "c": ["celebrate", "arrival", "new", "reflect", "historical achievements", "thousand years"]}, {"q": "There is a widespread __________ that using computers in the dark will instantly cause blindness, which has been debunked by scientists.", "o": ["background", "sum", "literature", "myth"], "c": ["widespread", "computers", "dark", "blindness", "debunked", "false belief"]}, {"q": "The supervisor promised to __________ the employees who consistently demonstrated outstanding dedication and achieved their quarterly targets.", "o": ["infect", "promote", "update", "chronicle"], "c": ["supervisor", "employees", "demonstrated", "dedication", "quarterly targets", "higher position"]}, {"q": "The teacher explained how the rise of unemployment is directly __________ to the economic downturn affecting the country.", "o": ["copper", "background", "related", "religion"], "c": ["unemployment", "economic downturn", "directly", "connected"]}, {"q": "The local government protects historical sites where ancient ancestors used to perform their traditional __________ rituals.", "o": ["religion", "teller", "bait", "vein"], "c": ["historical sites", "ancient ancestors", "traditional", "rituals", "faith", "worship"]}, {"q": "The total __________ of the repairs for the damaged sports car amounted to more than ten thousand dollars.", "o": ["folklore", "literature", "sum", "myth"], "c": ["total", "repairs", "damaged", "sports car", "amounted", "money"]}, {"q": "When I asked the bank __________ for assistance, she kindly showed me how to fill out the form to open a savings account.", "o": ["teller", "copper", "background", "venom"], "c": ["bank", "assistance", "fill out", "savings account", "customer service"]}, {"q": "Parents should make sure that the websites their children visit are safe, educational, and __________.", "o": ["infectious", "chronological", "venomous", "trustworthy"], "c": ["parents", "children", "websites", "safe", "educational", "can be relied on"]}, {"q": "The software company will __________ its application tomorrow morning to fix the bugs that caused the system to crash.", "o": ["infect", "update", "promote", "chronicle"], "c": ["software", "application", "fix the bugs", "system", "crash", "newer version"]}, {"q": "The laboratory technician carefully injected the dye into the patient's __________ to observe the blood flow on the monitor screen.", "o": ["bait", "sum", "vein", "millennium"], "c": ["laboratory", "injected", "dye", "patient", "blood flow", "monitor screen"]}, {"q": "Some species of jellyfish carry a potent __________ that can cause severe cardiovascular complications in humans.", "o": ["literature", "venom", "folklore", "background"], "c": ["jellyfish", "potent", "severe", "cardiovascular complications", "poisonous fluid"]}, {"q": "Having a diverse __________ can give you a significant advantage when applying for jobs in global organisations.", "o": ["literature", "background", "religion", "folklore"], "c": ["diverse", "advantage", "applying for jobs", "global organisations", "education and experience"]}, {"q": "The detective refused to believe the suspect's story, suspecting it was just a __________ to divert attention from the real evidence.", "o": ["sum", "copper", "bait", "vein"], "c": ["detective", "suspect", "divert attention", "trick", "real evidence"]}, {"q": "The ancient stone tablet serves to __________ the major military victories of the Pharaoh across the neighbouring lands.", "o": ["update", "promote", "infect", "chronicle"], "c": ["stone tablet", "military victories", "Pharaoh", "neighbouring lands", "record"]}, {"q": "Thousands of tons of __________ ore are extracted from this massive open-pit mine every year to meet the global manufacturing demand.", "o": ["copper", "teller", "myth", "millennium"], "c": ["tons", "ore", "extracted", "open-pit mine", "manufacturing demand", "reddish-brown metal"]}, {"q": "The health department is implementing strict measures to prevent the spread of the tropical __________ in coastal areas.", "o": ["background", "bait", "literature", "disease"], "c": ["health department", "strict measures", "prevent", "spread", "tropical", "illness"]}, {"q": "The anthropologist spent years living with the indigenous tribe to study their unique language, customs, and __________.", "o": ["copper", "chronicle", "sum", "folklore"], "c": ["anthropologist", "indigenous tribe", "language", "customs", "traditional beliefs and stories"]}, {"q": "Doctors warn that a single sneeze can release thousands of droplets that can __________ individuals standing nearby.", "o": ["infect", "update", "relate", "promote"], "c": ["sneeze", "release", "droplets", "spread illness", "nearby"]}, {"q": "The patient experienced a persistent __________ on his skin after trying a new brand of laundry detergent.", "o": ["bait", "millennium", "itch", "venom"], "c": ["patient", "persistent", "skin", "laundry detergent", "uncomfortable sensation"]}, {"q": "Academic research requires a thorough review of existing __________ to understand what previous scientists have discovered.", "o": ["background", "literature", "teller", "myth"], "c": ["academic research", "thorough review", "previous scientists", "discovered", "written works"]}, {"q": "The ancient ruins have remained hidden deep inside the dense tropical rainforest for more than a __________.", "o": ["millennium", "disease", "copper", "folklore"], "c": ["ancient ruins", "hidden", "tropical rainforest", "thousand years", "survived"]}, {"q": "It is a persistent __________ that chewing gum stays inside your stomach for seven years before it can be digested.", "o": ["background", "sum", "literature", "myth"], "c": ["persistent", "chewing gum", "stomach", "seven years", "digested", "false belief"]}, {"q": "The organic farm launched an online campaign to __________ healthy eating habits among young children in urban communities.", "o": ["infect", "promote", "update", "chronicle"], "c": ["organic farm", "campaign", "healthy eating habits", "young children", "encourage"]}, {"q": "The lawyer presented evidence showing that the suspect's sudden financial wealth was directly __________ to the bank robbery.", "o": ["copper", "background", "related", "religion"], "c": ["lawyer", "evidence", "suspect", "financial wealth", "bank robbery", "connected"]}, {"q": "Although they come from different countries, they share the same __________ and attend the same church services every Sunday.", "o": ["religion", "teller", "bait", "vein"], "c": ["different countries", "share", "church services", "Sunday", "faith", "worship"]}, {"q": "After calculating all the monthly expenses, the accountant presented the final __________ to the board of directors.", "o": ["folklore", "literature", "sum", "myth"], "c": ["calculating", "monthly expenses", "accountant", "final", "total amount"]}, {"q": "The experienced __________ noticed the counterfeit bill immediately and reported it to the bank's security manager.", "o": ["teller", "copper", "background", "venom"], "c": ["experienced", "noticed", "counterfeit bill", "reported", "bank", "security manager"]}, {"q": "You should only download files from __________ websites to avoid infecting your personal computer with malicious software.", "o": ["infectious", "chronological", "venomous", "trustworthy"], "c": ["download files", "avoid infecting", "malicious software", "reliable"]}, {"q": "The weather application will automatically __________ its forecast every hour to provide users with the most accurate information.", "o": ["infect", "update", "promote", "chronicle"], "c": ["weather application", "automatically", "forecast", "every hour", "accurate information"]}, {"q": "The biologist explained that a __________ carries deoxygenated blood back to the heart, while an artery carries oxygenated blood.", "o": ["bait", "sum", "vein", "millennium"], "c": ["biologist", "deoxygenated blood", "heart", "artery", "oxygenated", "blood vessel"]}, {"q": "The medical team successfully extracted the lethal __________ from the patient's wound, saving his life just in time.", "o": ["literature", "venom", "folklore", "background"], "c": ["medical team", "extracted", "lethal", "wound", "saving his life", "poisonous fluid"]}];
+
+function lu(raw){
+  const w=raw.toLowerCase().replace(/[^a-z\-]/g,'');
+  if(!w||w.length<2)return null;
+  if(D[w])return[w,...D[w]];
+  const stems=[w,
+    w.replace(/ies$/,'y'),w.replace(/ied$/,'y'),w.replace(/ying$/,'y'),
+    w.replace(/ness$/,''),w.replace(/ment$/,''),w.replace(/tion$/,''),
+    w.replace(/sion$/,''),w.replace(/ation$/,''),w.replace(/ful$/,''),
+    w.replace(/less$/,''),w.replace(/ous$/,''),w.replace(/ious$/,''),
+    w.replace(/ical$/,''),w.replace(/al$/,''),w.replace(/ic$/,''),
+    w.replace(/ive$/,''),w.replace(/ance$/,''),w.replace(/ence$/,''),
+    w.replace(/ity$/,''),w.replace(/ly$/,''),
+    w.replace(/ing$/,''),w.replace(/ing$/,'e'),w.replace(/ings$/,''),
+    w.replace(/ed$/,''),w.replace(/ed$/,'e'),
+    w.replace(/er$/,''),w.replace(/er$/,'e'),w.replace(/ers$/,''),
+    w.replace(/est$/,''),w.replace(/est$/,'e'),
+    w.replace(/s$/,''),w.replace(/es$/,''),w.replace(/es$/,'e'),
+    w.replace(/able$/,''),w.replace(/ible$/,''),
+    w.replace(/ist$/,''),w.replace(/ism$/,''),
+    w.replace(/ize$/,''),w.replace(/ise$/,''),
+  ];
+  for(const s of stems){if(s&&s.length>1&&D[s])return[s,...D[s]];}
+  if(w.length>=4){
+    for(const k of Object.keys(D)){
+      if(k.length>=3&&(k.startsWith(w)||w.startsWith(k)))return[k,...D[k]];
+    }
+  }
+  return null;
+}
+
+let cur=0,score=0,answered=false,t0,logs=[];
+let nm='',sid='',cls='';
+
+function startQuiz(){
+  nm=document.getElementById('nm').value.trim()||'Anonymous';
+  sid=document.getElementById('sid').value.trim()||'';
+  cls=document.getElementById('cls').value.trim()||'';
+  t0=Date.now();
+  document.getElementById('splash').style.display='none';
+  document.getElementById('qwrap').style.display='block';
+  renderQ(0);
+}
+
+function renderQ(i){
+  answered=false;
+  const q=QS[i];
+  const ci='ABCD'.indexOf(ANS[i]);
+  document.getElementById('qnl').textContent=`Question ${i+1} of ${QS.length}`;
+  document.getElementById('qctr').textContent=`Q${i+1} / ${QS.length}`;
+  document.getElementById('pbar').style.width=`${(i/QS.length)*100}%`;
+  document.getElementById('scdisp').textContent=score;
+  document.getElementById('dbox').style.display='none';
+  document.getElementById('fb').style.display='none';
+  document.getElementById('nxtbtn').style.display='none';
+
+  const pel=document.getElementById('passage');
+  pel.innerHTML='';
+  const parts=q.q.split('__________');
+  parts.forEach((part,pi)=>{
+    const toks=part.split(/([\s]+|(?=[,.;:!?])|(?<=[,.;:!?]))/);
+    toks.forEach(tok=>{
+      if(!tok)return;
+      if(/^\s+$/.test(tok)){pel.appendChild(document.createTextNode(tok));return;}
+      const clean=tok.toLowerCase().replace(/[^a-z\-]/g,'');
+      if(clean.length>=2){
+        const sp=document.createElement('span');
+        sp.className='ws';sp.textContent=tok;sp.dataset.w=clean;
+        sp.onclick=()=>showDef(clean,tok);
+        pel.appendChild(sp);
+      }else pel.appendChild(document.createTextNode(tok));
+    });
+    if(pi<parts.length-1){
+      const b=document.createElement('span');
+      b.className='blank';b.textContent=' ________ ';
+      pel.appendChild(b);
+    }
+  });
+  const tb=document.createElement('button');
+  tb.className='tts';tb.title='Read aloud';tb.innerHTML='&#128266;';
+  tb.onclick=()=>speak(q.q.replace(/__________/g,'blank'));
+  pel.appendChild(tb);
+
+  const oel=document.getElementById('opts');
+  oel.innerHTML='';
+  ['A','B','C','D'].forEach((l,idx)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.textContent=`(${l}) ${q.o[idx]}`;
+    btn.onclick=()=>choose(idx,ci,btn);
+    oel.appendChild(btn);
+  });
+}
+
+function showDef(w,disp){
+  const box=document.getElementById('dbox');
+  const r=lu(w);
+  if(!r){
+    box.innerHTML=`<span class="dw">${disp}</span><span style="color:#888;font-size:.8rem;margin-left:8px">— no entry found for this word</span>`;
+  }else{
+    const[kw,en,cn,ex]=r;
+    box.innerHTML=`<div><span class="dw">${kw}</span><span class="dc">${cn}</span>
+      <button class="tts" onclick="speak('${kw}')">&#128266;</button></div>
+      <div class="de">&#128218; ${en}</div>
+      ${ex?`<div class="dx">"${ex}" <button class="tts" onclick="speak('${ex.replace(/'/g,"\\'")}')">&#128266;</button></div>`:''}`; 
+  }
+  box.style.display='block';
+}
+
+function choose(chosen,correct,btn){
+  if(answered)return;
+  answered=true;
+  const q=QS[cur];
+  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  document.querySelectorAll('.opt')[correct].classList.add('correct');
+  if(chosen!==correct){btn.classList.add('wrong');logs.push({q:cur+1,ok:false,got:q.o[chosen],exp:q.o[correct]}); }
+  else{score++;document.getElementById('scdisp').textContent=score;logs.push({q:cur+1,ok:true,got:q.o[chosen],exp:q.o[correct]});}
+  document.querySelectorAll('.ws').forEach(sp=>{
+    const w=sp.dataset.w||'';
+    if(q.c.some(c=>w.includes(c.toLowerCase())||c.toLowerCase().split(' ').some(cw=>w===cw)))
+      sp.classList.add('clue');
+  });
+  showFB(q,correct);
+  document.getElementById('nxtbtn').style.display='block';
+}
+
+function showFB(q,ci){
+  const fb=document.getElementById('fb');
+  const L=['A','B','C','D'];
+  let h='<div class="fb-hdr">&#128218; VOCABULARY REVIEW — ALL 4 OPTIONS</div><div class="fb-grid">';
+  q.o.forEach((word,i)=>{
+    const r=lu(word.split(' ')[0])||[word,'see vocabulary list','請參考課本',''];
+    const[,en,cn,ex]=r;
+    const ok=i===ci;
+    h+=`<div class="fb-cell">
+      <span class="fb-word" style="color:${ok?'var(--correct)':'var(--primary)'}">(${L[i]}) ${word}${ok?' ✓':''}</span>
+      <span class="fb-cn">${cn}</span>
+      <div class="fb-en">${en}</div>
+      ${ex?`<div class="fb-ex">"${ex}" <button class="tts" onclick="speak('${ex.replace(/'/g,"\\'")}')">&#128266;</button></div>`:''}</div>`;
+  });
+  h+='</div>';
+  fb.innerHTML=h;fb.style.display='block';
+}
+
+function nextQ(){
+  cur++;
+  if(cur>=QS.length){showResults();return;}
+  renderQ(cur);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showResults(){
+  document.getElementById('qwrap').style.display='none';
+  document.getElementById('results').style.display='block';
+  const pct=Math.round(score/QS.length*100);
+  const el=Math.round((Date.now()-t0)/1000);
+  const m=Math.floor(el/60),s=el%60;
+  let g,tr,cn;
+  if(pct>=90){g='A+';tr='&#127942;';cn='太棒了！你是詞彙大師！';}
+  else if(pct>=80){g='A';tr='&#129351;';cn='優秀！繼續保持這個水準！';}
+  else if(pct>=70){g='B';tr='&#129352;';cn='不錯！還有進步的空間！';}
+  else if(pct>=60){g='C';tr='&#129353;';cn='加油！多複習就能進步！';}
+  else{g='D';tr='&#128218;';cn='需要更多練習！Review the vocabulary again.';}
+  document.getElementById('trophy').innerHTML=tr;
+  document.getElementById('gcirc').textContent=g;
+  document.getElementById('gcirc').style.background=pct>=80?'var(--correct)':pct>=60?'var(--accent)':'var(--wrong)';
+  document.getElementById('scline').textContent=`Score: ${score} / ${QS.length}  (${pct}%)  —  Time: ${m}m ${s}s`;
+  document.getElementById('cnmsg').textContent=cn;
+  window._R={studentName:nm,studentId:sid,unit:'21',score,total:QS.length,percentage:pct,grade:g,timeTaken:`${m}m ${s}s`,answers:logs,wrongAnswers:logs.filter(x=>!x.ok)};
+}
+
+function submitResults(){
+  const btn=document.querySelector('.bsub');
+  btn.textContent='&#9203; Submitting...';btn.disabled=true;
+  fetch(GAS,{method:'POST',headers:{'Content-Type':'application/json'},mode:'no-cors',body:JSON.stringify(window._R)})
+    .then(()=>{
+      document.getElementById('statusarea').innerHTML='<div class="ok">&#9989; Results submitted! Your teacher can see your score in Google Sheets.</div>';
+      btn.textContent='&#9989; Submitted!';
+    }).catch(e=>{
+      document.getElementById('statusarea').innerHTML=`<div class="err">&#10060; Submission failed. Tell your teacher: <strong>${nm} — ${score}/${QS.length}</strong></div>`;
+      btn.textContent='&#10060; Failed';btn.disabled=false;
+    });
+}
+
+function speak(t){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.lang='en-US';u.rate=0.88;
+  const vs=window.speechSynthesis.getVoices();
+  const v=vs.find(x=>x.lang.startsWith('en')&&/female|woman|zira|samantha|karen/i.test(x.name))
+           ||vs.find(x=>x.lang.startsWith('en-US'))||vs[0];
+  if(v)u.voice=v;
+  window.speechSynthesis.speak(u);
+}
+window.addEventListener('load',()=>window.speechSynthesis?.getVoices());
+</script>
+</body>
+</html>

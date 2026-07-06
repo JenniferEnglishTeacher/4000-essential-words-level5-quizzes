@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4000 Essential Words – Level 5 Unit 22 | Interactive Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+    --color-primary: #1a3a5c;
+    --color-accent: #c8962e;
+    --color-correct: #2d7a4f;
+    --color-incorrect: #b53a2f;
+    --color-clue: #fff3a3;
+    --color-surface: #faf8f5;
+    --color-card: #ffffff;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(26,58,92,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); background: var(--color-surface); color: #1a2433; min-height: 100vh; }
+  header { background: var(--color-primary); color: #fff; padding: 18px 24px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+  .header-title { font-family: var(--font-heading); font-size: 1.15rem; line-height: 1.25; }
+  .header-sub { font-size: .78rem; opacity: .75; margin-top: 2px; }
+  .score-badge { background: var(--color-accent); color: #fff; border-radius: 20px; padding: 6px 16px; font-weight: 600; font-size: .9rem; white-space: nowrap; min-width: 90px; text-align: center; }
+  main { max-width: 820px; margin: 0 auto; padding: 28px 16px 60px; }
+  .progress-wrap { margin-bottom: 18px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .82rem; color: #556; margin-bottom: 6px; }
+  .progress-bar-bg { background: #dde3ea; border-radius: 8px; height: 8px; }
+  .progress-bar-fill { height: 8px; border-radius: 8px; background: linear-gradient(90deg, var(--color-primary), var(--color-accent)); transition: width .35s ease; }
+  .card { background: var(--color-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 28px 22px; margin-bottom: 18px; }
+  .q-number { font-size: .78rem; font-weight: 600; color: var(--color-accent); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+  .q-passage { font-size: 1.04rem; line-height: 1.75; color: #1e2c3a; margin-bottom: 16px; }
+  .q-passage .word { cursor: pointer; border-bottom: 1px dotted #aab; transition: background .15s; border-radius: 2px; padding: 0 1px; }
+  .q-passage .word:hover { background: #e8f0fc; }
+  .clue-highlight { background: var(--color-clue) !important; border-radius: 3px; padding: 0 2px; }
+  .tts-btn { background: none; border: none; cursor: pointer; color: var(--color-primary); font-size: .95rem; margin-right: 8px; vertical-align: middle; opacity: .7; transition: opacity .15s; }
+  .tts-btn:hover { opacity: 1; }
+  .word-helper { background: #eef4fb; border-left: 4px solid var(--color-primary); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: .88rem; margin-bottom: 14px; display: none; animation: fadeIn .2s; }
+  .word-helper.visible { display: block; }
+  .word-helper strong { color: var(--color-primary); }
+  .helper-phonetic { color: #778; font-style: italic; font-size: .82rem; }
+  .helper-meaning { margin-top: 4px; }
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 6px; }
+  @media(max-width:520px){ .options-grid { grid-template-columns: 1fr; } }
+  .opt-btn { display: flex; align-items: center; gap: 10px; background: #f0f4fa; border: 2px solid transparent; border-radius: 9px; padding: 11px 14px; font-family: var(--font-body); font-size: .95rem; color: #1a2433; cursor: pointer; transition: background .15s, border-color .15s, transform .1s; text-align: left; line-height: 1.4; }
+  .opt-btn:hover:not(:disabled) { background: #dde8f7; border-color: var(--color-primary); transform: translateY(-1px); }
+  .opt-btn .opt-label { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--color-primary); color: #fff; font-weight: 700; font-size: .82rem; flex-shrink: 0; }
+  .opt-btn.correct { background: #d4edda; border-color: var(--color-correct); }
+  .opt-btn.correct .opt-label { background: var(--color-correct); }
+  .opt-btn.incorrect { background: #f8d7da; border-color: var(--color-incorrect); }
+  .opt-btn.incorrect .opt-label { background: var(--color-incorrect); }
+  .opt-btn:disabled { cursor: default; transform: none; }
+  .feedback-box { display: none; margin-top: 16px; border-radius: var(--radius); overflow: hidden; border: 1px solid #dde3ea; animation: fadeIn .25s; }
+  .feedback-box.visible { display: block; }
+  .feedback-header { padding: 9px 16px; font-weight: 600; font-size: .88rem; display: flex; align-items: center; gap: 8px; }
+  .feedback-header.correct-header { background: #d4edda; color: var(--color-correct); }
+  .feedback-header.incorrect-header { background: #f8d7da; color: var(--color-incorrect); }
+  .vocab-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  @media(max-width:540px){ .vocab-cards { grid-template-columns: 1fr; } }
+  .vocab-card { padding: 12px 14px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; font-size: .84rem; line-height: 1.5; }
+  .vocab-card:nth-child(2n){ border-right: none; }
+  .vocab-card .vc-word { font-weight: 700; color: var(--color-primary); font-size: .92rem; }
+  .vocab-card .vc-en { color: #334; margin: 2px 0; }
+  .vocab-card .vc-cn { color: #667; font-size: .82rem; }
+  .vocab-card .vc-ex { color: #445; font-style: italic; font-size: .82rem; margin-top: 3px; border-left: 2px solid var(--color-accent); padding-left: 7px; }
+  .nav-row { display: flex; justify-content: flex-end; margin-top: 16px; }
+  .next-btn { background: var(--color-primary); color: #fff; border: none; border-radius: 9px; padding: 11px 26px; font-family: var(--font-body); font-size: .95rem; font-weight: 600; cursor: pointer; display: none; align-items: center; gap: 8px; transition: background .15s, transform .1s; }
+  .next-btn:hover { background: #244d7a; transform: translateY(-1px); }
+  .next-btn.visible { display: inline-flex; }
+  #results-screen { display: none; text-align: center; }
+  #results-screen.visible { display: block; }
+  .results-card { background: var(--color-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 48px 32px; max-width: 500px; margin: 40px auto; }
+  .results-icon { font-size: 3.5rem; margin-bottom: 16px; }
+  .results-score { font-family: var(--font-heading); font-size: 3rem; color: var(--color-primary); }
+  .results-pct { font-size: 1.1rem; color: var(--color-accent); font-weight: 600; margin-bottom: 8px; }
+  .results-msg { font-size: 1.05rem; color: #334; margin-bottom: 8px; }
+  .results-msg-cn { font-size: .95rem; color: #667; }
+  .restart-btn { margin-top: 28px; background: var(--color-primary); color: #fff; border: none; border-radius: 9px; padding: 13px 36px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .15s; }
+  .restart-btn:hover { background: #244d7a; }
+  .gform-banner { background: linear-gradient(135deg,#1a3a5c,#244d7a); color:#fff; border-radius: var(--radius); padding: 18px 22px; margin-bottom: 22px; display: flex; align-items: center; gap: 14px; font-size: .9rem; line-height: 1.5; }
+  .gform-banner i { font-size: 1.4rem; flex-shrink: 0; color: var(--color-accent); }
+  #submit-form { margin-top: 22px; }
+  #submit-form input { border: 2px solid #dde3ea; border-radius: 8px; padding: 10px 14px; font-family: var(--font-body); font-size: .95rem; width: 100%; margin-bottom: 10px; transition: border-color .15s; }
+  #submit-form input:focus { outline: none; border-color: var(--color-primary); }
+  #submit-form .submit-btn { background: var(--color-accent); color: #fff; border: none; border-radius: 8px; padding: 11px 26px; font-family: var(--font-body); font-size: .95rem; font-weight: 600; cursor: pointer; width: 100%; transition: background .15s; }
+  #submit-form .submit-btn:hover { background: #a87820; }
+  #submit-msg { font-size: .88rem; margin-top: 8px; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="header-title">4000 Essential Words — Level 5, Unit 22</div>
+    <div class="header-sub">Interactive Vocabulary Quiz &nbsp;|&nbsp; 100 Questions</div>
+  </div>
+  <div class="score-badge" id="score-badge">Score: 0</div>
+</header>
+<main>
+  <div class="gform-banner">
+    <i class="fa-brands fa-google"></i>
+    <div>
+      <strong>Submit your result to the teacher!</strong> After finishing, enter your name and student ID to send your score automatically.
+      <br><span style="font-size:.82rem;opacity:.8;">完成後，輸入姓名與學號，成績將自動傳送給老師。</span>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="q-counter">Question 1 of 100</span><span id="q-pct">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:1%"></div></div>
+  </div>
+  <div id="quiz-screen">
+    <div class="card">
+      <div class="q-number" id="q-number">Q1</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+        <button class="tts-btn" onclick="readPassage()" title="Read aloud"><i class="fa-solid fa-volume-high"></i></button>
+        <span style="font-size:.78rem;color:#889;">Click any word for definition</span>
+      </div>
+      <div class="q-passage" id="q-passage"></div>
+      <div class="word-helper" id="word-helper">
+        <strong id="helper-word"></strong><span class="helper-phonetic" id="helper-phonetic"></span>
+        <div class="helper-meaning" id="helper-meaning"></div>
+      </div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="feedback-box" id="feedback-box">
+        <div class="feedback-header" id="feedback-header"></div>
+        <div class="vocab-cards" id="vocab-cards"></div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question <i class="fa-solid fa-arrow-right"></i></button></div>
+  </div>
+  <div id="results-screen">
+    <div class="results-card">
+      <div class="results-icon" id="results-icon">🎉</div>
+      <div class="results-score" id="results-score">0 / 100</div>
+      <div class="results-pct" id="results-pct"></div>
+      <div class="results-msg" id="results-msg"></div>
+      <div class="results-msg-cn" id="results-msg-cn"></div>
+      <div id="submit-form">
+        <p style="font-weight:600;margin-bottom:10px;font-size:.92rem;"><i class="fa-solid fa-paper-plane" style="color:var(--color-accent)"></i> &nbsp;Send your score to the teacher:</p>
+        <input type="text" id="student-name" placeholder="Your full name (姓名)" />
+        <input type="text" id="student-id" placeholder="Student ID / Class number (學號)" />
+        <button class="submit-btn" onclick="submitScore()"><i class="fa-solid fa-cloud-arrow-up"></i> &nbsp;Submit Score</button>
+        <div id="submit-msg"></div>
+      </div>
+      <button class="restart-btn" onclick="restartQuiz()"><i class="fa-solid fa-rotate-right"></i> &nbsp;Try Again</button>
+    </div>
+  </div>
+</main>
+<script>
+/* ═══════════════════════════════════════
+   ANSWER KEY PATTERN (repeating every 20):
+   B C D A D | D A C B A | D B C A C | A D B C B
+═══════════════════════════════════════ */
+const questions = [
+  // Q1-20
+  {q:"After making a massive fortune, the generous billionaire decided to donate half of his wealth to ________.",options:["commerce","charity","temper","unity"],answer:"charity",clues:["fortune","donate","wealth","generous"]},
+  {q:"The local foundation organized a ________ gala last night, which successfully raised thousands of dollars for orphanages.",options:["neutral","commercial","charitable","victorious"],answer:"charitable",clues:["foundation","gala","raised","orphanages"]},
+  {q:"The development of the historic harbor significantly boosted international ________, creating hundreds of new business opportunities.",options:["empire","commerce","pity","unity"],answer:"commerce",clues:["harbor","boosted","international","business"]},
+  {q:"World leaders issued a joint statement to ________ the sudden violent attacks against innocent civilians in the region.",options:["condemn","reduce","mock","heed"],answer:"condemn",clues:["leaders","joint","statement","violent","civilians"]},
+  {q:"We spent the entire evening inside a ________ mountain cabin while a fierce winter blizzard raged outside.",options:["neutral","victorious","imperial","cozy"],answer:"cozy",clues:["evening","cabin","blizzard","raged"]},
+  {q:"Running a full marathon under the blazing hot summer sun will quickly ________ your body's water reserves.",options:["reduce","persecute","deplete","condemn"],answer:"deplete",clues:["marathon","blazing","water","reserves"]},
+  {q:"The government implemented new financial policies to stabilize the national ________ and reduce the high rate of inflation.",options:["economy","empire","unity","charity"],answer:"economy",clues:["government","financial","stabilize","inflation"]},
+  {q:"Historical records show that the ancient Roman ________ controlled vast territories stretching from Europe to North Africa.",options:["commerce","temper","empire","pity"],answer:"empire",clues:["Roman","ancient","territories","Europe","Africa"]},
+  {q:"The massive cargo train transported industrial ________ across the border to be distributed to various retail markets.",options:["goods","scribe","charity","unity"],answer:"goods",clues:["cargo","transported","industrial","retail","markets"]},
+  {q:"If you want to avoid failing the final grade, you should ________ your teacher's academic advice carefully.",options:["heed","mock","reduce","persecute"],answer:"heed",clues:["avoid","failing","teacher","advice","carefully"]},
+  // Q11-20
+  {q:"Because they did not have enough cash for bus tickets, the adventurous backpackers decided to ________ across Europe.",options:["condemn","hitchhike","persecute","reduce"],answer:"hitchhike",clues:["cash","tickets","backpackers","Europe"]},
+  {q:"The cruel boys began to ________ the new student because he wore old clothing and spoke with an unusual accent.",options:["heed","mock","reduce","deplete"],answer:"mock",clues:["cruel","student","clothing","accent"]},
+  {q:"Switzerland has famously chosen to maintain a ________ position during major global political conflicts for over two centuries.",options:["victorious","charitable","neutral","cozy"],answer:"neutral",clues:["Switzerland","maintain","political","conflicts","centuries"]},
+  {q:"Corrupt governments often use their absolute power to ________ political activists who speak out against social inequality.",options:["persecute","reduce","heed","condemn"],answer:"persecute",clues:["corrupt","absolute","power","activists","inequality"]},
+  {q:"We felt a deep sense of ________ for the homeless families shivering on the frozen streets during the winter night.",options:["commerce","temper","pity","unity"],answer:"pity",clues:["homeless","shivering","frozen","winter","night"]},
+  {q:"Eating more fresh organic vegetables and exercising daily can significantly ________ the risk of suffering from a heart attack.",options:["reduce","mock","heed","hitchhike"],answer:"reduce",clues:["organic","vegetables","exercising","risk","heart"]},
+  {q:"The theater actors gathered in the rehearsal room to memorize their lines from the newly written dramatic ________.",options:["script","scribe","manuscript","inscription"],answer:"script",clues:["theater","rehearsal","memorize","lines","dramatic"]},
+  {q:"The customer lost his ________ and began screaming at the manager because his food order was delayed twice.",options:["pity","charity","commerce","temper"],answer:"temper",clues:["customer","screaming","manager","delayed","twice"]},
+  {q:"The golden ________ was beautifully decorated with precious diamonds and guarded carefully by royal soldiers day and night.",options:["throne","thorn","scribe","victor"],answer:"throne",clues:["golden","diamonds","royal","soldiers","guarded"]},
+  {q:"The community leader emphasized that political ________ is absolutely crucial if we want to rebuild our economy after war.",options:["pity","commerce","unity","temper"],answer:"unity",clues:["community","political","crucial","rebuild","economy"]},
+  // Q21-40
+  {q:"After a long and grueling tennis match, the young talented athlete emerged as the clear ________ of the tournament.",options:["victor","scribe","charity","commerce"],answer:"victor",clues:["tennis","athlete","emerged","tournament"]},
+  {q:"Many wealthy citizens choose to ________ ________ ________ regularly because they want to support public welfare programs.",options:["reduce stress","heed a warning","donate to charity","mock an accent"],answer:"donate to charity",clues:["wealthy","regularly","support","welfare","programs"]},
+  {q:"The rapid advancement of internet technology has caused ________ to grow rapidly over the past decade worldwide.",options:["e-commerce","mock exam","cozy room","neutral ground"],answer:"e-commerce",clues:["internet","technology","grow","decade","worldwide"]},
+  {q:"The politician's corrupt actions faced severe public ________, which ultimately forced him to resign from office immediately.",options:["condemnation","hitchhiker","reduction","mockery"],answer:"condemnation",clues:["corrupt","severe","public","resign","office"]},
+  {q:"On freezing Sunday afternoons, Emily loves to ________ ________ with a thick blanket and an interesting novel.",options:["cozy up","heed up","deplete energy","reduce risk"],answer:"cozy up",clues:["freezing","blanket","novel","Emily","afternoons"]},
+  {q:"Scientists are constantly warning governments about the rapid ________ of global oil resources over the next fifty years.",options:["depletion","charity","unity","commerce"],answer:"depletion",clues:["scientists","warning","oil","resources","fifty years"]},
+  {q:"Developing new tourism projects can provide a massive ________ boost to rural communities by creating hundreds of local jobs.",options:["imperial","economic","neutral","victorious"],answer:"economic",clues:["tourism","projects","rural","communities","jobs"]},
+  {q:"The powerful ________ commanded a massive army of brave soldiers, and his laws were obeyed across the land.",options:["victor","scribe","emperor","hitchhiker"],answer:"emperor",clues:["powerful","commanded","army","soldiers","laws"]},
+  {q:"The police raided the abandoned warehouse last night and recovered thousands of dollars worth of ________ ________.",options:["stolen goods","neutral colors","cozy room","mock exam"],answer:"stolen goods",clues:["police","raided","warehouse","recovered","dollars"]},
+  {q:"The reckless teenager drove at a very high speed, paying no ________ to the dangerous traffic warning signs.",options:["heed","pity","temper","unity"],answer:"heed",clues:["reckless","teenager","speed","warning","signs"]},
+  // Q31-40
+  {q:"The kind truck driver pulled over on the rainy highway to pick up a wet ________ holding a sign.",options:["hitchhiker","scribe","victor","emperor"],answer:"hitchhiker",clues:["truck","rainy","highway","sign","wet"]},
+  {q:"She turned around and walked away because she could no longer tolerate her coworker's constant, ________ comments.",options:["neutral","charitable","mocking","cozy"],answer:"mocking",clues:["tolerate","coworker","constant","comments","walked"]},
+  {q:"The strict manager maintained complete ________ during the bitter argument between the two employees to ensure a fair resolution.",options:["neutrality","charity","mockery","persecution"],answer:"neutrality",clues:["strict","manager","argument","employees","fair"]},
+  {q:"The courageous witness stood up in the courtroom and directly pointed at her brutal ________ during the criminal trial.",options:["persecutor","victor","scribe","emperor"],answer:"persecutor",clues:["courageous","courtroom","brutal","criminal","trial"]},
+  {q:"The manager expressed her deepest ________ to the employee whose father had tragically passed away in a car accident.",options:["temper","mockery","sympathy","depletion"],answer:"sympathy",clues:["manager","employee","father","tragically","car accident"]},
+  {q:"The retail department store announced a massive fifty percent ________ in prices for all winter clothing items this week.",options:["reduction","depletion","condemnation","persecution"],answer:"reduction",clues:["retail","fifty percent","prices","clothing","winter"]},
+  {q:"In ancient civilizations, a professional ________ played a critical role by carefully recording government laws and historical achievements.",options:["scribe","victor","hitchhiker","emperor"],answer:"scribe",clues:["ancient","civilizations","recording","government","laws"]},
+  {q:"Although the client was shouting rudely, the professional customer service agent refused to ________ ________ ________.",options:["lose one's temper","take pity on","remain neutral","heed a warning"],answer:"lose one's temper",clues:["client","shouting","customer","service","agent","refused"]},
+  {q:"The bully laughed ________ at my mistake during the presentation, which made me feel extremely embarrassed in front of class.",options:["neutrally","victoriously","charitably","mockingly"],answer:"mockingly",clues:["bully","laughed","mistake","presentation","embarrassed"]},
+  {q:"The retail billionaire successfully established a global ________ ________ that includes hundreds of supermarkets across twenty countries.",options:["business empire","neutral ground","cozy atmosphere","charity event"],answer:"business empire",clues:["retail","billionaire","global","supermarkets","countries"]},
+  // Q41-60
+  {q:"The local ________ ________ ________ organized a large networking conference to help small businesses find new clients.",options:["chamber of commerce","donate to charity","neutral ground","mock exam"],answer:"chamber of commerce",clues:["organized","networking","conference","businesses","clients"]},
+  {q:"After working consecutive twelve-hour shifts at the hospital, the nurses felt their energy was completely ________.",options:["depleted","charitable","neutral","victorious"],answer:"depleted",clues:["consecutive","shifts","hospital","nurses","energy"]},
+  {q:"Buying fresh groceries from the local open-market is often much more ________ than dining at luxury restaurants every night.",options:["economical","imperial","neutral","charitable"],answer:"economical",clues:["groceries","open-market","dining","luxury","restaurants"]},
+  {q:"The rebellious military generals plotted a secret coup to ________ the corrupt king and establish a republic government.",options:["dethrone","reduce","heed","mock"],answer:"dethrone",clues:["military","generals","plotted","coup","corrupt","king"]},
+  {q:"Thousands of refugees fled across the country's border to escape severe religious ________ and seek freedom in Europe.",options:["persecution","depletion","condemnation","mockery"],answer:"persecution",clues:["refugees","fled","border","religious","Europe","freedom"]},
+  {q:"The thin, starving stray cat looked incredibly ________ as it searched through trash cans for scraps of food.",options:["pitiful","imperial","charitable","cozy"],answer:"pitiful",clues:["starving","stray","cat","trash","scraps"]},
+  {q:"The ________ landlord showed no mercy and kicked the poor family out onto the street because they failed to pay rent.",options:["pitiless","neutral","charitable","victorious"],answer:"pitiless",clues:["landlord","mercy","kicked","family","rent"]},
+  {q:"The compassionate schoolteacher decided to ________ ________ ________ the student who arrived at school without warm winter clothing.",options:["take pity on","heed a warning","mock someone","reduce risk"],answer:"take pity on",clues:["compassionate","teacher","student","winter","clothing"]},
+  {q:"Although I can fully ________ with your current financial difficulties, I cannot lend you any money right now.",options:["sympathize","condemn","reduce","deplete"],answer:"sympathize",clues:["fully","financial","difficulties","lend","money"]},
+  {q:"The ________ nurse stayed late at the medical clinic to comfort the crying child before his major surgery began.",options:["compassionate","imperial","neutral","depleted"],answer:"compassionate",clues:["nurse","stayed","clinic","comfort","surgery"]},
+  // Q61-80
+  {q:"The school held a massive bake sale last weekend to ________ ________ ________ ________ and improve local school libraries.",options:["raise money for charity","take pity on others","remain neutral always","reduce one's temper"],answer:"raise money for charity",clues:["school","bake sale","weekend","libraries","improve"]},
+  {q:"The doctor took out his medical pad to ________ ________ ________ for some powerful pain-relief pills.",options:["write a prescription","lose one's temper","heed a warning","mock an accent"],answer:"write a prescription",clues:["doctor","medical","pad","pain-relief","pills"]},
+  {q:"The company hired a famous celebrity to ________ their new skincare line on various social media platforms.",options:["promote","condemn","reduce","heed"],answer:"promote",clues:["hired","celebrity","skincare","social media","platforms"]},
+  {q:"New trade agreements were signed by the presidents to eliminate tariffs and encourage ________ ________ between both nations.",options:["international commerce","business empire","neutral ground","mock exam"],answer:"international commerce",clues:["trade","agreements","presidents","tariffs","nations"]},
+  {q:"The national football team celebrated their historic ________ after scoring a winning goal in the final minutes of the match.",options:["victory","charity","temper","commerce"],answer:"victory",clues:["football","celebrated","scoring","winning","final"]},
+  {q:"The ________ army marched through the capital city streets, greeted by thousands of cheering citizens waving national flags.",options:["victorious","neutral","charitable","imperial"],answer:"victorious",clues:["army","marched","capital","cheering","citizens","flags"]},
+  {q:"Overcoming his physical disabilities to win an Olympic gold medal was a truly magnificent ________ of human willpower.",options:["triumph","scribe","temper","depletion"],answer:"triumph",clues:["disabilities","Olympic","gold medal","magnificent","willpower"]},
+  {q:"The ________ scientists held a press conference to announce their successful development of a safe vaccine for the disease.",options:["triumphant","neutral","pitiless","charitable"],answer:"triumphant",clues:["scientists","press conference","vaccine","disease","successful"]},
+  {q:"It is incredibly impolite and disrespectful to ________ ________ ________ when they are trying their best to speak a new language.",options:["mock someone's accent","heed a warning","donate to charity","lose one's temper"],answer:"mock someone's accent",clues:["impolite","disrespectful","language","trying","speaking"]},
+  {q:"The major charity groups decided to ________ their efforts in order to collect emergency winter clothing for disaster victims.",options:["unite","condemn","deplete","reduce"],answer:"unite",clues:["charity","groups","emergency","winter","clothing","victims"]},
+  // Q81-100
+  {q:"Following the sudden passing of the beloved queen, the eldest prince prepared to ________ ________ ________ as the new monarch.",options:["take the throne","lose his temper","heed the warning","reduce the risk"],answer:"take the throne",clues:["sudden","queen","eldest","prince","monarch"]},
+  {q:"As a dedicated ________ ________, Sarah spends her weekends delivering hot meals to elderly people living alone.",options:["charity worker","mock exam","neutral ground","emperor's palace"],answer:"charity worker",clues:["dedicated","weekends","delivering","meals","elderly"]},
+  {q:"The government established a new department to oversee ________ ________ ________ and protect the rights of workers.",options:["commerce and industry","neutral and charity","mocking and pitiless","reduce and deplete"],answer:"commerce and industry",clues:["government","department","oversee","protect","workers"]},
+  {q:"Environmental organizations around the world issued a warning to ________ ________ the illegal dumping of chemical waste.",options:["strongly condemn","take pity on","cozy up with","remain neutral about"],answer:"strongly condemn",clues:["environmental","organizations","warning","illegal","chemical","waste"]},
+  {q:"International treaties were successfully signed to ban harmful chemicals that are responsible for causing atmospheric ________ ________.",options:["ozone depletion","neutral colors","business empire","charity event"],answer:"ozone depletion",clues:["treaties","signed","ban","chemicals","atmospheric"]},
+  {q:"To prepare for the difficult university entrance examination, students are required to take a ________ ________ every single month.",options:["mock exam","neutral ground","charity event","cozy room"],answer:"mock exam",clues:["university","entrance","examination","students","required"]},
+  {q:"A person's physical appearance, such as eye color, is determined entirely by their unique ________ ________.",options:["genetic makeup","neutral ground","mock exam","stolen goods"],answer:"genetic makeup",clues:["physical","appearance","eye color","determined","unique"]},
+  {q:"The company board decided to ________ ________ the CEO's inappropriate comments to protect their corporate reputation.",options:["publicly condemn","cozy up with","heed a warning","take pity on"],answer:"publicly condemn",clues:["board","CEO","inappropriate","protect","corporate","reputation"]},
+  {q:"Royal guests from forty different countries arrived at the cathedral to attend ________ ________ ________ ________ ________ today.",options:["the coronation of the king","the neutral ground peace","the charity gala event","the victory commerce show"],answer:"the coronation of the king",clues:["royal","guests","countries","cathedral","attend"]},
+  {q:"You must hand over this medical ________ to the local pharmacist in order to obtain the necessary pain-relief drugs.",options:["prescription","scribe","commerce","mockery"],answer:"prescription",clues:["hand over","medical","pharmacist","obtain","pain-relief"]}
+];
+
+const vocabDef = {
+  "charity":{"en":"Giving help or money to those in need","cn":"慈善","ex":"The billionaire donated half his wealth to charity."},
+  "charitable":{"en":"Kind, generous, giving to others","cn":"慈善的","ex":"The charitable gala raised thousands for orphanages."},
+  "charity event":{"en":"A gathering to raise money for a good cause","cn":"慈善活動","ex":"Every student participated in the annual charity event."},
+  "charitable organization":{"en":"An official group set up to help and raise money","cn":"慈善機構","ex":"Joining the charitable organization let Kevin help build water systems."},
+  "donate to charity":{"en":"To give money or goods to an organization","cn":"捐款給慈善機構","ex":"Many wealthy citizens donate to charity regularly."},
+  "raise money for charity":{"en":"To collect funds for a good cause","cn":"為慈善籌款","ex":"The school held a bake sale to raise money for charity."},
+  "charity worker":{"en":"A person employed by a charitable organization","cn":"慈善工作者","ex":"As a charity worker, Sarah delivers meals to the elderly."},
+  "commerce":{"en":"The activity of buying and selling things","cn":"商業","ex":"The harbor boosted international commerce greatly."},
+  "commercial":{"en":"Related to business and making money","cn":"商業的","ex":"The downtown area is filled with huge commercial buildings."},
+  "e-commerce":{"en":"The activity of buying and selling online","cn":"電子商務","ex":"E-commerce has grown rapidly over the past decade."},
+  "chamber of commerce":{"en":"A local association to promote business interests","cn":"商會","ex":"The chamber of commerce organized a large networking conference."},
+  "international commerce":{"en":"Trade between different countries","cn":"國際貿易","ex":"New trade agreements encouraged international commerce between nations."},
+  "commerce and industry":{"en":"Business and manufacturing sectors combined","cn":"工商業","ex":"The government oversees commerce and industry to protect workers."},
+  "condemn":{"en":"To give someone a punishment; to criticize","cn":"譴責","ex":"World leaders condemned the violent attacks against civilians."},
+  "condemnation":{"en":"The expression of very strong disapproval","cn":"譴責","ex":"The politician's actions faced severe public condemnation."},
+  "strongly condemn":{"en":"To disapprove of something intensely","cn":"強烈譴責","ex":"Environmental organizations strongly condemned the illegal dumping."},
+  "publicly condemn":{"en":"To state disapproval in front of others","cn":"公開譴責","ex":"The board decided to publicly condemn the CEO's comments."},
+  "cozy":{"en":"Comfortable, warm, and relaxing","cn":"舒適的","ex":"We spent the evening in a cozy mountain cabin."},
+  "cozy up":{"en":"To make oneself comfortable and warm","cn":"依偎舒適地蜷縮","ex":"Emily loves to cozy up with a blanket and a novel."},
+  "cozy atmosphere":{"en":"A relaxing and welcoming environment","cn":"溫馨的氣氛","ex":"The new coffee shop became popular due to its cozy atmosphere."},
+  "deplete":{"en":"To use all of it up","cn":"耗盡","ex":"Running a marathon will quickly deplete your water reserves."},
+  "depletion":{"en":"The reduction in the number or quantity of something","cn":"消耗","ex":"Scientists warned about the rapid depletion of global oil resources."},
+  "depleted":{"en":"Emptied of something; greatly reduced","cn":"耗盡的","ex":"After twelve-hour shifts, the nurses felt completely depleted."},
+  "ozone depletion":{"en":"The thinning of the earth's ozone layer","cn":"臭氧層破壞","ex":"Treaties were signed to ban chemicals causing ozone depletion."},
+  "economy":{"en":"The money and businesses of a country or region","cn":"經濟","ex":"The government stabilized the national economy and reduced inflation."},
+  "economic":{"en":"Relating to economics or the economy","cn":"經濟的","ex":"Tourism projects provide a massive economic boost to rural communities."},
+  "economical":{"en":"Giving good value without wasting money","cn":"節約的","ex":"Shopping at the open market is more economical than dining out."},
+  "global economy":{"en":"The interconnected worldwide economic activities","cn":"全球經濟","ex":"A crisis in one country can instantly damage the global economy."},
+  "empire":{"en":"A large group of countries ruled by an emperor","cn":"帝國","ex":"The ancient Roman Empire controlled vast territories."},
+  "emperor":{"en":"The sovereign ruler of an empire","cn":"皇帝","ex":"The powerful emperor commanded a massive army of brave soldiers."},
+  "business empire":{"en":"A large and powerful group of companies","cn":"商業帝國","ex":"The retail billionaire established a global business empire."},
+  "goods":{"en":"Anything that can be bought or sold","cn":"商品","ex":"The cargo train transported industrial goods across the border."},
+  "stolen goods":{"en":"Items that have been taken illegally","cn":"贓物","ex":"The police recovered thousands of dollars worth of stolen goods."},
+  "consumer goods":{"en":"Products bought for use by the average person","cn":"消費品","ex":"Demand for consumer goods spikes during the year-end shopping season."},
+  "heed":{"en":"To obey or follow advice or warning","cn":"留心","ex":"You should heed your teacher's academic advice carefully."},
+  "heedless":{"en":"Showing a reckless lack of care or attention","cn":"掉以輕心的","ex":"He rushed onto the frozen lake, heedless of his father's warnings."},
+  "take heed of":{"en":"To pay attention to","cn":"留意","ex":"Cautious investors should always take heed of market trends."},
+  "hitchhike":{"en":"To travel by asking for rides from passing vehicles","cn":"搭便車","ex":"The backpackers decided to hitchhike across Europe."},
+  "hitchhiker":{"en":"A person who travels by getting free rides","cn":"搭便車的人","ex":"The truck driver picked up a wet hitchhiker holding a sign."},
+  "mock":{"en":"To tease someone in a cruel way","cn":"嘲笑","ex":"The cruel boys began to mock the new student."},
+  "mockery":{"en":"Teasing and contemptuous language or behavior","cn":"嘲笑","ex":"The unfair trial was a complete mockery of justice."},
+  "mocking":{"en":"Making fun of someone or something","cn":"嘲弄的","ex":"She could no longer tolerate her coworker's mocking comments."},
+  "mockingly":{"en":"In a way that makes fun of someone","cn":"嘲弄地","ex":"The bully laughed mockingly at my mistake during the presentation."},
+  "mock exam":{"en":"A practice test before the real one","cn":"模擬考","ex":"Students are required to take a mock exam every month."},
+  "neutral":{"en":"Not helping either of the two fighting sides","cn":"中立的","ex":"Switzerland maintained a neutral position during global conflicts."},
+  "neutrality":{"en":"The state of not supporting either side","cn":"中立","ex":"The manager maintained complete neutrality during the argument."},
+  "remain neutral":{"en":"To stay out of an argument or war","cn":"保持中立","ex":"I decided to remain neutral to avoid damaging friendships."},
+  "persecute":{"en":"To treat someone badly or cruelly","cn":"迫害","ex":"Corrupt governments use power to persecute political activists."},
+  "persecution":{"en":"Hostility and ill-treatment because of race or beliefs","cn":"迫害","ex":"Refugees fled to escape severe religious persecution."},
+  "persecutor":{"en":"A person who treats someone cruelly or unfairly","cn":"迫害者","ex":"The courageous witness pointed at her brutal persecutor in court."},
+  "pity":{"en":"The feeling of sadness and kindness for those suffering","cn":"同情","ex":"We felt deep pity for the homeless families in the winter night."},
+  "pitiful":{"en":"Deserving or arousing pity","cn":"可憐的","ex":"The thin, starving stray cat looked incredibly pitiful."},
+  "pitiless":{"en":"Showing no pity; cruel","cn":"無情的","ex":"The pitiless landlord kicked the poor family out onto the street."},
+  "take pity on":{"en":"To feel sorry for and help someone","cn":"對...產生憐憫並伸出援手","ex":"The teacher decided to take pity on the student without warm clothing."},
+  "sympathy":{"en":"Feelings of pity and sorrow for someone else's misfortune","cn":"同情心","ex":"The manager expressed her deepest sympathy to the bereaved employee."},
+  "sympathetic":{"en":"Feeling, showing, or expressing sympathy","cn":"有同情心的","ex":"The doctor was highly sympathetic toward his patients."},
+  "sympathize":{"en":"To feel or express sympathy for someone","cn":"同情","ex":"Although I can fully sympathize with your difficulties, I cannot help now."},
+  "compassionate":{"en":"Feeling or showing sympathy and concern for others","cn":"富有同情心的","ex":"The compassionate nurse comforted the crying child before surgery."},
+  "reduce":{"en":"To make it smaller in size or fewer in number","cn":"減少","ex":"Eating vegetables and exercising can reduce the risk of heart attacks."},
+  "reduction":{"en":"The action of making something smaller","cn":"減少","ex":"The store announced a massive fifty percent reduction in prices."},
+  "reduce the risk":{"en":"To lower the chance of danger","cn":"降低風險","ex":"Wearing a helmet will effectively reduce the risk of head injuries."},
+  "scribe":{"en":"A person whose job was to copy written works","cn":"抄寫員","ex":"In ancient civilizations, a professional scribe recorded government laws."},
+  "script":{"en":"The written text of a play, movie, or broadcast","cn":"劇本","ex":"Actors memorized their lines from the newly written dramatic script."},
+  "prescription":{"en":"A doctor's written note for medicine","cn":"處方籤","ex":"You must hand the prescription to the pharmacist for pain-relief drugs."},
+  "write a prescription":{"en":"To authorize medicine for a patient","cn":"開處方箋","ex":"The doctor took out his medical pad to write a prescription."},
+  "temper":{"en":"Someone's mood or a tendency to get angry","cn":"脾氣","ex":"The customer lost his temper and began screaming at the manager."},
+  "lose one's temper":{"en":"To become very angry suddenly","cn":"發脾氣","ex":"The professional agent refused to lose one's temper despite the shouting."},
+  "throne":{"en":"The special chair in which a ruler sits","cn":"王座","ex":"The golden throne was decorated with diamonds and guarded by soldiers."},
+  "take the throne":{"en":"To become king or queen","cn":"登上王位","ex":"Following the queen's passing, the eldest prince prepared to take the throne."},
+  "dethrone":{"en":"To remove a monarch from power","cn":"廢黜","ex":"The military generals plotted a coup to dethrone the corrupt king."},
+  "coronation of the king":{"en":"The ceremony of crowning a monarch","cn":"國王的加冕","ex":"Royal guests arrived to attend the coronation of the king today."},
+  "unity":{"en":"The state of people working together for a purpose","cn":"團結","ex":"Political unity is crucial if we want to rebuild our economy after war."},
+  "unite":{"en":"To bring together for a common purpose","cn":"團結","ex":"The charity groups decided to unite their efforts for disaster victims."},
+  "victorious":{"en":"Having won a victory; triumphant","cn":"勝利的","ex":"The victorious army marched through the capital city streets."},
+  "victory":{"en":"An act of defeating an enemy or opponent","cn":"勝利","ex":"The football team celebrated their historic victory."},
+  "victor":{"en":"A group or person that wins in a contest","cn":"勝利者","ex":"The young athlete emerged as the clear victor of the tournament."},
+  "triumph":{"en":"A great victory or achievement","cn":"勝利","ex":"Winning the Olympic gold medal was a magnificent triumph of willpower."},
+  "triumphant":{"en":"Having won a battle or contest","cn":"勝利的","ex":"The triumphant scientists announced their successful vaccine development."},
+  "mock someone's accent":{"en":"To imitate how someone speaks to make fun of them","cn":"嘲笑某人的口音","ex":"It is impolite to mock someone's accent when they are learning a language."},
+  "donate to charity":{"en":"To give money or goods to an organization","cn":"捐款給慈善","ex":"Many wealthy citizens donate to charity to support welfare programs."},
+  "genetic makeup":{"en":"The combination of genes in an organism","cn":"基因組成","ex":"Eye color is determined entirely by a person's unique genetic makeup."}
+};
+
+const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+let currentQ = 0, score = 0, answered = false;
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[currentQ], total = questions.length;
+  document.getElementById("q-counter").textContent = `Question ${currentQ+1} of ${total}`;
+  document.getElementById("q-pct").textContent = Math.round((currentQ/total)*100)+"%";
+  document.getElementById("progress-fill").style.width = ((currentQ/total)*100)+"%";
+  document.getElementById("q-number").textContent = `Q${currentQ+1}`;
+  document.getElementById("score-badge").textContent = `Score: ${score}`;
+  const passageDiv = document.getElementById("q-passage");
+  const words = q.q.split(/(\s+)/);
+  passageDiv.innerHTML = words.map(token => {
+    if (/\s+/.test(token)) return token;
+    if (token === "__________") return `<strong style="color:var(--color-primary);font-size:1.05em;">__________</strong>`;
+    const clean = token.replace(/[^a-zA-Z'-]/g,"");
+    return `<span class="word" data-word="${clean}" onclick="lookupWord('${clean}')">${token}</span>`;
+  }).join("");
+  document.getElementById("word-helper").classList.remove("visible");
+  const grid = document.getElementById("options-grid");
+  const labels = ["A","B","C","D"];
+  grid.innerHTML = q.options.map((opt,i) => `<button class="opt-btn" onclick="selectAnswer(${i})"><span class="opt-label">${labels[i]}</span>${opt}</button>`).join("");
+  document.getElementById("feedback-box").classList.remove("visible");
+  document.getElementById("next-btn").classList.remove("visible");
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = questions[currentQ];
+  const btns = document.querySelectorAll(".opt-btn");
+  btns.forEach((btn,i) => {
+    btn.disabled = true;
+    if (q.options[i] === q.answer) btn.classList.add("correct");
+    else if (i === idx) btn.classList.add("incorrect");
+  });
+  if (q.options[idx] === q.answer) score++;
+  const passageDiv = document.getElementById("q-passage");
+  passageDiv.querySelectorAll(".word").forEach(span => {
+    const w = span.getAttribute("data-word").toLowerCase();
+    if (q.clues && q.clues.some(c => w.includes(c.toLowerCase()) || c.toLowerCase().includes(w))) span.classList.add("clue-highlight");
+  });
+  showFeedback(idx);
+  document.getElementById("next-btn").classList.add("visible");
+  document.getElementById("score-badge").textContent = `Score: ${score}`;
+}
+
+function showFeedback(chosenIdx) {
+  const q = questions[currentQ];
+  const correct = q.options[chosenIdx] === q.answer;
+  const fb = document.getElementById("feedback-box");
+  const fh = document.getElementById("feedback-header");
+  fh.className = "feedback-header " + (correct ? "correct-header" : "incorrect-header");
+  fh.innerHTML = correct ? `<i class="fa-solid fa-circle-check"></i> Correct! The answer is "<strong>${q.answer}</strong>"` : `<i class="fa-solid fa-circle-xmark"></i> The correct answer is "<strong>${q.answer}</strong>"`;
+  const cardsDiv = document.getElementById("vocab-cards");
+  cardsDiv.innerHTML = q.options.map(opt => {
+    const def = vocabDef[opt] || {en:"—",cn:"—",ex:"—"};
+    return `<div class="vocab-card"><div class="vc-word">${opt}<button class="tts-btn" onclick="speak('${opt}')" title="Pronounce"><i class="fa-solid fa-volume-low"></i></button></div><div class="vc-en">${def.en}</div><div class="vc-cn">${def.cn}</div><div class="vc-ex">${def.ex}<button class="tts-btn" onclick="speak(\`${def.ex.replace(/`/g,"'")}\`)" title="Read"><i class="fa-solid fa-volume-low"></i></button></div></div>`;
+  }).join("");
+  fb.classList.add("visible");
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= questions.length) showResults();
+  else { document.getElementById("word-helper").classList.remove("visible"); renderQuestion(); window.scrollTo({top:0,behavior:"smooth"}); }
+}
+
+function showResults() {
+  document.getElementById("quiz-screen").style.display = "none";
+  document.getElementById("results-screen").classList.add("visible");
+  const pct = Math.round((score/questions.length)*100);
+  document.getElementById("results-score").textContent = `${score} / ${questions.length}`;
+  document.getElementById("results-pct").textContent = `${pct}%`;
+  document.getElementById("progress-fill").style.width = "100%";
+  document.getElementById("q-pct").textContent = "100%";
+  let icon, msg, msgCn;
+  if (pct>=90){icon="🏆";msg="Outstanding! You've mastered Unit 22.";msgCn="太棒了！你已精通第22單元！";}
+  else if (pct>=75){icon="🎉";msg="Great work! Keep reviewing the tricky ones.";msgCn="表現優異！繼續複習難的字詞。";}
+  else if (pct>=60){icon="📚";msg="Good effort! A bit more practice will get you there.";msgCn="很努力！再多練習幾次就會更好。";}
+  else{icon="💪";msg="Keep going! Review the word list and try again.";msgCn="繼續加油！複習字彙表後再試一次。";}
+  document.getElementById("results-icon").textContent = icon;
+  document.getElementById("results-msg").textContent = msg;
+  document.getElementById("results-msg-cn").textContent = msgCn;
+}
+
+function restartQuiz() {
+  currentQ=0; score=0; answered=false;
+  document.getElementById("results-screen").classList.remove("visible");
+  document.getElementById("quiz-screen").style.display = "";
+  document.getElementById("submit-msg").textContent = "";
+  renderQuestion(); window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=0.9;
+  const voices = window.speechSynthesis.getVoices();
+  const female = voices.find(v => v.lang.startsWith("en") && /female|zira|samantha/i.test(v.name));
+  if (female) u.voice = female;
+  window.speechSynthesis.speak(u);
+}
+
+function readPassage() { speak(questions[currentQ].q.replace(/__________/g,"blank")); }
+
+async function lookupWord(word) {
+  if (!word || word.length<2) return;
+  const helper = document.getElementById("word-helper");
+  document.getElementById("helper-word").textContent = word;
+  document.getElementById("helper-phonetic").textContent = "";
+  document.getElementById("helper-meaning").textContent = "Looking up…";
+  helper.classList.add("visible");
+  try {
+    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word.toLowerCase()}`);
+    if (!res.ok) throw new Error("not found");
+    const data = await res.json();
+    const entry = data[0];
+    const phonetic = entry.phonetic || entry.phonetics?.find(p=>p.text)?.text || "";
+    const meaning = entry.meanings?.[0]?.definitions?.[0]?.definition || "Definition not found.";
+    document.getElementById("helper-phonetic").textContent = phonetic ? ` ${phonetic}` : "";
+    document.getElementById("helper-meaning").textContent = meaning;
+  } catch { document.getElementById("helper-meaning").textContent = "Definition not found. Try another word."; }
+}
+
+async function submitScore() {
+  const name = document.getElementById("student-name").value.trim();
+  const sid = document.getElementById("student-id").value.trim();
+  const msgEl = document.getElementById("submit-msg");
+  if (!name||!sid){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="Please enter both your name and student ID.";return;}
+  if (GOOGLE_SCRIPT_URL==="YOUR_GOOGLE_APPS_SCRIPT_URL_HERE"){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="⚠️ Teacher: please set the Google Apps Script URL in the HTML file.";return;}
+  msgEl.style.color="#334";msgEl.textContent="Submitting…";
+  try {
+    const payload = {name,studentId:sid,score,total:questions.length,percentage:Math.round((score/questions.length)*100),unit:"Level 5 Unit 22",timestamp:new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"})};
+    await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    msgEl.style.color="var(--color-correct)";msgEl.textContent=`✅ Score submitted! ${name} — ${score}/${questions.length} (${payload.percentage}%)`;
+  } catch(e){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="Submission failed. Please check your internet connection.";}
+}
+
+window.speechSynthesis.onvoiceschanged = ()=>{};
+renderQuestion();
+</script>
+</body>
+</html>
