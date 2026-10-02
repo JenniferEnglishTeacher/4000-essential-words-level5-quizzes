@@ -1,26 +1,227 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>4000 Essential Words Book 5 Unit 5 | MCQ Quiz</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Book 5 Unit 5: 20 interactive vocabulary questions, English definitions and read aloud.">
+<title>Book 5 Unit 5 — The Magic Computer | Interactive Vocabulary Quiz</title>
 <style>
-:root{--navy:#183b5e;--gold:#cf9e3e;--green:#24764b;--red:#ae3b31;--paper:#f6f4ef}*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#18283a}header{background:var(--navy);color:#fff;padding:17px;display:flex;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:3}h1{font:700 1.1rem Georgia,serif;margin:0}.sub{font-size:.78rem;opacity:.8;margin-top:3px}.score{background:var(--gold);padding:7px 14px;border-radius:20px;font-weight:700;white-space:nowrap}main{max-width:820px;margin:auto;padding:24px 15px 60px}.intro,.card,.result{background:#fff;border-radius:14px;box-shadow:0 4px 20px #183b5e18}.intro{padding:15px 19px;margin-bottom:18px;line-height:1.5}.row{display:flex;justify-content:space-between;font-size:.82rem;color:#657080}.track{height:8px;background:#dce3e9;border-radius:8px;margin:7px 0 18px}.bar{height:100%;background:linear-gradient(90deg,var(--navy),var(--gold));border-radius:8px}.card{padding:26px}.qnum{color:var(--gold);font-size:.78rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.question{font-size:1.1rem;line-height:1.7;margin:14px 0 18px}.blank{font-weight:800;color:var(--navy)}.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.opt{background:#eef2f6;border:2px solid transparent;border-radius:10px;padding:12px;text-align:left;font-size:.97rem;cursor:pointer}.opt:hover:not(:disabled){border-color:var(--navy)}.opt.correct{background:#d9efdf;border-color:var(--green)}.opt.wrong{background:#f7dad7;border-color:var(--red)}.feedback{display:none;margin-top:16px;padding:14px;border-radius:10px;line-height:1.5}.feedback.show{display:block}.good{background:#eaf7ee;color:#185d39}.bad{background:#fff0ef;color:#8c3029}.cn{color:#70458f;font-weight:650}.next{display:none;margin:17px 0 0 auto;background:var(--navy);color:#fff;border:0;border-radius:9px;padding:11px 20px;font-weight:700;cursor:pointer}.next.show{display:block}.result{display:none;text-align:center;padding:32px 23px}.big{font:700 3rem Georgia,serif;color:var(--navy)}.review{text-align:left;background:#f0f3f6;padding:13px;border-radius:9px;margin:17px 0;line-height:1.5}input{width:100%;padding:11px;margin:5px 0;border:2px solid #d8e0e6;border-radius:8px;font-size:.96rem}.submit,.again{width:100%;border:0;border-radius:9px;padding:12px;margin-top:8px;font-weight:750;cursor:pointer}.submit{background:var(--gold);color:#fff}.again{background:var(--navy);color:#fff}.msg{margin-top:8px}@media(max-width:560px){.options{grid-template-columns:1fr}.card{padding:19px}}
-</style></head><body>
-<header><div><h1>4000 Essential Words - Book 5, Unit 5</h1><div class="sub">The Magic Computer | 20 Questions</div></div><div class="score" id="score">Score: 0</div></header>
-<main><div class="intro"><strong>Unit 5 Vocabulary MCQ</strong><br>Choose the best word for each sentence. Complete the quiz and submit your score to your teacher.</div>
-<div class="row"><span id="counter"></span><span id="pct"></span></div><div class="track"><div class="bar" id="bar"></div></div>
-<section id="quiz"><div class="card"><div class="qnum" id="qnum"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><button class="next" id="next" onclick="nextQuestion()">Next question →</button></div></section>
-<section class="result" id="result"><div class="big" id="finalScore"></div><h2 id="finalPct"></h2><p id="finalMsg"></p><div class="review" id="review"></div><input id="name" maxlength="60" placeholder="Your full name（姓名）"><input id="sid" maxlength="40" placeholder="Student ID / class number（學號）"><button class="submit" id="submit" onclick="submitScore()">Submit score</button><div class="msg" id="msg"></div><button class="again" onclick="location.reload()">Try again</button></section></main>
+:root{--navy:#4a2c23;--gold:#a06f20;--paper:#faf6ef;--ink:#182c40;--muted:#526477;--green:#196b40;--red:#a22f2b}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}[hidden]{display:none!important}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default}a{color:var(--navy)}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #cc8a11;outline-offset:3px}
+header{background:var(--navy);color:#fff;padding:22px 20px}header>div{max-width:860px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}h1{font:700 clamp(1.3rem,4vw,1.8rem)/1.3 Georgia,serif;margin:5px 0}.eyebrow{font-size:.8rem;letter-spacing:.11em;text-transform:uppercase;color:#e9c573}.unitTitle{margin:4px 0 0;color:#e5edf5}.score{border:1px solid #ffffff70;border-radius:99px;padding:8px 14px;white-space:nowrap;font-weight:700}
+main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;background:white;border:1px solid #dde3e7;border-radius:16px;box-shadow:0 5px 20px #173a5e0b;margin-bottom:18px}h2,h3{line-height:1.35}.muted{color:var(--muted)}.cn{color:#754692}label{display:block;font-weight:650;margin-top:14px}input{display:block;width:100%;border:1px solid #aab8c6;border-radius:8px;padding:11px;margin-top:5px}.primary,.secondary,.small{border:0;border-radius:9px;padding:11px 18px;min-height:44px;font-weight:650}.primary{background:var(--navy);color:white}.secondary,.small{background:#e9eff4;color:var(--navy)}.primary:disabled{background:#677b8e}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.progressLine{display:flex;justify-content:space-between;gap:12px}.progressLine span{color:var(--muted)}progress{width:100%;height:12px;accent-color:var(--gold);margin:9px 0 20px}.questionNumber{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);font-weight:800}.sentence{font-size:1.18rem;line-height:2.1;margin:18px 0}.word{display:inline;border:0;border-bottom:1px dotted #8193a5;padding:0;background:transparent;color:inherit;font:inherit;line-height:inherit}.word:hover{background:#fff0bc}.blank{color:var(--navy);font-weight:800}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{border:2px solid #d8e2eb;border-radius:10px;background:#f0f4f8;color:var(--ink);text-align:left;padding:13px 16px;min-height:50px}.option:hover:not(:disabled){border-color:var(--navy)}.option.correct{background:#dff3e7;border-color:var(--green);color:#115530}.option.wrong{background:#ffe6e3;border-color:var(--red);color:#8b2422}.feedback{border-radius:10px;padding:16px;margin-top:18px}.feedback p{margin:7px 0}.feedback.good{background:#eaf7ef;border:1px solid #a9d6bb}.feedback.bad{background:#fff0ee;border:1px solid #e2b1ac}.completedSentence{border-top:1px solid #cbd4db;padding-top:9px;margin-top:12px;line-height:1.9}.lookup{border-left:4px solid var(--navy);background:#edf4fb}.lookup p{margin:8px 0}.lookup small{display:inline-block}details{background:#f0f4f8;border-radius:8px;padding:12px;margin-top:18px}summary{cursor:pointer;font-weight:650}.big{font:700 3rem Georgia,serif;color:var(--navy);margin:10px 0}.percent{font-size:1.4rem;color:var(--green)}.review p{padding-bottom:9px;border-bottom:1px solid #e1e7eb}.status{min-height:1.6em}.footer{font-size:.85rem;color:var(--muted);margin-top:24px}.unitNav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.unitNav a{padding:7px 11px;background:#e9eff4;border-radius:7px;text-decoration:none}.unitNav a[aria-current]{background:var(--navy);color:white}
+@media(max-width:560px){header{padding:17px 14px}header>div{align-items:flex-start}.score{font-size:.8rem;padding:6px 9px}.card{padding:20px 16px}.options{grid-template-columns:1fr}.sentence{font-size:1.08rem}.actions>*{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div><div><div class="eyebrow">4000 Essential English Words · Book 5</div><h1>Unit 5</h1><p class="unitTitle">The Magic Computer</p></div><div class="score" id="score" aria-live="polite">Score: 0</div></div></header>
+<main>
+<section class="card" id="setup">
+<h2>20 words. 20 questions.</h2>
+<p>Choose the best word for each sentence. Tap any sentence word for an English definition, or use <strong>Read aloud</strong> to listen. Each unit word is tested once.</p>
+<p class="muted">請輸入姓名與學號，再開始測驗。完成後可傳送成績給老師。</p>
+<form id="studentForm">
+<label for="studentName">Student name · 姓名</label><input id="studentName" name="studentName" maxlength="60" autocomplete="name" required>
+<label for="studentId">Student ID · 學號</label><input id="studentId" name="studentId" maxlength="40" autocomplete="off" required>
+<div class="actions"><button type="submit" class="primary">Start Unit 5 →</button></div>
+<p class="status" id="formMessage" role="status"></p>
+</form>
+<div id="extraVocabulary"></div>
+</section>
+<div id="progressArea" hidden><div class="progressLine"><strong>Unit 5 progress</strong><span id="progressText">0 / 20 completed</span></div><progress id="progress" value="0" max="20" aria-label="Questions completed"></progress></div>
+<section class="card" id="quiz" hidden>
+<div class="questionNumber" id="questionNumber" tabindex="-1"></div>
+<div class="actions"><button type="button" class="small" id="readQuestion">🔊 Read aloud</button><span id="speechStatus" class="muted" role="status"></span></div>
+<div class="sentence" id="sentence"></div>
+<div class="options" id="options" role="group" aria-label="Choose one answer"></div>
+<div id="feedback" class="feedback" aria-live="polite" hidden></div>
+<div class="actions"><button type="button" id="next" class="primary" hidden>Next question →</button></div>
+</section>
+<aside class="card lookup" id="lookup" aria-live="polite" aria-label="English word definition" hidden></aside>
+<section class="card" id="result" hidden>
+<h2>Your result</h2><p id="studentSummary" class="muted"></p>
+<div class="big" id="finalScore" tabindex="-1"></div><div class="percent" id="finalPercent"></div><p id="resultMessage"></p>
+<div class="review" id="review"></div><h3>Words looked up</h3><p id="lookedUp"></p>
+<div class="actions"><button type="button" class="primary" id="submit">Send result to teacher</button><button type="button" class="secondary" id="download">Save result</button><button type="button" class="secondary" id="retry">Try again</button></div>
+<p id="submissionMessage" class="status" role="status"></p>
+</section>
+<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">Unit 1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html">Unit 2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html">Unit 3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">Unit 4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html" aria-current="page">Unit 5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">Unit 6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html">Unit 7</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-5-the-magic-computer" target="_blank" rel="noopener">Book 5 · Unit 5</a>. Practice sentences are written for this quiz.</p></footer>
+</main>
 <script>
-const UNIT=5,TITLE="The Magic Computer",ENDPOINT="https://script.google.com/macros/s/AKfycbyCD78fQsk8mKNTl0fNuRJE6AT0WpS0rAQctBeaDPGoZyd_w3T6MGNJuxnPoBCz9jIb-Q/exec";
-const TARGETS=[{"word":"awhile","cat":"adv","def":"For a short time.","cn":"一會兒","q":"Please wait ______ while I finish the report."},{"word":"cyberspace","cat":"n","def":"The imaginary place on the Internet where activities occur.","cn":"網路空間","q":"Messages and websites exist in ______."},{"word":"edit","cat":"v","def":"To correct writing so it is suitable for publication.","cn":"編輯；修改","q":"She asked a friend to ______ her essay."},{"word":"essay","cat":"n","def":"A short piece of writing on a particular subject.","cn":"文章；短論文","q":"The student wrote an ______ about technology."},{"word":"evaluate","cat":"v","def":"To study something so a decision can be made.","cn":"評估","q":"The class will ______ the usefulness of the computer."},{"word":"faint","cat":"v","def":"To lose consciousness and fall down.","cn":"昏倒","q":"She might ______ if she becomes too weak."},{"word":"global","cat":"adj","def":"Happening all around the world.","cn":"全球的","q":"Internet access has become a ______ issue."},{"word":"gymnasium","cat":"n","def":"A building with equipment used for exercise.","cn":"體育館；健身房","q":"He exercised in the school ______."},{"word":"highlight","cat":"v","def":"To mark something with color so it is easy to see.","cn":"標示；強調","q":"Use a yellow pen to ______ the key words."},{"word":"ignorant","cat":"adj","def":"Having no knowledge about something.","cn":"無知的；不了解的","q":"He was ______ about how computers worked."},{"word":"index","cat":"n","def":"An alphabetical list in a book that gives page information.","cn":"索引","q":"She used the ______ to find the correct page."},{"word":"lecture","cat":"n","def":"A long educational speech.","cn":"講座；演講","q":"The professor gave a ______ about world hunger."},{"word":"moral","cat":"n","def":"A lesson or message that a story teaches.","cn":"寓意；道德教訓","q":"The ______ of the story was to treat others kindly."},{"word":"operate","cat":"v","def":"To work, function, or control a machine.","cn":"操作；運作","q":"Can you ______ this new computer?"},{"word":"private","cat":"adj","def":"Used by or belonging to one person or group only.","cn":"私人的；私密的","q":"Do not read the document because it is ______."},{"word":"recent","cat":"adj","def":"Happening a short time ago.","cn":"最近的","q":"A ______ study examined students' Internet use."},{"word":"resolution","cat":"n","def":"A firm personal decision.","cn":"決心；決議","q":"She made a ______ to exercise more often."},{"word":"semester","cat":"n","def":"One portion of a school year.","cn":"學期","q":"The report is due at the end of the ______."},{"word":"typewritten","cat":"adj","def":"Written using a computer or typewriter.","cn":"打字的","q":"The teacher required a neat, ______ report."},{"word":"weird","cat":"adj","def":"Very strange or unusual.","cn":"奇怪的","q":"The computer gave a ______ answer to the question."}],EXTRA=[{"word":"briefly","cat":"adv","def":"For a short period of time.","cn":"短暫地"},{"word":"soon","cat":"adv","def":"After a short time.","cn":"不久"},{"word":"patiently","cat":"adv","def":"In a calm way while waiting.","cn":"耐心地"}],ALL=TARGETS.concat(EXTRA);
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
-const questions=shuffle(TARGETS).map(function(d){const pool=ALL.filter(function(x){return x.cat===d.cat&&x.word!==d.word});return{answer:d.word,cat:d.cat,q:d.q,def:d.def,cn:d.cn,options:shuffle([d.word].concat(shuffle(pool).slice(0,3)))}})
-function validate(){if(TARGETS.length!==20||questions.length!==20||new Set(questions.map(function(q){return q.answer})).size!==20)throw new Error("Invalid question count");questions.forEach(function(q){if(q.options.length!==4||new Set(q.options).size!==4||!q.options.includes(q.answer))throw new Error("Invalid options");q.options.forEach(function(w){const d=ALL.find(function(x){return x.word===w});if(!d||d.cat!==q.cat)throw new Error("Part-of-speech mismatch")})})}validate();
-let at=0,score=0,answered=false,start=Date.now();const responses=new Array(20).fill("");
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-function render(){const q=questions[at];answered=false;document.getElementById("counter").textContent="Question "+(at+1)+" of 20";document.getElementById("pct").textContent=Math.round(at/20*100)+"%";document.getElementById("bar").style.width=(at/20*100)+"%";document.getElementById("qnum").textContent="Question "+(at+1);document.getElementById("question").innerHTML=esc(q.q).replace(/_{3,}/g,'<span class="blank">________</span>');document.getElementById("options").innerHTML=q.options.map(function(w,i){return'<button class="opt" data-w="'+esc(w)+'" onclick="choose(this.dataset.w,this)"><strong>'+String.fromCharCode(65+i)+".</strong> "+esc(w)+"</button>"}).join("");document.getElementById("feedback").className="feedback";document.getElementById("next").className="next"}
-function choose(choice,button){if(answered)return;answered=true;const q=questions[at],ok=choice===q.answer;responses[at]=choice;if(ok)score++;document.getElementById("score").textContent="Score: "+score;document.querySelectorAll(".opt").forEach(function(b){b.disabled=true;if(b.dataset.w===q.answer)b.classList.add("correct");else if(b===button)b.classList.add("wrong")});const f=document.getElementById("feedback");f.className="feedback show "+(ok?"good":"bad");f.innerHTML=(ok?"✓ Correct!":"✗ Correct answer: <strong>"+esc(q.answer)+"</strong>")+"<br>"+esc(q.def)+'<div class="cn">'+esc(q.cn)+"</div>";document.getElementById("next").className="next show"}
-function nextQuestion(){at++;if(at<20)render();else finish()}
-function finish(){document.getElementById("quiz").style.display="none";document.getElementById("result").style.display="block";document.getElementById("bar").style.width="100%";document.getElementById("pct").textContent="100%";const p=Math.round(score/20*100);document.getElementById("finalScore").textContent=score+" / 20";document.getElementById("finalPct").textContent=p+"%";document.getElementById("finalMsg").textContent=p>=90?"Outstanding!":p>=75?"Great work!":p>=60?"Good effort!":"Review the words and try again.";const wrong=questions.filter(function(q,i){return responses[i]!==q.answer}).map(function(q){return q.answer});document.getElementById("review").innerHTML="<strong>Words to review:</strong> "+(wrong.join(", ")||"none")}
-async function submitScore(){const name=document.getElementById("name").value.trim(),sid=document.getElementById("sid").value.trim(),msg=document.getElementById("msg");if(!name||!sid){msg.textContent="Please enter both your name and student ID.";return}const btn=document.getElementById("submit");btn.disabled=true;msg.textContent="Submitting...";const percent=Math.round(score/20*100),secs=Math.round((Date.now()-start)/1000),answers=questions.map(function(q,i){return{question:q.q,selected:responses[i],answer:q.answer,ok:responses[i]===q.answer}}),wrong=answers.filter(function(a){return!a.ok});const payload={testDateTime:new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"}),studentName:name,studentId:sid,unit:String(UNIT),unitName:"Level 5 Unit "+UNIT+" - "+TITLE,score:score,total:20,percentage:percent/100,grade:percent>=90?"A+":percent>=80?"A":percent>=70?"B":percent>=60?"C":"D",timeTaken:Math.floor(secs/60)+"m "+secs%60+"s",answers:answers,wrongAnswers:wrong,wrongWords:Array.from(new Set(wrong.map(function(a){return a.answer}))).join(", ")||"none",lookUpWords:"none"};try{await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});msg.style.color="var(--green)";msg.textContent="Submitted! "+name+" - "+percent+"%";btn.textContent="Submitted ✓"}catch(e){btn.disabled=false;msg.style.color="var(--red)";msg.textContent="Submission failed. Please try again."}}
-render();
-</script></body></html>
+
+"use strict";
+const CONFIG={"unit":5,"title":"The Magic Computer"};
+const TARGETS=[{"word":"awhile","cat":"adv","def":"For a short time.","cn":"一會兒","q":"She stayed only ______—for a short time—before returning home.","options":["awhile","silently","everywhere","never"]},{"word":"cyberspace","cat":"n","def":"The Internet's virtual space.","cn":"網路空間","q":"The online game's players meet in ______, the virtual world of the Internet.","options":["cyberspace","gymnasium","index","lecture"]},{"word":"edit","cat":"v","def":"To correct writing for publication.","cn":"編輯；修改","q":"Before publication, please ______ the draft to correct its spelling and grammar.","options":["edit","highlight","operate","evaluate"]},{"word":"essay","cat":"n","def":"A short text on one subject.","cn":"文章；短論文","q":"For homework, write a short ______ explaining your opinion on school uniforms.","options":["essay","lecture","moral","resolution"]},{"word":"evaluate","cat":"v","def":"To assess before deciding.","cn":"評估","q":"We need to ______ the plan, carefully judging whether it will work.","options":["evaluate","edit","faint","highlight"]},{"word":"faint","cat":"v","def":"To lose consciousness.","cn":"昏倒","q":"Without enough food, he felt he might ______ and lose consciousness.","options":["faint","evaluate","highlight","operate"]},{"word":"global","cat":"adj","def":"Involving the whole world.","cn":"全球的","q":"Air pollution affects countries everywhere, making it a ______ problem.","options":["global","private","recent","typewritten"]},{"word":"gymnasium","cat":"n","def":"A building for exercise.","cn":"體育館；健身房","q":"The school's ______ has exercise machines and an indoor basketball court.","options":["gymnasium","cyberspace","essay","index"]},{"word":"highlight","cat":"v","def":"To mark with noticeable color.","cn":"標示；強調","q":"Use a colored marker to ______ the important words so they stand out.","options":["highlight","edit","evaluate","faint"]},{"word":"ignorant","cat":"adj","def":"Lacking knowledge.","cn":"無知的；不了解的","q":"She was ______ about the subject and knew nothing about it.","options":["ignorant","weird","global","private"]},{"word":"index","cat":"n","def":"An alphabetical guide to book contents.","cn":"索引","q":"Look in the book's ______ for an alphabetical list of topics and page numbers.","options":["index","lecture","moral","resolution"]},{"word":"lecture","cat":"n","def":"An educational talk.","cn":"講座；演講","q":"The scientist gave a long educational ______ to the students.","options":["lecture","moral","resolution","semester"]},{"word":"moral","cat":"n","def":"A story's lesson.","cn":"寓意；道德教訓","q":"The ______ of the fable is the lesson that kindness matters.","options":["moral","resolution","semester","cyberspace"]},{"word":"operate","cat":"v","def":"To function or work.","cn":"操作；運作","q":"This engine cannot ______ until someone repairs it; it will not function.","options":["operate","evaluate","faint","highlight"]},{"word":"private","cat":"adj","def":"For one person or group only.","cn":"私人的；私密的","q":"This diary is ______, intended for its owner alone.","options":["private","weird","global","ignorant"]},{"word":"recent","cat":"adj","def":"Having happened shortly before now.","cn":"最近的","q":"The discovery is ______; the researchers announced it only yesterday.","options":["recent","global","ignorant","private"]},{"word":"resolution","cat":"n","def":"A firm personal decision.","cn":"決心；決議","q":"My New Year's ______ is a firm personal decision to read daily.","options":["resolution","gymnasium","index","lecture"]},{"word":"semester","cat":"n","def":"One division of a school year.","cn":"學期","q":"This ______ is one part of our school year and ends in January.","options":["semester","index","lecture","moral"]},{"word":"typewritten","cat":"adj","def":"Written using a keyboard.","cn":"打字的","q":"The report must be ______, produced on a computer rather than written by hand.","options":["typewritten","recent","weird","global"]},{"word":"weird","cat":"adj","def":"Strange or unusual.","cn":"奇怪的","q":"A purple carrot that glowed in the dark would be very ______ and unusual.","options":["weird","typewritten","global","ignorant"]}];
+const EXTRA=[{"word":"silently","cat":"adv","def":"Without making a sound.","cn":"安靜地"},{"word":"everywhere","cat":"adv","def":"In all places.","cn":"到處"},{"word":"never","cat":"adv","def":"At no time.","cn":"從不"}];
+const ALL=TARGETS.concat(EXTRA), WORDS=new Map(ALL.map(x=>[x.word,x]));
+const POS={n:"noun",v:"verb",adj:"adjective",adv:"adverb"};
+const ENDPOINT="https://script.google.com/macros/s/AKfycbyCD78fQsk8mKNTl0fNuRJE6AT0WpS0rAQctBeaDPGoZyd_w3T6MGNJuxnPoBCz9jIb-Q/exec";
+const OPEN_DICTIONARY="https://raw.githubusercontent.com/mhollingshead/open-dictionary/main/api";
+const IRREGULAR={am:"be",is:"be",are:"be",was:"be",were:"be",been:"be",being:"be",has:"have",had:"have",does:"do",did:"do",done:"do",said:"say",went:"go",gone:"go",came:"come",coming:"come",saw:"see",seen:"see",made:"make",making:"make",took:"take",taken:"take",taking:"take",gave:"give",given:"give",giving:"give",got:"get",getting:"get",brought:"bring",bought:"buy",thought:"think",felt:"feel",found:"find",knew:"know",known:"know",grew:"grow",grown:"grow",wrote:"write",written:"write",writing:"write",ran:"run",running:"run",ate:"eat",eaten:"eat",children:"child",men:"man",women:"woman",feet:"foot",teeth:"tooth",mice:"mouse",better:"good",best:"good",worse:"bad",worst:"bad",clung:"cling",could:"can",would:"will",should:"shall","can't":"can",cannot:"can","won't":"will","don't":"do","doesn't":"do","didn't":"do","isn't":"be","wasn't":"be","weren't":"be","it's":"it","that's":"that","let's":"let"};
+let questions=[],at=0,score=0,answered=false,startedAt=0,finishedAt=0,student=null,completed=false,submitted=false,lookupVersion=0;
+const responses=[],lookedUpWords=new Set(),dictionaryFiles=new Map(),lookupCache=new Map();
+const $=id=>document.getElementById(id);
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function forms(raw){
+ const word=raw.toLowerCase().replace(/’/g,"'").replace(/[^a-z'-]/g,""),plain=word.replace(/'s$/,"").replace(/s'$/,"s");
+ const out=[word];if(plain!==word)out.push(plain);if(IRREGULAR[plain])out.push(IRREGULAR[plain]);
+ if(/ies$/.test(plain)&&plain.length>4)out.push(plain.slice(0,-3)+"y");
+ if(/ied$/.test(plain)&&plain.length>4)out.push(plain.slice(0,-3)+"y");
+ if(/ing$/.test(plain)&&plain.length>5){const stem=plain.slice(0,-3);out.push(stem,stem+"e");if(/([a-z])\1$/.test(stem))out.push(stem.slice(0,-1));}
+ if(/ed$/.test(plain)&&plain.length>3){const stem=plain.slice(0,-2);out.push(stem,plain.slice(0,-1));if(/([a-z])\1$/.test(stem))out.push(stem.slice(0,-1));}
+ if(/es$/.test(plain)&&plain.length>3)out.push(plain.slice(0,-2),plain.slice(0,-1));
+ else if(/s$/.test(plain)&&plain.length>2)out.push(plain.slice(0,-1));
+ if(plain==="resource")out.push("resources");
+ return [...new Set(out.filter(Boolean))];
+}
+function localDefinition(raw){for(const term of forms(raw)){const entry=WORDS.get(term);if(entry)return{term,pos:POS[entry.cat],definition:entry.def,cn:entry.cn,source:"Unit vocabulary"};}return null;}
+function validate(){
+ if(TARGETS.length!==20||new Set(TARGETS.map(t=>t.word)).size!==20)throw Error("This unit must test exactly 20 unique words.");
+ if(new Set(ALL.map(t=>t.word)).size!==ALL.length)throw Error("Duplicate vocabulary.");
+ const counts=new Map();
+ for(const t of TARGETS){
+  if(!t.q||((t.q.match(/_{3,}/g)||[]).length!==1)||!t.def||!POS[t.cat])throw Error("Invalid target: "+t.word);
+  if(t.options.length!==4||new Set(t.options).size!==4||t.options.filter(w=>w===t.word).length!==1)throw Error("Invalid choices: "+t.word);
+  if(t.options.some(w=>!WORDS.has(w)||WORDS.get(w).cat!==t.cat))throw Error("Choice part of speech mismatch: "+t.word);
+  counts.set(t.word,(counts.get(t.word)||0)+1);
+ }
+ if([...counts.values()].some(n=>n!==1)||EXTRA.some(x=>counts.has(x.word)))throw Error("Answer coverage mismatch.");
+ return true;
+}
+function makeQuestions(){return shuffle(TARGETS).map(t=>({...t,answer:t.word,options:shuffle(t.options)}));}
+function wordHtml(text){return text.split(/(_{3,}|[A-Za-z]+(?:['’][A-Za-z]+)*)/g).map(token=>/^_{3,}$/.test(token)?'<span class="blank" aria-label="blank">________</span>':/^[A-Za-z]/.test(token)?'<button type="button" class="word" data-word="'+esc(token)+'" aria-label="Look up '+esc(token)+'">'+esc(token)+'</button>':esc(token)).join("");}
+function speak(text){
+ if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){$("speechStatus").textContent="Read aloud is unavailable in this browser.";return;}
+ window.speechSynthesis.cancel();
+ const u=new window.SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=.9;
+ const voice=window.speechSynthesis.getVoices().find(v=>v.lang==="en-US")||window.speechSynthesis.getVoices().find(v=>v.lang.startsWith("en"));
+ if(voice)u.voice=voice;window.speechSynthesis.speak(u);
+}
+function readQuestion(){if(!student||completed)return;const q=questions[at];speak(q.q.replace(/_{3,}/g,answered?q.answer:"blank"));}
+function startQuiz(event){
+ if(event)event.preventDefault();
+ if(student)return false;
+ const name=$("studentName").value.trim(),id=$("studentId").value.trim();
+ if(!name||!id){$("formMessage").textContent="Please enter your name and student ID.";return false;}
+ student={name,id};questions=makeQuestions();responses.length=0;startedAt=Date.now();
+ $("setup").hidden=true;$("quiz").hidden=false;$("progressArea").hidden=false;render();return true;
+}
+function render(){
+ lookupVersion++;answered=false;const q=questions[at];
+ $("questionNumber").textContent="Question "+(at+1)+" of 20";
+ $("progress").value=at;$("progressText").textContent=at+" / 20 completed";
+ $("sentence").innerHTML=wordHtml(q.q);$("options").innerHTML="";
+ q.options.forEach((word,i)=>{const button=document.createElement("button");button.type="button";button.className="option";button.dataset.word=word;button.textContent=String.fromCharCode(65+i)+". "+word;button.addEventListener("click",()=>choose(word));$("options").appendChild(button);});
+ $("feedback").hidden=true;$("lookup").hidden=true;$("next").hidden=true;$("questionNumber").focus();
+}
+function choose(choice){
+ if(answered||completed||!student)return false;
+ const q=questions[at];if(!q.options.includes(choice))return false;answered=true;responses[at]=choice;const ok=choice===q.answer;if(ok)score++;
+ $("score").textContent="Score: "+score;
+ [...$("options").children].forEach(b=>{b.disabled=true;if(b.dataset.word===q.answer)b.classList.add("correct");else if(b.dataset.word===choice)b.classList.add("wrong");});
+ $("feedback").className="feedback "+(ok?"good":"bad");
+ $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><p>'+esc(POS[q.cat])+' · '+esc(q.def)+'</p><p class="cn">'+esc(q.cn)+'</p><div class="completedSentence">'+wordHtml(q.q.replace(/_{3,}/g,q.answer))+'</div>';
+ $("feedback").hidden=false;$("next").textContent=at===19?"See results":"Next question →";$("next").hidden=false;
+ $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus();return true;
+}
+function nextQuestion(){if(!answered||completed)return false;if(at===19)finish();else{at++;render();}return true;}
+function finish(){
+ completed=true;finishedAt=Date.now();lookupVersion++;
+ $("quiz").hidden=true;$("result").hidden=false;$("progress").value=20;
+ const pct=Math.round(score/20*100);$("finalScore").textContent=score+" / 20";$("finalPercent").textContent=pct+"%";
+ $("studentSummary").textContent=student.name+" · "+student.id+" · Book 5 Unit "+CONFIG.unit;
+ $("resultMessage").textContent=pct>=90?"Excellent work!":pct>=70?"Good work. Review the words you missed.":"Review the feedback and try again.";
+ renderReview();$("finalScore").focus();
+}
+function renderReview(){
+ const wrong=questions.filter((q,i)=>responses[i]!==q.answer);
+ $("review").innerHTML='<h3>Words to review</h3>'+(wrong.length?wrong.map(q=>'<p>'+wordHtml(q.answer)+' <span class="muted">'+esc(POS[q.cat])+'</span> — '+esc(q.def)+' <span class="cn">'+esc(q.cn)+'</span></p>').join(""):'<p>All 20 answers were correct.</p>');
+ $("lookedUp").textContent=[...lookedUpWords].join(", ")||"none";
+}
+function plainHTML(html){
+ const doc=new DOMParser().parseFromString(String(html),"text/html");
+ doc.querySelectorAll("script,style,iframe").forEach(e=>e.remove());return(doc.body.textContent||"").trim();
+}
+async function fetchJSON(url,ms=4500){
+ if(ms<1)throw Error("Dictionary timeout.");
+ const controller=new AbortController();let timer;
+ const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error("Dictionary timeout."));},ms);});
+ try{return await Promise.race([(async()=>{const r=await fetch(url,{signal:controller.signal});if(!r.ok)throw Error("Dictionary unavailable.");return await r.json();})(),timeout]);}finally{clearTimeout(timer);}
+}
+async function openDefinition(term,ms){
+ if(!/^[a-z][a-z'-]*$/.test(term))return null;
+ const first=term[0],file=term.length===1?first:term.slice(0,2),url=OPEN_DICTIONARY+"/"+first+"/"+file+".json";
+ let data=dictionaryFiles.get(url);if(!data){data=await fetchJSON(url,ms);dictionaryFiles.set(url,data);}
+ const part=data[term]?.etymologies?.flatMap(e=>e.partsOfSpeech||[]).find(p=>p.senses?.some(s=>s.sense));
+ const sense=part?.senses?.find(s=>s.sense);
+ return sense?{term,pos:part.partOfSpeech||"",definition:plainHTML(sense.sense),source:"Open Dictionary"}:null;
+}
+async function datamuseDefinition(term,ms){
+ const data=await fetchJSON("https://api.datamuse.com/words?sp="+encodeURIComponent(term)+"&md=dp&max=5",ms);
+ const entry=data.find(x=>x.word?.toLowerCase()===term&&x.defs?.length);
+ if(!entry)return null;const raw=entry.defs[0],parts=raw.split("\t");
+ return{term,pos:parts.length>1?parts[0]:"",definition:parts.length>1?parts.slice(1).join(" "):raw,source:"Datamuse"};
+}
+async function freeDefinition(term,ms){
+ const data=await fetchJSON("https://api.dictionaryapi.dev/api/v2/entries/en/"+encodeURIComponent(term),ms);
+ const m=data[0]?.meanings?.find(m=>m.definitions?.some(d=>d.definition));
+ return m?{term,pos:m.partOfSpeech||"",definition:m.definitions.find(d=>d.definition).definition,source:"Free Dictionary"}:null;
+}
+async function wikiDefinition(term,ms){
+ const data=await fetchJSON("https://en.wiktionary.org/api/rest_v1/page/definition/"+encodeURIComponent(term),ms);
+ const entry=data.en?.find(e=>e.definitions?.some(d=>d.definition));
+ return entry?{term,pos:entry.partOfSpeech||"",definition:plainHTML(entry.definitions.find(d=>d.definition).definition),source:"Wiktionary"}:null;
+}
+async function onlineDefinition(word){
+ const candidates=forms(word).slice(0,5);
+ for(const provider of [openDefinition,datamuseDefinition,freeDefinition,wikiDefinition]){
+  const deadline=Date.now()+4500;
+  for(const term of candidates){const remaining=deadline-Date.now();if(remaining<=0)break;try{const r=await provider(term,remaining);if(r?.definition)return r;}catch{}}
+ }
+ return null;
+}
+async function lookupWord(raw){
+ const word=raw.toLowerCase().replace(/’/g,"'");lookedUpWords.add(word);
+ if(completed)renderReview();const version=++lookupVersion,box=$("lookup");box.hidden=false;
+ box.innerHTML='<strong>'+esc(raw)+'</strong><p>Looking up an English definition…</p>';
+ let result=localDefinition(word)||lookupCache.get(word);
+ if(!result){result=await onlineDefinition(word);if(result)lookupCache.set(word,result);}
+ if(version!==lookupVersion)return result;
+ if(result){box.innerHTML='<strong>'+esc(raw)+'</strong> <span class="muted">'+esc(result.pos)+'</span>'+(result.term!==word?'<small> (base form: '+esc(result.term)+')</small>':"")+'<p>'+esc(result.definition)+'</p>'+(result.cn?'<p class="cn">'+esc(result.cn)+'</p>':"")+'<button type="button" class="small" id="readWord">🔊 Pronounce</button><small class="muted"> '+esc(result.source)+'</small>';
+ $("readWord").addEventListener("click",()=>speak(result.term));
+ }else box.innerHTML='<strong>'+esc(raw)+'</strong><p>The dictionaries are temporarily unavailable. Tap the word again when your connection is restored.</p>';
+ return result;
+}
+function buildPayload(){
+ if(!completed||responses.length!==20)throw Error("Finish all 20 questions first.");
+ const pct=Math.round(score/20*100),seconds=Math.max(0,Math.round((finishedAt-startedAt)/1000));
+ const answers=questions.map((q,i)=>({question:q.q,selected:responses[i],answer:q.answer,ok:responses[i]===q.answer}));
+ const wrongAnswers=answers.filter(a=>!a.ok);
+ return{testDateTime:new Date(finishedAt).toLocaleString("zh-TW",{timeZone:"Asia/Taipei"}),studentName:student.name,studentId:student.id,unit:String(CONFIG.unit),unitName:"Level 5 Unit "+CONFIG.unit+" - "+CONFIG.title,score,total:20,percentage:pct/100,grade:pct>=90?"A+":pct>=80?"A":pct>=70?"B":pct>=60?"C":"D",timeTaken:Math.floor(seconds/60)+"m "+seconds%60+"s",answers,wrongAnswers,wrongWords:[...new Set(wrongAnswers.map(a=>a.answer))].join(", ")||"none",lookUpWords:[...lookedUpWords].join(", ")||"none"};
+}
+async function submitScore(){
+ if(!completed||submitted||$("submit").disabled)return;
+ $("submit").disabled=true;$("submissionMessage").textContent="Sending result…";
+ try{const payload=buildPayload();await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});submitted=true;$("submit").textContent="Result sent";$("submissionMessage").textContent="Result sent. Ask your teacher to confirm receipt.";
+ }catch{$("submit").disabled=false;$("submissionMessage").textContent="Unable to send. Your result is still here; check your connection and try again.";}
+}
+function downloadResult(){
+ if(!completed)return;const blob=new Blob([JSON.stringify(buildPayload(),null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Book5_Unit"+CONFIG.unit+"_Result.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+validate();
+$("studentForm").addEventListener("submit",startQuiz);
+$("next").addEventListener("click",nextQuestion);
+$("readQuestion").addEventListener("click",readQuestion);
+$("submit").addEventListener("click",submitScore);
+$("download").addEventListener("click",downloadResult);
+$("retry").addEventListener("click",()=>window.location.reload());
+document.addEventListener("click",event=>{const b=event.target.closest?.("button[data-word]");if(b&&b.classList.contains("word"))lookupWord(b.dataset.word);});
+$("extraVocabulary").innerHTML=EXTRA.length?'<details><summary>Extra choice vocabulary · not tested</summary>'+EXTRA.map(x=>'<p>'+wordHtml(x.word)+' ('+esc(POS[x.cat])+') — '+esc(x.def)+' <span class="cn">'+esc(x.cn)+'</span></p>').join("")+'</details>':"";
+
+</script>
+</body>
+</html>
