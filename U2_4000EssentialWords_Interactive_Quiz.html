@@ -14,6 +14,22 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 @media(max-width:560px){header{padding:17px 14px}header>div{align-items:flex-start}.score{font-size:.8rem;padding:6px 9px}.card{padding:20px 16px}.options{grid-template-columns:1fr}.sentence{font-size:1.08rem}.actions>*{flex:1 1 auto}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 </style>
+<style>
+.b5-review-heading{font:700 1.05rem/1.4 system-ui,sans-serif;margin:1rem 0 .65rem;color:#302018}
+.vocab-cards.b5-review-host,.feedback-grid.b5-review-host{display:block;padding:0 .7rem .45rem}
+#fb.b5-review-host{padding:0 .7rem .45rem}
+.b5-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.35rem 0 .7rem;color:#26303a}
+.b5-review-card{background:#fff;border:1px solid #d9d1c7;border-radius:10px;padding:.75rem;min-width:0;overflow-wrap:anywhere}
+.b5-review-card.b5-right{border-color:#41855e;background:#f0fbf3}.b5-review-card.b5-wrong{border-color:#b96b5e;background:#fff7f5}
+.b5-review-label{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem;font:700 .9rem/1.3 system-ui,sans-serif}
+.b5-review-tag{font-size:.73rem;border-radius:12px;background:#e9ede9;color:#254b34;padding:.2rem .45rem}
+.b5-wrong .b5-review-tag{background:#f9e4df;color:#722e24}
+.b5-pronounce,.b5-read-example{cursor:pointer;min-height:44px;border:1px solid #d3c0ad;border-radius:7px;color:#45291f;background:#fff8ed;font:700 .92rem/1.3 system-ui,sans-serif;padding:.35rem .55rem;text-align:left}
+.b5-pronounce:hover,.b5-read-example:hover{background:#f8e8d2}.b5-pronounce:focus-visible,.b5-read-example:focus-visible{outline:3px solid #a76b19;outline-offset:2px}
+.b5-read-example{font-size:.79rem;margin-top:.2rem}.b5-review-card p{margin:.35rem 0;font:400 .9rem/1.55 system-ui,sans-serif}.b5-review-card p strong{color:#42342c}
+@media(max-width:560px){.b5-review-grid{grid-template-columns:1fr}}
+
+</style>
 </head>
 <body>
 <header><div><div><div class="eyebrow">4000 Essential English Words · Book 5</div><h1>Unit 2</h1><p class="unitTitle">Monkey Island</p></div><div class="score" id="score" aria-live="polite">Score: 0</div></div></header>
@@ -47,11 +63,70 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 <div class="actions"><button type="button" class="primary" id="submit">Send result to teacher</button><button type="button" class="secondary" id="download">Save result</button><button type="button" class="secondary" id="retry">Try again</button></div>
 <p id="submissionMessage" class="status" role="status"></p>
 </section>
-<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">Unit 1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html" aria-current="page">Unit 2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html">Unit 3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">Unit 4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html">Unit 5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">Unit 6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html">Unit 7</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-2-monkey-island" target="_blank" rel="noopener">Book 5 · Unit 2</a>. Practice sentences are written for this quiz.</p></footer>
+<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Book 5 unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">U1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html" aria-current="page">U2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html">U3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">U4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html">U5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">U6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html">U7</a><a href="U8_4000EssentialWords_Interactive_Quiz.html">U8</a><a href="U9_4000EssentialWords_Interactive_Quiz.html">U9</a><a href="U10_4000EssentialWords_Interactive_Quiz.html">U10</a><a href="U11_4000EssentialWords_Interactive_Quiz.html">U11</a><a href="U12_4000EssentialWords_Interactive_Quiz.html">U12</a><a href="U13_4000EssentialWords_Interactive_Quiz.html">U13</a><a href="U14_4000EssentialWords_Interactive_Quiz.html">U14</a><a href="U15_4000EssentialWords_Interactive_Quiz.html">U15</a><a href="U16_4000EssentialWords_Interactive_Quiz.html">U16</a><a href="U17_4000EssentialWords_Interactive_Quiz.html">U17</a><a href="U18_4000EssentialWords_Interactive_Quiz.html">U18</a><a href="U19_4000EssentialWords_Interactive_Quiz.html">U19</a><a href="U20_4000EssentialWords_Interactive_Quiz.html">U20</a><a href="U21_4000EssentialWords_Interactive_Quiz.html">U21</a><a href="U22_4000EssentialWords_Interactive_Quiz.html">U22</a><a href="U23_4000EssentialWords_Interactive_Quiz.html">U23</a><a href="U24_4000EssentialWords_Interactive_Quiz.html">U24</a><a href="U25_4000EssentialWords_Interactive_Quiz.html">U25</a><a href="U26_4000EssentialWords_Interactive_Quiz.html">U26</a><a href="U27_4000EssentialWords_Interactive_Quiz.html">U27</a><a href="U28_4000EssentialWords_Interactive_Quiz.html">U28</a><a href="U29_4000EssentialWords_Interactive_Quiz.html">U29</a><a href="U30_4000EssentialWords_Interactive_Quiz.html">U30</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-2-monkey-island" target="_blank" rel="noopener">Book 5 · Unit 2</a>. Practice sentences are written for this quiz.</p></footer>
 </main>
 <script>
 
 "use strict";
+const BOOK5_REVIEW = {"admiral":["A senior officer commanding naval ships.","海軍上將","The naval admiral commanded several military ships during the exercise."],"arc":["A curved line or shape.","弧形","The curved line above the doorway formed an arc rather than a straight edge."],"character":["The qualities making up someone's personality.","性格；品格","Her cheerful, friendly character made everyone enjoy spending time with her."],"conscience":["A sense of whether actions are right or wrong.","良心","His conscience told him that keeping the lost money would be wrong."],"escape":["To get away from confinement or danger.","逃脫","The prisoners hoped to escape by getting away through an open window."],"fiery":["Blazing with intense fire.","燃燒的；火熱的","Firefighters stayed far back from the fiery blaze, which was burning fiercely."],"flesh":["The body's soft muscle and fat.","肉；肌肉組織","The deep scratch injured the animal's flesh beneath its skin."],"grapefruit":["A large, tart citrus fruit.","葡萄柚","She cut a large grapefruit in half; this citrus fruit was bigger and less sweet than an orange."],"hay":["Dried grass kept as animal feed.","乾草","The farmer fed the horse dry hay from the barn."],"horrified":["Deeply shocked and distressed.","驚恐的；震驚的","We were horrified when we heard the terrible news, feeling shocked and upset."],"kerosene":["Oil burned as fuel in lamps or stoves.","煤油","The old lamp burned kerosene, an oil also used in some stoves."],"loop":["A line bent into a circular shape.","環；圈","He bent the rope into a circular loop and slipped it over the post."],"middle":["The central part or position.","中間；中央","Stand in the middle of the line, with the same number of people on either side."],"paddle":["A handheld blade used to propel a boat.","槳","She dipped the wooden paddle into the water and pulled to move the canoe forward."],"sour":["Having a sharp, acidic taste.","酸的","The lemon tasted sour, with a sharp taste that made him wrinkle his face."],"stake":["A pointed post driven into the earth.","樁；木樁","Hammer this pointed wooden stake into the soil to support the young tree."],"steward":["An attendant serving passengers on ships or aircraft.","服務員；乘務員","The ship's steward served lunch to the passengers."],"string":["Thin cord used for tying things.","細繩；線","Tie the gift with a thin piece of string from this spool."],"thorn":["A sharp spike growing on a plant.","刺；荊棘","A sharp thorn on the rose stem pricked her finger."],"wreck":["To badly damage or destroy something.","破壞；毀壞","Driving straight into the wall could wreck the car and ruin it completely."],"capture":["To catch and keep someone or something.","捕捉","The workers tried to capture the stray dog without hurting it."],"repair":["To fix something that is damaged.","修理","My father helped me repair my bicycle."],"gentle":["Kind and careful, without roughness.","溫和的","She used a gentle voice to calm the child."]};
+function book5Review(host, options, answer, selected) {
+  host.classList.add("b5-review-host");
+  const fragment = document.createDocumentFragment();
+  const heading = document.createElement("h3");
+  heading.className = "b5-review-heading";
+  heading.textContent = "Review all four options · 四個選項解析";
+  fragment.appendChild(heading);
+  const grid = document.createElement("div");
+  grid.className = "b5-review-grid";
+  options.forEach((word, i) => {
+    const entry = BOOK5_REVIEW[word];
+    const card = document.createElement("article");
+    card.className = "b5-review-card" + (word === answer ? " b5-right" : word === selected ? " b5-wrong" : "");
+    const label = document.createElement("div");
+    label.className = "b5-review-label";
+    label.textContent = String.fromCharCode(65 + i) + ". ";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "b5-pronounce";
+    const display = word === "etc" ? "etc." : word;
+    button.textContent = display + " 🔊";
+    button.setAttribute("aria-label", "Pronounce " + display);
+    button.addEventListener("click", () => speak(word === "etc" ? "et cetera" : word));
+    label.appendChild(button);
+    if (word === answer || word === selected) {
+      const state = document.createElement("span");
+      state.className = "b5-review-tag";
+      state.textContent = word === answer ? "✓ Correct answer" : "Your choice";
+      label.appendChild(state);
+    }
+    card.appendChild(label);
+    for (const [name, value, language] of [["English", entry[0], "en"], ["中文", entry[1], "zh-Hant"], ["Example", entry[2], "en"]]) {
+      const p = document.createElement("p");
+      const title = document.createElement("strong");
+      title.textContent = name + ": ";
+      const body = document.createElement("span");
+      body.lang = language;
+      body.textContent = value;
+      p.append(title, body);
+      card.appendChild(p);
+    }
+    const example = document.createElement("button");
+    example.type = "button";
+    example.className = "b5-read-example";
+    example.textContent = "🔊 Read example";
+    example.addEventListener("click", () => speak(entry[2].replace(/\betc\./gi, "et cetera.")));
+    card.appendChild(example);
+    grid.appendChild(card);
+  });
+  fragment.appendChild(grid);
+  host.appendChild(fragment);
+}
+function book5Filled(question, word) {
+  const spoken = word === "etc" ? "etc" : word;
+  return question.replace(/_{3,}/, (_, offset) => offset === 0 ? spoken.charAt(0).toUpperCase() + spoken.slice(1) : spoken);
+}
+
+
 const CONFIG={"unit":2,"title":"Monkey Island"};
 const TARGETS=[{"word":"admiral","cat":"n","def":"A senior officer commanding naval ships.","cn":"海軍上將","q":"The naval ______ commanded several military ships during the exercise.","options":["admiral","arc","character","conscience"]},{"word":"arc","cat":"n","def":"A curved line or shape.","cn":"弧形","q":"The curved line above the doorway formed an ______ rather than a straight edge.","options":["arc","character","conscience","flesh"]},{"word":"character","cat":"n","def":"The qualities making up someone's personality.","cn":"性格；品格","q":"Her cheerful, friendly ______ made everyone enjoy spending time with her.","options":["character","conscience","flesh","grapefruit"]},{"word":"conscience","cat":"n","def":"A sense of whether actions are right or wrong.","cn":"良心","q":"His ______ told him that keeping the lost money would be wrong.","options":["conscience","flesh","grapefruit","hay"]},{"word":"escape","cat":"v","def":"To get away from confinement or danger.","cn":"逃脫","q":"The prisoners hoped to ______ by getting away through an open window.","options":["escape","capture","repair","wreck"]},{"word":"fiery","cat":"adj","def":"Blazing with intense fire.","cn":"燃燒的；火熱的","q":"Firefighters stayed far back from the ______ blaze, which was burning fiercely.","options":["fiery","gentle","horrified","sour"]},{"word":"flesh","cat":"n","def":"The body's soft muscle and fat.","cn":"肉；肌肉組織","q":"The deep scratch injured the animal's ______ beneath its skin.","options":["flesh","kerosene","loop","middle"]},{"word":"grapefruit","cat":"n","def":"A large, tart citrus fruit.","cn":"葡萄柚","q":"She cut a large ______ in half; this citrus fruit was bigger and less sweet than an orange.","options":["grapefruit","loop","middle","paddle"]},{"word":"hay","cat":"n","def":"Dried grass kept as animal feed.","cn":"乾草","q":"The farmer fed the horse dry ______ from the barn.","options":["hay","middle","paddle","stake"]},{"word":"horrified","cat":"adj","def":"Deeply shocked and distressed.","cn":"驚恐的；震驚的","q":"We were ______ when we heard the terrible news, feeling shocked and upset.","options":["horrified","fiery","sour","gentle"]},{"word":"kerosene","cat":"n","def":"Oil burned as fuel in lamps or stoves.","cn":"煤油","q":"The old lamp burned ______, an oil also used in some stoves.","options":["kerosene","stake","steward","string"]},{"word":"loop","cat":"n","def":"A line bent into a circular shape.","cn":"環；圈","q":"He bent the rope into a circular ______ and slipped it over the post.","options":["loop","steward","string","thorn"]},{"word":"middle","cat":"n","def":"The central part or position.","cn":"中間；中央","q":"Stand in the ______ of the line, with the same number of people on either side.","options":["middle","string","thorn","admiral"]},{"word":"paddle","cat":"n","def":"A handheld blade used to propel a boat.","cn":"槳","q":"She dipped the wooden ______ into the water and pulled to move the canoe forward.","options":["paddle","thorn","admiral","arc"]},{"word":"sour","cat":"adj","def":"Having a sharp, acidic taste.","cn":"酸的","q":"The lemon tasted ______, with a sharp taste that made him wrinkle his face.","options":["sour","gentle","fiery","horrified"]},{"word":"stake","cat":"n","def":"A pointed post driven into the earth.","cn":"樁；木樁","q":"Hammer this pointed wooden ______ into the soil to support the young tree.","options":["stake","arc","character","conscience"]},{"word":"steward","cat":"n","def":"An attendant serving passengers on ships or aircraft.","cn":"服務員；乘務員","q":"The ship's ______ served lunch to the passengers.","options":["steward","character","conscience","flesh"]},{"word":"string","cat":"n","def":"Thin cord used for tying things.","cn":"細繩；線","q":"Tie the gift with a thin piece of ______ from this spool.","options":["string","conscience","flesh","grapefruit"]},{"word":"thorn","cat":"n","def":"A sharp spike growing on a plant.","cn":"刺；荊棘","q":"A sharp ______ on the rose stem pricked her finger.","options":["thorn","flesh","grapefruit","hay"]},{"word":"wreck","cat":"v","def":"To badly damage or destroy something.","cn":"破壞；毀壞","q":"Driving straight into the wall could ______ the car and ruin it completely.","options":["wreck","capture","repair","escape"]}];
 const EXTRA=[{"word":"capture","cat":"v","def":"To catch and keep someone or something.","cn":"捕捉"},{"word":"repair","cat":"v","def":"To fix something that is damaged.","cn":"修理"},{"word":"gentle","cat":"adj","def":"Kind and careful, without roughness.","cn":"溫和的"}];
@@ -100,7 +175,7 @@ function speak(text){
  const voice=window.speechSynthesis.getVoices().find(v=>v.lang==="en-US")||window.speechSynthesis.getVoices().find(v=>v.lang.startsWith("en"));
  if(voice)u.voice=voice;window.speechSynthesis.speak(u);
 }
-function readQuestion(){if(!student||completed)return;const q=questions[at];speak(q.q.replace(/_{3,}/g,answered?q.answer:"blank"));}
+function readQuestion(){if(!student||completed)return;const q=questions[at];speak(answered?book5Filled(q.q,q.answer):q.q.replace(/_{3,}/g,"blank"));}
 function startQuiz(event){
  if(event)event.preventDefault();
  if(student)return false;
@@ -123,9 +198,10 @@ function choose(choice){
  $("score").textContent="Score: "+score;
  [...$("options").children].forEach(b=>{b.disabled=true;if(b.dataset.word===q.answer)b.classList.add("correct");else if(b.dataset.word===choice)b.classList.add("wrong");});
  $("feedback").className="feedback "+(ok?"good":"bad");
- $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><p>'+esc(POS[q.cat])+' · '+esc(q.def)+'</p><p class="cn">'+esc(q.cn)+'</p><div class="completedSentence">'+wordHtml(q.q.replace(/_{3,}/g,q.answer))+'</div>';
+ $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><div class="completedSentence">'+wordHtml(book5Filled(q.q,q.answer))+'</div>';
+ book5Review($("feedback"),q.options,q.answer,choice);
  $("feedback").hidden=false;$("next").textContent=at===19?"See results":"Next question →";$("next").hidden=false;
- $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus();return true;
+ $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus({preventScroll:true});return true;
 }
 function nextQuestion(){if(!answered||completed)return false;if(at===19)finish();else{at++;render();}return true;}
 function finish(){

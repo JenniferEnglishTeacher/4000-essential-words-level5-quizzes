@@ -276,6 +276,22 @@
 
   @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
 </style>
+<style>
+.b5-review-heading{font:700 1.05rem/1.4 system-ui,sans-serif;margin:1rem 0 .65rem;color:#302018}
+.vocab-cards.b5-review-host,.feedback-grid.b5-review-host{display:block;padding:0 .7rem .45rem}
+#fb.b5-review-host{padding:0 .7rem .45rem}
+.b5-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.35rem 0 .7rem;color:#26303a}
+.b5-review-card{background:#fff;border:1px solid #d9d1c7;border-radius:10px;padding:.75rem;min-width:0;overflow-wrap:anywhere}
+.b5-review-card.b5-right{border-color:#41855e;background:#f0fbf3}.b5-review-card.b5-wrong{border-color:#b96b5e;background:#fff7f5}
+.b5-review-label{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem;font:700 .9rem/1.3 system-ui,sans-serif}
+.b5-review-tag{font-size:.73rem;border-radius:12px;background:#e9ede9;color:#254b34;padding:.2rem .45rem}
+.b5-wrong .b5-review-tag{background:#f9e4df;color:#722e24}
+.b5-pronounce,.b5-read-example{cursor:pointer;min-height:44px;border:1px solid #d3c0ad;border-radius:7px;color:#45291f;background:#fff8ed;font:700 .92rem/1.3 system-ui,sans-serif;padding:.35rem .55rem;text-align:left}
+.b5-pronounce:hover,.b5-read-example:hover{background:#f8e8d2}.b5-pronounce:focus-visible,.b5-read-example:focus-visible{outline:3px solid #a76b19;outline-offset:2px}
+.b5-read-example{font-size:.79rem;margin-top:.2rem}.b5-review-card p{margin:.35rem 0;font:400 .9rem/1.55 system-ui,sans-serif}.b5-review-card p strong{color:#42342c}
+@media(max-width:560px){.b5-review-grid{grid-template-columns:1fr}}
+
+</style>
 </head>
 <body>
 
@@ -375,6 +391,113 @@
 </main>
 
 <script>
+const BOOK5_REVIEW = {"analytical":["Relating to logical reasoning","分析的","Solving puzzles requires strong analytical skills."],"accurate":["Completely correct","準確的","The scientist made sure the data was accurate."],"genetic":["Related to genes","基因的","Some conditions are purely genetic."],"identical":["Exactly the same","完全相同的","The two luxury cars are completely identical in design."],"multiply":["To increase in number","繁殖 / 增加","Bacteria will quickly multiply if you don't clean."],"regulate":["To control how something happens","規範 / 調節","The government will regulate the prices of medical drugs."],"analyze":["To study something carefully","分析","The team will analyze the consumer feedback."],"evolve":["To change and develop over time","演化","Languages tend to evolve over centuries."],"asteroid":["A giant rock from space","小行星","Scientists are tracking a massive asteroid this month."],"mammal":["An animal with hair that is not born from an egg","哺乳動物","The whale is a unique marine mammal."],"pesticide":["A substance used to kill insects","殺蟲劑 / 農藥","The farmer sprayed a chemical pesticide on the crops."],"crater":["A bowl-shaped cavity in the ground","撞擊坑","The volcano has a huge crater at the top."],"controversy":["A dispute about something affecting many","爭議","The new policy created a lot of public controversy."],"evolution":["The process of gradual development","演化（名詞）","Darwin wrote about the biological evolution of species."],"accuracy":["The state of being correct","準確性","The accuracy of the report was questioned by experts."],"offspring":["The children of a person or babies of an animal","後代","Animals protect their vulnerable offspring from predators."],"strike":["To hit or attack","打擊 / 襲擊","Lightning can strike the same pole multiple times."],"reinforce":["To make something stronger","加強 / 強化","The teacher used examples to reinforce the grammar point."],"intellect":["The ability to think and understand","智力","Einstein was admired for his extraordinary intellect."],"analysis":["Detailed examination","分析（名詞）","After a careful analysis of the sample, the doctor confirmed the patient was healthy."],"factor":["Something that has an effect on a result","因素","Diet is a major factor affecting health."],"vast":["Very large","廣闊的 / 巨大的","The Sahara is a vast desert covering millions of km²."],"controversial":["Causing a lot of disagreement","有爭議的","The author wrote a controversial book about politics."],"genome":["The collection of all genes in a living thing","基因組","Scientists mapped the complete corn genome."],"intellectual":["A very smart person / relating to the mind","知識分子 / 智力的","Professor Higgins is a leading intellectual."],"analyst":["A person who analyzes","分析師","Kevin works as a professional data analyst."],"regulator":["A person or device that controls","監管者","Financial regulators are investigating the bank."],"majority":["More than half","多數","The majority of students voted for the beach party."],"genetics":["The study of genes","遺傳學","Scientists in genetics study inherited traits."],"biological":["Related to living things or the study of life.","生物的","The researchers studied the biological effects of pollution on fish."],"vegan":["No animal products at all","全素者","As a strict vegan, Kevin refuses dairy products."],"vegetarian":["Someone who does not eat meat / consisting of no meat","素食者 / 素食的","Susan became a vegetarian to prevent animal cruelty."],"identically":["In the exact same way","完全相同地","The sisters were dressed identically for the wedding."],"accurately":["In a correct manner","準確地","It is difficult to accurately predict the weather."],"vastly":["To a very great extent","極大地","The internet has vastly improved communication."],"genetically":["In a way relating to genes","從遺傳學角度","These plants are genetically identical."],"marine mammal":["A mammal that lives in the ocean","海洋哺乳動物","The dolphin is a highly intelligent marine mammal."],"human genome":["All the genes in a human","人類基因組","Mapping the human genome was a historic milestone."],"asteroid belt":["A region of space with many asteroids","小行星帶","The asteroid belt lies between Mars and Jupiter."],"vegetarian diet":["A meal plan with no meat","素食飲食","A balanced vegetarian diet can lower blood pressure."],"multiply quickly":["To increase fast","快速增加","Insects multiply quickly in hot humid weather."],"analyze data":["To examine information carefully","分析數據","Computers analyze data from space telescopes."],"spray pesticide":["To apply bug killer","噴灑農藥","Farms use airplanes to spray pesticide over wheat fields."],"evolve into":["To develop into something else","演變成","The small business managed to evolve into a corporation."],"genetic mutation":["A change in genes","基因突變","Radiation can cause a harmful genetic mutation."],"genome sequence":["The order of DNA","基因組序列","By analyzing the genome sequence, researchers identify hereditary conditions."],"silent majority":["The large group that doesn't express opinions","沉默的多數","Politicians try to appeal to the silent majority."],"key factor":["A very important element","關鍵因素","Hard work is a key factor in business success."],"vastness":["Very great size or extent","廣闊 / 巨大","The night sky shows the incredible vastness of the universe."],"evolutionary":["Relating to gradual development","演化的","Biologists study the evolutionary history of birds."],"genomic":["Relating to genomes","基因組的","The new genomic research lab studies DNA sequencing."],"mammalian":["Relating to mammals","哺乳動物的","Scientists discovered a rare mammalian fossil."],"major":["Important or large","主要的","Traffic congestion is a major problem in the city."],"geological":["Related to rocks, Earth, or the processes that shape them.","地質的","The team examined geological evidence of an ancient volcano."],"multiplication":["The act of increasing or calculating","乘法","Children memorize the multiplication table at school."],"produce offspring":["To have babies","繁衍後代","Animals have an instinct to produce offspring."],"spark controversy":["To start a dispute","引發爭議","The factory decision will definitely spark controversy."],"regulate the temperature":["To control the heat or cold","調節溫度","Smart air conditioners regulate the temperature automatically."],"pest":["A destructive insect or animal","害蟲","Rats are considered a dangerous pest."],"regulation":["A rule or law","規定 / 條例","Safety regulation requires construction workers to wear helmets."],"reinforcement":["The action of making something stronger","加固 / 增援","Engineers recommended iron reinforcement for the old walls."],"stricken":["Badly affected by a disease or problem","遭受重創的","The cancer-stricken patient remained incredibly brave."],"land mammal":["A mammal that lives on land","陸生哺乳動物","The cheetah is a fast land mammal."],"asteroid impact":["A crash from a space rock","小行星撞擊","A massive asteroid impact caused dinosaur extinction."],"cause controversy":["To create disagreement","引起爭議","The celebrity's rude comments caused controversy."],"critically analyze":["To examine with deep judgment","批判性分析","Students are encouraged to critically analyze historical texts."],"protect their offspring":["To keep babies safe","保護幼崽","Bears are aggressive when they protect their offspring."],"evolve over time":["To change gradually","隨時間演變","Human cultures naturally evolve over time."],"accurate explanation":["An account that describes something correctly.","準確的解釋","The book gives an accurate explanation of why the moon changes shape."],"genome project":["A scientific study of genetic material","基因體計畫","The international genome project involved thousands of experts."],"identical twin":["One of two people born together who developed from the same fertilized egg.","同卵雙胞胎之一","Her identical twin wore a different jacket so we could tell them apart."],"contributing factor":["An element that helps cause something","促成因素","Alcohol was a contributing factor in the accident."],"chemical pesticides":["Chemicals used to kill insects, weeds, or other pests.","化學農藥","The farmer is trying to use fewer chemical pesticides."],"identical twins":["Siblings that look exactly the same","同卵雙胞胎","Kevin and his brother are identical twins."],"asteroid collisions":["Events in which asteroids hit other objects in space.","小行星碰撞","Scientists study asteroid collisions to understand how craters form."],"major factors":["Especially important influences or causes.","主要因素","Cost and travel time were major factors in our decision."],"intellectually":["In a mental or smart way","智力上地","The seminar was intellectually stimulating."],"accurate description":["A correct explanation","準確的描述","The witness gave an accurate description of the suspect."],"vast majority":["Almost all","絕大多數","The vast majority prefer mobile payments to cash."],"chemical pesticide":["Artificial bug killer","化學農藥","Heavy use of chemical pesticide pollutes rivers."],"multiple":["Having several parts","多個的","The accident caused multiple injuries to the driver."],"raise offspring":["To care for young","撫養後代","Birds raise their offspring in strong nests."],"regulators":["People or organizations that enforce rules or standards.","監管機構或人員","Food safety regulators inspected the factory."],"analysts":["People who study information carefully to understand it.","分析師","The analysts compared sales figures from the last two years."],"intellects":["People with strong reasoning abilities, or their powers of thought.","知識分子；智力","The conference brought together leading intellects from several fields."],"reinforced":["Made stronger","加強的","The bank vault is made of thick reinforced concrete."],"panic-stricken":["Severely affected by fear","驚慌失措的","Panic-stricken citizens ran into the streets during the earthquake."],"completely identical":["Exactly the same in every way being compared.","完全相同","The two keys looked completely identical."],"highly accurate":["Very correct","高度準確的","The new clock provides highly accurate time measurements."],"constantly evolving":["Always changing","不斷演進的","The internet is a constantly evolving platform."],"strictly regulated":["Controlled very tightly","嚴格管制的","Tobacco sales are strictly regulated by law."],"accurate measurement":["A correct size or amount finding","精確的測量","Architects must take an accurate measurement of the land."],"vegetarian restaurant":["A place that serves no meat","素食餐廳","We dined at a local vegetarian restaurant last night."],"near-Earth asteroid":["A space rock close to our planet","近地小行星","Telescopes scan the sky to detect near-Earth asteroids."],"rapidly evolve":["To change quickly","快速發展","AI technologies continue to rapidly evolve."],"generic makeup":["Makeup sold under a general label rather than a well-known brand.","無名牌化妝品","The shop sells generic makeup at a lower price."],"major factor":["A large or main cause","主要因素","High housing prices are a major factor preventing purchases."],"genetically-modified":["Changed using genetic engineering","基因改造的","Many consumers refuse to buy genetically-modified food."],"almost identical":["Very nearly the same","幾乎完全相同","The fake handbag looked almost identical to the real one."],"accurate measurements":["Measurements that are close to or match the true values.","精確的測量結果","Accurate measurements are important when cutting wood for a shelf."],"asteroid belts":["Regions of space where many asteroids orbit.","小行星帶","Astronomers study asteroid belts around distant stars."],"land mammals":["Mammals that live mainly on land.","陸生哺乳動物","Elephants and tigers are land mammals."],"majority of voters":["Most of the people voting","多數選民","The majority of voters supported the mayor's plans."],"large mammal":["A big warm-blooded animal","大型哺乳動物","The elephant is the largest large mammal on land."],"healthy offspring":["Young that are strong and well","健康的後代","Balanced nutrition ensures healthy offspring."],"key factors":["The most important influences or causes.","關鍵因素","Temperature and light are key factors in plant growth."],"silent majorities":["Larger groups whose members do not often express their opinions publicly.","沉默的大多數（複數）","The surveys asked whether silent majorities supported the change."],"genomic sequence":["The order of the DNA units in part or all of an organism's genetic material.","基因組序列","Scientists compared the genomic sequence with data from earlier samples."],"pesticide residue":["Chemicals left on food","農藥殘留","Wash fruits to remove harmful pesticide residue."],"regulatory":["Serving to control or govern","監管的","The company needs approval from the regulatory agency."],"reinforce a building":["To make a structure stronger","加固建築物","The city passed a law to reinforce every old building."],"poverty-stricken":["Extremely poor","貧困交加的","The charity provides meals for children in poverty-stricken villages."],"accurate information":["Correct details","準確的資訊","Journalists must provide accurate information during a crisis."],"asteroid collision":["A crash involving a space rock","小行星相撞","Earth is threatened by an imminent asteroid collision."],"a major controversy":["A big public disagreement","重大爭議","The athlete's drug use turned into a major controversy."],"an accurate description":["An explanation or account that gives the correct details.","準確的描述","The witness gave an accurate description of the missing bike."],"a marine mammal":["A mammal that lives mainly in the sea.","海洋哺乳動物","A dolphin is a marine mammal that breathes air."],"a key factor":["One especially important cause or influence.","一個關鍵因素","Clear signs were a key factor in helping visitors find the station."],"deciding factor":["The element that makes the final choice","決定性因素","The tuition fee was the deciding factor for Linda."],"genetic makeup":["The combination of genes in an organism","基因組成","Eye color is determined by a person's genetic makeup."],"look identical":["To appear exactly the same","看起來一模一樣","The two devices look identical but have different speeds."],"intellectual property":["Ideas or inventions owned by someone","智慧財產權","The tech company protects its intellectual property."],"majority rule":["Control by the larger group","多數決","Democratic societies use majority rule to ensure fairness."],"multiply by":["To perform a math operation","乘以","Multiply length by width to find the area."],"reinforce learning":["To help remember knowledge","強化學習","Reviewing flashcards every night helps reinforce learning."],"grief-stricken":["Overwhelmed with sadness","極度悲傷的","The grief-stricken mother wept at the funeral."],"vast amount":["A very large quantity","巨量","Building a railway requires a vast amount of funding."],"strict vegetarian":["Someone who eats absolutely no meat","嚴格的素食者","A strict vegetarian must read food labels carefully."]};
+function book5Review(host, options, answer, selected) {
+  host.classList.add("b5-review-host");
+  const fragment = document.createDocumentFragment();
+  const heading = document.createElement("h3");
+  heading.className = "b5-review-heading";
+  heading.textContent = "Review all four options · 四個選項解析";
+  fragment.appendChild(heading);
+  const grid = document.createElement("div");
+  grid.className = "b5-review-grid";
+  options.forEach((word, i) => {
+    const entry = BOOK5_REVIEW[word];
+    const card = document.createElement("article");
+    card.className = "b5-review-card" + (word === answer ? " b5-right" : word === selected ? " b5-wrong" : "");
+    const label = document.createElement("div");
+    label.className = "b5-review-label";
+    label.textContent = String.fromCharCode(65 + i) + ". ";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "b5-pronounce";
+    const display = word === "etc" ? "etc." : word;
+    button.textContent = display + " 🔊";
+    button.setAttribute("aria-label", "Pronounce " + display);
+    button.addEventListener("click", () => speak(word === "etc" ? "et cetera" : word));
+    label.appendChild(button);
+    if (word === answer || word === selected) {
+      const state = document.createElement("span");
+      state.className = "b5-review-tag";
+      state.textContent = word === answer ? "✓ Correct answer" : "Your choice";
+      label.appendChild(state);
+    }
+    card.appendChild(label);
+    for (const [name, value, language] of [["English", entry[0], "en"], ["中文", entry[1], "zh-Hant"], ["Example", entry[2], "en"]]) {
+      const p = document.createElement("p");
+      const title = document.createElement("strong");
+      title.textContent = name + ": ";
+      const body = document.createElement("span");
+      body.lang = language;
+      body.textContent = value;
+      p.append(title, body);
+      card.appendChild(p);
+    }
+    const example = document.createElement("button");
+    example.type = "button";
+    example.className = "b5-read-example";
+    example.textContent = "🔊 Read example";
+    example.addEventListener("click", () => speak(entry[2].replace(/\betc\./gi, "et cetera.")));
+    card.appendChild(example);
+    grid.appendChild(card);
+  });
+  fragment.appendChild(grid);
+  host.appendChild(fragment);
+}
+function book5Filled(question, word) {
+  const spoken = word === "etc" ? "etc" : word;
+  return question.replace(/_{3,}/, (_, offset) => offset === 0 ? spoken.charAt(0).toUpperCase() + spoken.slice(1) : spoken);
+}
+
+const BOOK5_UNIT = 23;
+const BOOK5_TITLE = "How the Dinosaurs Really Died";
+const BOOK5_ENDPOINT = "https://script.google.com/macros/s/AKfycbyCD78fQsk8mKNTl0fNuRJE6AT0WpS0rAQctBeaDPGoZyd_w3T6MGNJuxnPoBCz9jIb-Q/exec";
+const book5Run = {started:Date.now(), finished:0, answers:[], looked:new Set(), sent:false, sending:false};
+function book5Reset() {
+  book5Run.started=Date.now();book5Run.finished=0;book5Run.answers=[];book5Run.looked.clear();book5Run.sent=false;
+}
+function book5Track(question, selected, answer) {
+  book5Run.answers.push({question,selected,answer,ok:selected===answer});
+}
+function book5Lookup(word) {
+  const value=String(word||"").trim().toLowerCase();
+  if(value)book5Run.looked.add(value);
+}
+function book5Finish() {book5Run.finished=Date.now();}
+function book5LegacyPayload(name, studentId, total) {
+  const answers=book5Run.answers;
+  if(!book5Run.finished||answers.length!==total)throw Error("Finish all questions first.");
+  const score=answers.filter(x=>x.ok).length, wrongAnswers=answers.filter(x=>!x.ok), percentage=score/total;
+  const seconds=Math.max(0,Math.round((book5Run.finished-book5Run.started)/1000));
+  return {
+    testDateTime:new Date(book5Run.finished).toLocaleString("zh-TW",{timeZone:"Asia/Taipei"}),
+    studentName:name,studentId,unit:String(BOOK5_UNIT),unitName:"Level 5 Unit "+BOOK5_UNIT+" - "+BOOK5_TITLE,
+    score,total,percentage,grade:percentage>=.9?"A+":percentage>=.8?"A":percentage>=.7?"B":percentage>=.6?"C":"D",
+    timeTaken:Math.floor(seconds/60)+"m "+seconds%60+"s",
+    answers,wrongAnswers,wrongWords:[...new Set(wrongAnswers.map(x=>x.answer))].join(", ")||"none",
+    lookUpWords:[...book5Run.looked].join(", ")||"none"
+  };
+}
+async function book5Submit(button, status, name, studentId, total) {
+  if(book5Run.sent||book5Run.sending)return;
+  name=String(name||"").trim();studentId=String(studentId||"").trim();
+  if(!name||!studentId){status.textContent="Please enter both your name and student ID.";return;}
+  if(!book5Run.finished||book5Run.answers.length!==total){status.textContent="Please finish all questions first.";return;}
+  book5Run.sending=true;
+  if(button)button.disabled=true;
+  status.textContent="Sending result…";
+  try{
+    const payload=book5LegacyPayload(name,studentId,total);
+    await fetch(BOOK5_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    book5Run.sent=true;
+    status.textContent="Result sent. Ask your teacher to confirm receipt.";
+  }catch{
+    if(button)button.disabled=false;
+    status.textContent="Unable to send. Check your connection and try again.";
+  }finally{book5Run.sending=false;}
+}
+
+
 /* ═══════════════════════════════════════════════════
    QUESTION DATA  — 100 MCQs from Unit 23
    Answer key pattern (repeating every 20):
@@ -642,7 +765,6 @@ let score = 0;
 let answered = false;
 
 /* Google Apps Script Web App URL — teacher fills this in */
-const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
 
 /* ═══════════════════════════════════════════════════
    RENDER QUESTION
@@ -718,6 +840,7 @@ function selectAnswer(idx) {
   });
 
   // Feedback panel
+  book5Track(q.q,q.options[idx],q.answer);
   showFeedback(idx);
 
   document.getElementById("next-btn").classList.add("visible");
@@ -735,23 +858,9 @@ function showFeedback(chosenIdx) {
     ? `<i class="fa-solid fa-circle-check"></i> Correct! The answer is "<strong>${q.answer}</strong>"`
     : `<i class="fa-solid fa-circle-xmark"></i> The correct answer is "<strong>${q.answer}</strong>"`;
 
-  const cardsDiv = document.getElementById("vocab-cards");
-  cardsDiv.innerHTML = q.options.map(opt => {
-    const def = vocabDef[opt] || {en:"—",cn:"—",ex:"—"};
-    return `
-      <div class="vocab-card">
-        <div class="vc-word">${opt}
-          <button class="tts-btn" onclick="speak('${opt}')" title="Pronounce"><i class="fa-solid fa-volume-low"></i></button>
-        </div>
-        <div class="vc-en">${def.en}</div>
-        <div class="vc-cn">${def.cn}</div>
-        <div class="vc-ex">${def.ex}
-          <button class="tts-btn" onclick="speak(\`${def.ex.replace(/`/g,"'")}\`)" title="Read example"><i class="fa-solid fa-volume-low"></i></button>
-        </div>
-      </div>
-    `;
-  }).join("");
-
+  const cardsDiv=document.getElementById("vocab-cards");
+  cardsDiv.replaceChildren();
+  book5Review(cardsDiv,q.options,q.answer,q.options[chosenIdx]);
   fb.classList.add("visible");
 }
 
@@ -773,6 +882,7 @@ function nextQuestion() {
    RESULTS
 ═══════════════════════════════════════════════════ */
 function showResults() {
+  book5Finish();
   document.getElementById("quiz-screen").style.display = "none";
   const rs = document.getElementById("results-screen");
   rs.classList.add("visible");
@@ -798,6 +908,7 @@ function showResults() {
    RESTART
 ═══════════════════════════════════════════════════ */
 function restartQuiz() {
+  book5Reset(); document.querySelector(".submit-btn").disabled=false;
   currentQ = 0; score = 0; answered = false;
   document.getElementById("results-screen").classList.remove("visible");
   document.getElementById("quiz-screen").style.display = "";
@@ -830,6 +941,7 @@ function readPassage() {
    DICTIONARY LOOKUP
 ═══════════════════════════════════════════════════ */
 async function lookupWord(word) {
+  book5Lookup(word);
   if (!word || word.length < 2) return;
   const helper = document.getElementById("word-helper");
   document.getElementById("helper-word").textContent = word;
@@ -854,51 +966,15 @@ async function lookupWord(word) {
 /* ═══════════════════════════════════════════════════
    GOOGLE SHEETS SUBMISSION
 ═══════════════════════════════════════════════════ */
-async function submitScore() {
-  const name = document.getElementById("student-name").value.trim();
-  const sid = document.getElementById("student-id").value.trim();
-  const msgEl = document.getElementById("submit-msg");
-
-  if (!name || !sid) {
-    msgEl.style.color = "var(--color-incorrect)";
-    msgEl.textContent = "Please enter both your name and student ID.";
-    return;
-  }
-  if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
-    msgEl.style.color = "var(--color-incorrect)";
-    msgEl.textContent = "⚠️ Teacher: please set the Google Apps Script URL in the HTML file.";
-    return;
-  }
-
-  msgEl.style.color = "#334";
-  msgEl.textContent = "Submitting…";
-
-  try {
-    const payload = {
-      name, studentId: sid,
-      score, total: questions.length,
-      percentage: Math.round((score / questions.length) * 100),
-      unit: "Level 5 Unit 23",
-      timestamp: new Date().toLocaleString("zh-TW", {timeZone:"Asia/Taipei"})
-    };
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify(payload)
-    });
-    msgEl.style.color = "var(--color-correct)";
-    msgEl.textContent = `✅ Score submitted! ${name} — ${score}/${questions.length} (${payload.percentage}%)`;
-  } catch(e) {
-    msgEl.style.color = "var(--color-incorrect)";
-    msgEl.textContent = "Submission failed. Please check your internet connection.";
-  }
+function submitScore() {
+  return book5Submit(document.querySelector(".submit-btn"),document.getElementById("submit-msg"),
+    document.getElementById("student-name").value,document.getElementById("student-id").value,questions.length);
 }
 
 /* ═══════════════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════════════ */
-window.speechSynthesis.onvoiceschanged = () => {};
+if(window.speechSynthesis)window.speechSynthesis.onvoiceschanged = () => {};
 renderQuestion();
 </script>
 </body>

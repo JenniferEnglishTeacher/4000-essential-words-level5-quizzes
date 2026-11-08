@@ -14,6 +14,22 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 @media(max-width:560px){header{padding:17px 14px}header>div{align-items:flex-start}.score{font-size:.8rem;padding:6px 9px}.card{padding:20px 16px}.options{grid-template-columns:1fr}.sentence{font-size:1.08rem}.actions>*{flex:1 1 auto}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 </style>
+<style>
+.b5-review-heading{font:700 1.05rem/1.4 system-ui,sans-serif;margin:1rem 0 .65rem;color:#302018}
+.vocab-cards.b5-review-host,.feedback-grid.b5-review-host{display:block;padding:0 .7rem .45rem}
+#fb.b5-review-host{padding:0 .7rem .45rem}
+.b5-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.35rem 0 .7rem;color:#26303a}
+.b5-review-card{background:#fff;border:1px solid #d9d1c7;border-radius:10px;padding:.75rem;min-width:0;overflow-wrap:anywhere}
+.b5-review-card.b5-right{border-color:#41855e;background:#f0fbf3}.b5-review-card.b5-wrong{border-color:#b96b5e;background:#fff7f5}
+.b5-review-label{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem;font:700 .9rem/1.3 system-ui,sans-serif}
+.b5-review-tag{font-size:.73rem;border-radius:12px;background:#e9ede9;color:#254b34;padding:.2rem .45rem}
+.b5-wrong .b5-review-tag{background:#f9e4df;color:#722e24}
+.b5-pronounce,.b5-read-example{cursor:pointer;min-height:44px;border:1px solid #d3c0ad;border-radius:7px;color:#45291f;background:#fff8ed;font:700 .92rem/1.3 system-ui,sans-serif;padding:.35rem .55rem;text-align:left}
+.b5-pronounce:hover,.b5-read-example:hover{background:#f8e8d2}.b5-pronounce:focus-visible,.b5-read-example:focus-visible{outline:3px solid #a76b19;outline-offset:2px}
+.b5-read-example{font-size:.79rem;margin-top:.2rem}.b5-review-card p{margin:.35rem 0;font:400 .9rem/1.55 system-ui,sans-serif}.b5-review-card p strong{color:#42342c}
+@media(max-width:560px){.b5-review-grid{grid-template-columns:1fr}}
+
+</style>
 </head>
 <body>
 <header><div><div><div class="eyebrow">4000 Essential English Words · Book 5</div><h1>Unit 3</h1><p class="unitTitle">The Young Man and the Old Man</p></div><div class="score" id="score" aria-live="polite">Score: 0</div></div></header>
@@ -47,11 +63,70 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 <div class="actions"><button type="button" class="primary" id="submit">Send result to teacher</button><button type="button" class="secondary" id="download">Save result</button><button type="button" class="secondary" id="retry">Try again</button></div>
 <p id="submissionMessage" class="status" role="status"></p>
 </section>
-<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">Unit 1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html">Unit 2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html" aria-current="page">Unit 3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">Unit 4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html">Unit 5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">Unit 6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html">Unit 7</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-3-the-young-man-and-the-old-man" target="_blank" rel="noopener">Book 5 · Unit 3</a>. Practice sentences are written for this quiz.</p></footer>
+<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Book 5 unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">U1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html">U2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html" aria-current="page">U3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">U4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html">U5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">U6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html">U7</a><a href="U8_4000EssentialWords_Interactive_Quiz.html">U8</a><a href="U9_4000EssentialWords_Interactive_Quiz.html">U9</a><a href="U10_4000EssentialWords_Interactive_Quiz.html">U10</a><a href="U11_4000EssentialWords_Interactive_Quiz.html">U11</a><a href="U12_4000EssentialWords_Interactive_Quiz.html">U12</a><a href="U13_4000EssentialWords_Interactive_Quiz.html">U13</a><a href="U14_4000EssentialWords_Interactive_Quiz.html">U14</a><a href="U15_4000EssentialWords_Interactive_Quiz.html">U15</a><a href="U16_4000EssentialWords_Interactive_Quiz.html">U16</a><a href="U17_4000EssentialWords_Interactive_Quiz.html">U17</a><a href="U18_4000EssentialWords_Interactive_Quiz.html">U18</a><a href="U19_4000EssentialWords_Interactive_Quiz.html">U19</a><a href="U20_4000EssentialWords_Interactive_Quiz.html">U20</a><a href="U21_4000EssentialWords_Interactive_Quiz.html">U21</a><a href="U22_4000EssentialWords_Interactive_Quiz.html">U22</a><a href="U23_4000EssentialWords_Interactive_Quiz.html">U23</a><a href="U24_4000EssentialWords_Interactive_Quiz.html">U24</a><a href="U25_4000EssentialWords_Interactive_Quiz.html">U25</a><a href="U26_4000EssentialWords_Interactive_Quiz.html">U26</a><a href="U27_4000EssentialWords_Interactive_Quiz.html">U27</a><a href="U28_4000EssentialWords_Interactive_Quiz.html">U28</a><a href="U29_4000EssentialWords_Interactive_Quiz.html">U29</a><a href="U30_4000EssentialWords_Interactive_Quiz.html">U30</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-3-the-young-man-and-the-old-man" target="_blank" rel="noopener">Book 5 · Unit 3</a>. Practice sentences are written for this quiz.</p></footer>
 </main>
 <script>
 
 "use strict";
+const BOOK5_REVIEW = {"admonish":["To scold someone for bad behavior.","告誡；責備","The coach had to admonish the player, saying that his rude behavior was unacceptable."],"audible":["Capable of being heard.","聽得見的","The announcement was audible even at the back of the hall: everyone could hear it."],"awesome":["Inspiring wonder or fear.","令人驚嘆的；可怕的","The waterfall filled us with wonder; it was an awesome sight."],"beware":["To be careful about danger.","當心；提防","The warning sign told drivers to beware of ice on the road."],"brag":["To boast about one's achievements.","吹噓；自誇","He liked to brag about his prizes, telling everyone how talented he was."],"conscious":["Aware of something.","意識到的","She was conscious of the footsteps behind her and knew someone was following."],"disagree":["To hold a different opinion.","不同意","I think the film is excellent, but you think it is terrible; we disagree about its quality."],"echo":["To repeat as sound bounces back.","回響","In the empty tunnel, our voices would echo, bouncing back from the walls."],"eventual":["Happening at the end.","最終的","Years of research led to the eventual discovery, which finally came at the end of the project."],"hint":["A clue suggesting something.","暗示；線索","She would not reveal the answer, but gave me a hint to help me work it out."],"idiot":["Someone acting foolishly.","笨蛋；傻瓜","After putting his shoes on the wrong feet, he said he had acted like an idiot."],"immense":["Extremely large.","巨大的","The tiny boat looked very small beside the immense ship, which was enormous."],"indirect":["Not taking a straight route.","迂迴的；間接的","Instead of going straight home, we followed an indirect route with several detours."],"option":["One possible choice.","選擇","Taking the bus is one option; walking is another choice."],"pastime":["An activity enjoyed regularly.","消遣；嗜好","Painting is my favorite pastime, an activity I often do for fun."],"perfect":["Free of mistakes.","完美的","Every answer was right, so her score was perfect."],"pinpoint":["To locate precisely.","精確定位","The tracking device can pinpoint the animal's exact location on a map."],"switch":["To change to something else.","轉換；改變","If the first channel has no news, switch to a different television channel."],"thorough":["Careful and complete.","徹底的；詳盡的","The inspector made a thorough check, carefully examining every part of the building."],"torment":["To deliberately cause suffering.","折磨","The cruel boy would torment his little brother on purpose by hiding his favorite toy."]};
+function book5Review(host, options, answer, selected) {
+  host.classList.add("b5-review-host");
+  const fragment = document.createDocumentFragment();
+  const heading = document.createElement("h3");
+  heading.className = "b5-review-heading";
+  heading.textContent = "Review all four options · 四個選項解析";
+  fragment.appendChild(heading);
+  const grid = document.createElement("div");
+  grid.className = "b5-review-grid";
+  options.forEach((word, i) => {
+    const entry = BOOK5_REVIEW[word];
+    const card = document.createElement("article");
+    card.className = "b5-review-card" + (word === answer ? " b5-right" : word === selected ? " b5-wrong" : "");
+    const label = document.createElement("div");
+    label.className = "b5-review-label";
+    label.textContent = String.fromCharCode(65 + i) + ". ";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "b5-pronounce";
+    const display = word === "etc" ? "etc." : word;
+    button.textContent = display + " 🔊";
+    button.setAttribute("aria-label", "Pronounce " + display);
+    button.addEventListener("click", () => speak(word === "etc" ? "et cetera" : word));
+    label.appendChild(button);
+    if (word === answer || word === selected) {
+      const state = document.createElement("span");
+      state.className = "b5-review-tag";
+      state.textContent = word === answer ? "✓ Correct answer" : "Your choice";
+      label.appendChild(state);
+    }
+    card.appendChild(label);
+    for (const [name, value, language] of [["English", entry[0], "en"], ["中文", entry[1], "zh-Hant"], ["Example", entry[2], "en"]]) {
+      const p = document.createElement("p");
+      const title = document.createElement("strong");
+      title.textContent = name + ": ";
+      const body = document.createElement("span");
+      body.lang = language;
+      body.textContent = value;
+      p.append(title, body);
+      card.appendChild(p);
+    }
+    const example = document.createElement("button");
+    example.type = "button";
+    example.className = "b5-read-example";
+    example.textContent = "🔊 Read example";
+    example.addEventListener("click", () => speak(entry[2].replace(/\betc\./gi, "et cetera.")));
+    card.appendChild(example);
+    grid.appendChild(card);
+  });
+  fragment.appendChild(grid);
+  host.appendChild(fragment);
+}
+function book5Filled(question, word) {
+  const spoken = word === "etc" ? "etc" : word;
+  return question.replace(/_{3,}/, (_, offset) => offset === 0 ? spoken.charAt(0).toUpperCase() + spoken.slice(1) : spoken);
+}
+
+
 const CONFIG={"unit":3,"title":"The Young Man and the Old Man"};
 const TARGETS=[{"word":"admonish","cat":"v","def":"To scold someone for bad behavior.","cn":"告誡；責備","q":"The coach had to ______ the player, saying that his rude behavior was unacceptable.","options":["admonish","beware","brag","disagree"]},{"word":"audible","cat":"adj","def":"Capable of being heard.","cn":"聽得見的","q":"The announcement was ______ even at the back of the hall: everyone could hear it.","options":["audible","conscious","eventual","immense"]},{"word":"awesome","cat":"adj","def":"Inspiring wonder or fear.","cn":"令人驚嘆的；可怕的","q":"The waterfall filled us with wonder; it was an ______ sight.","options":["awesome","eventual","indirect","perfect"]},{"word":"beware","cat":"v","def":"To be careful about danger.","cn":"當心；提防","q":"The warning sign told drivers to ______ of ice on the road.","options":["beware","echo","pinpoint","switch"]},{"word":"brag","cat":"v","def":"To boast about one's achievements.","cn":"吹噓；自誇","q":"He liked to ______ about his prizes, telling everyone how talented he was.","options":["brag","pinpoint","switch","torment"]},{"word":"conscious","cat":"adj","def":"Aware of something.","cn":"意識到的","q":"She was ______ of the footsteps behind her and knew someone was following.","options":["conscious","perfect","thorough","audible"]},{"word":"disagree","cat":"v","def":"To hold a different opinion.","cn":"不同意","q":"I think the film is excellent, but you think it is terrible; we ______ about its quality.","options":["disagree","torment","admonish","beware"]},{"word":"echo","cat":"v","def":"To repeat as sound bounces back.","cn":"回響","q":"In the empty tunnel, our voices would ______, bouncing back from the walls.","options":["echo","admonish","beware","brag"]},{"word":"eventual","cat":"adj","def":"Happening at the end.","cn":"最終的","q":"Years of research led to the ______ discovery, which finally came at the end of the project.","options":["eventual","awesome","conscious","immense"]},{"word":"hint","cat":"n","def":"A clue suggesting something.","cn":"暗示；線索","q":"She would not reveal the answer, but gave me a ______ to help me work it out.","options":["hint","idiot","option","pastime"]},{"word":"idiot","cat":"n","def":"Someone acting foolishly.","cn":"笨蛋；傻瓜","q":"After putting his shoes on the wrong feet, he said he had acted like an ______.","options":["idiot","option","pastime","hint"]},{"word":"immense","cat":"adj","def":"Extremely large.","cn":"巨大的","q":"The tiny boat looked very small beside the ______ ship, which was enormous.","options":["immense","thorough","audible","conscious"]},{"word":"indirect","cat":"adj","def":"Not taking a straight route.","cn":"迂迴的；間接的","q":"Instead of going straight home, we followed an ______ route with several detours.","options":["indirect","perfect","thorough","audible"]},{"word":"option","cat":"n","def":"One possible choice.","cn":"選擇","q":"Taking the bus is one ______; walking is another choice.","options":["option","idiot","pastime","hint"]},{"word":"pastime","cat":"n","def":"An activity enjoyed regularly.","cn":"消遣；嗜好","q":"Painting is my favorite ______, an activity I often do for fun.","options":["pastime","option","hint","idiot"]},{"word":"perfect","cat":"adj","def":"Free of mistakes.","cn":"完美的","q":"Every answer was right, so her score was ______.","options":["perfect","eventual","immense","indirect"]},{"word":"pinpoint","cat":"v","def":"To locate precisely.","cn":"精確定位","q":"The tracking device can ______ the animal's exact location on a map.","options":["pinpoint","brag","disagree","echo"]},{"word":"switch","cat":"v","def":"To change to something else.","cn":"轉換；改變","q":"If the first channel has no news, ______ to a different television channel.","options":["switch","disagree","echo","pinpoint"]},{"word":"thorough","cat":"adj","def":"Careful and complete.","cn":"徹底的；詳盡的","q":"The inspector made a ______ check, carefully examining every part of the building.","options":["thorough","audible","awesome","conscious"]},{"word":"torment","cat":"v","def":"To deliberately cause suffering.","cn":"折磨","q":"The cruel boy would ______ his little brother on purpose by hiding his favorite toy.","options":["torment","pinpoint","switch","admonish"]}];
 const EXTRA=[];
@@ -100,7 +175,7 @@ function speak(text){
  const voice=window.speechSynthesis.getVoices().find(v=>v.lang==="en-US")||window.speechSynthesis.getVoices().find(v=>v.lang.startsWith("en"));
  if(voice)u.voice=voice;window.speechSynthesis.speak(u);
 }
-function readQuestion(){if(!student||completed)return;const q=questions[at];speak(q.q.replace(/_{3,}/g,answered?q.answer:"blank"));}
+function readQuestion(){if(!student||completed)return;const q=questions[at];speak(answered?book5Filled(q.q,q.answer):q.q.replace(/_{3,}/g,"blank"));}
 function startQuiz(event){
  if(event)event.preventDefault();
  if(student)return false;
@@ -123,9 +198,10 @@ function choose(choice){
  $("score").textContent="Score: "+score;
  [...$("options").children].forEach(b=>{b.disabled=true;if(b.dataset.word===q.answer)b.classList.add("correct");else if(b.dataset.word===choice)b.classList.add("wrong");});
  $("feedback").className="feedback "+(ok?"good":"bad");
- $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><p>'+esc(POS[q.cat])+' · '+esc(q.def)+'</p><p class="cn">'+esc(q.cn)+'</p><div class="completedSentence">'+wordHtml(q.q.replace(/_{3,}/g,q.answer))+'</div>';
+ $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><div class="completedSentence">'+wordHtml(book5Filled(q.q,q.answer))+'</div>';
+ book5Review($("feedback"),q.options,q.answer,choice);
  $("feedback").hidden=false;$("next").textContent=at===19?"See results":"Next question →";$("next").hidden=false;
- $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus();return true;
+ $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus({preventScroll:true});return true;
 }
 function nextQuestion(){if(!answered||completed)return false;if(at===19)finish();else{at++;render();}return true;}
 function finish(){

@@ -91,12 +91,28 @@
   #submit-msg { font-size: .88rem; margin-top: 8px; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
 </style>
+<style>
+.b5-review-heading{font:700 1.05rem/1.4 system-ui,sans-serif;margin:1rem 0 .65rem;color:#302018}
+.vocab-cards.b5-review-host,.feedback-grid.b5-review-host{display:block;padding:0 .7rem .45rem}
+#fb.b5-review-host{padding:0 .7rem .45rem}
+.b5-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.35rem 0 .7rem;color:#26303a}
+.b5-review-card{background:#fff;border:1px solid #d9d1c7;border-radius:10px;padding:.75rem;min-width:0;overflow-wrap:anywhere}
+.b5-review-card.b5-right{border-color:#41855e;background:#f0fbf3}.b5-review-card.b5-wrong{border-color:#b96b5e;background:#fff7f5}
+.b5-review-label{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem;font:700 .9rem/1.3 system-ui,sans-serif}
+.b5-review-tag{font-size:.73rem;border-radius:12px;background:#e9ede9;color:#254b34;padding:.2rem .45rem}
+.b5-wrong .b5-review-tag{background:#f9e4df;color:#722e24}
+.b5-pronounce,.b5-read-example{cursor:pointer;min-height:44px;border:1px solid #d3c0ad;border-radius:7px;color:#45291f;background:#fff8ed;font:700 .92rem/1.3 system-ui,sans-serif;padding:.35rem .55rem;text-align:left}
+.b5-pronounce:hover,.b5-read-example:hover{background:#f8e8d2}.b5-pronounce:focus-visible,.b5-read-example:focus-visible{outline:3px solid #a76b19;outline-offset:2px}
+.b5-read-example{font-size:.79rem;margin-top:.2rem}.b5-review-card p{margin:.35rem 0;font:400 .9rem/1.55 system-ui,sans-serif}.b5-review-card p strong{color:#42342c}
+@media(max-width:560px){.b5-review-grid{grid-template-columns:1fr}}
+
+</style>
 </head>
 <body>
 <header>
   <div>
     <div class="header-title">4000 Essential Words — Level 5, Unit 22</div>
-    <div class="header-sub">Interactive Vocabulary Quiz &nbsp;|&nbsp; 100 Questions</div>
+    <div class="header-sub">Interactive Vocabulary Quiz &nbsp;|&nbsp; 70 Questions</div>
   </div>
   <div class="score-badge" id="score-badge">Score: 0</div>
 </header>
@@ -151,6 +167,113 @@
   </div>
 </main>
 <script>
+const BOOK5_REVIEW = {"commerce":["The activity of buying and selling things","商業","The harbor boosted international commerce greatly."],"charity":["Giving help or money to those in need","慈善","The billionaire donated half his wealth to charity."],"temper":["Someone's mood or a tendency to get angry","脾氣","The customer lost his temper and began screaming at the manager."],"unity":["The state of people working together for a purpose","團結","Political unity is crucial if we want to rebuild our economy after war."],"neutral":["Not helping either of the two fighting sides","中立的","Switzerland maintained a neutral position during global conflicts."],"commercial":["Related to business and making money","商業的","The downtown area is filled with huge commercial buildings."],"charitable":["Kind, generous, giving to others","慈善的","The charitable gala raised thousands for orphanages."],"victorious":["Having won a victory; triumphant","勝利的","The victorious army marched through the capital city streets."],"empire":["A large group of countries ruled by an emperor","帝國","The ancient Roman Empire controlled vast territories."],"pity":["The feeling of sadness and kindness for those suffering","同情","We felt deep pity for the homeless families in the winter night."],"condemn":["To give someone a punishment; to criticize","譴責","World leaders condemned the violent attacks against civilians."],"reduce":["To make it smaller in size or fewer in number","減少","Eating vegetables and exercising can reduce the risk of heart attacks."],"mock":["To tease someone in a cruel way","嘲笑","The cruel boys began to mock the new student."],"heed":["To obey or follow advice or warning","留心","You should heed your teacher's academic advice carefully."],"imperial":["Related to an emperor or an empire.","帝國的；皇帝的","Visitors can still see the old imperial palace."],"cozy":["Comfortable, warm, and relaxing","舒適的","We spent the evening in a cozy mountain cabin."],"persecute":["To treat someone badly or cruelly","迫害","Corrupt governments use power to persecute political activists."],"deplete":["To use all of it up","耗盡","Running a marathon will quickly deplete your water reserves."],"economy":["The money and businesses of a country or region","經濟","The government stabilized the national economy and reduced inflation."],"goods":["Anything that can be bought or sold","商品","The cargo train transported industrial goods across the border."],"scribe":["A person whose job was to copy written works","抄寫員","In ancient civilizations, a professional scribe recorded government laws."],"hitchhike":["To travel by asking for rides from passing vehicles","搭便車","The backpackers decided to hitchhike across Europe."],"script":["The written text of a play, movie, or broadcast","劇本","Actors memorized their lines from the newly written dramatic script."],"manuscript":["A handwritten document or an author's original text.","手稿","The writer sent her manuscript to the publisher."],"inscription":["Words written or carved on a surface.","碑文；銘文","The stone had a short inscription with the builder's name."],"throne":["The special chair in which a ruler sits","王座","The golden throne was decorated with diamonds and guarded by soldiers."],"thorn":["A sharp point growing on a plant.","刺","A thorn on the rose bush pricked my finger."],"victor":["A group or person that wins in a contest","勝利者","The young athlete emerged as the clear victor of the tournament."],"reduce stress":["To make someone feel less worried or tense.","減輕壓力","A short walk can help reduce stress after work."],"heed a warning":["To pay attention to advice about a danger or problem.","留意警告","We should heed a warning about ice on the road."],"donate to charity":["To give money or goods to an organization","捐款給慈善","Many wealthy citizens donate to charity to support welfare programs."],"mock an accent":["To copy someone's way of speaking in order to make fun of it.","嘲笑口音","It's unkind to mock an accent you aren't familiar with."],"e-commerce":["The activity of buying and selling online","電子商務","E-commerce has grown rapidly over the past decade."],"mock exam":["A practice test before the real one","模擬考","Students are required to take a mock exam every month."],"cozy room":["A warm, comfortable room.","舒適的房間","We spent the evening reading in a cozy room."],"neutral ground":["A place that is not controlled by either side in a disagreement.","中立地點","The groups agreed to meet on neutral ground."],"condemnation":["The expression of very strong disapproval","譴責","The politician's actions faced severe public condemnation."],"hitchhiker":["A person who travels by getting free rides","搭便車的人","The truck driver picked up a wet hitchhiker holding a sign."],"reduction":["The action of making something smaller","減少","The store announced a massive fifty percent reduction in prices."],"mockery":["Teasing and contemptuous language or behavior","嘲笑","The unfair trial was a complete mockery of justice."],"cozy up":["To make oneself comfortable and warm","依偎舒適地蜷縮","Emily loves to cozy up with a blanket and a novel."],"speak up":["To speak more loudly or express an opinion openly.","大聲說；勇於發言","Please speak up so the class can hear you."],"deplete energy":["To use up or greatly reduce available energy.","消耗精力","Several nights without enough sleep can deplete energy."],"reduce risk":["To make a danger less likely.","降低風險","Wearing a helmet can reduce risk when cycling."],"depletion":["The reduction in the number or quantity of something","消耗","Scientists warned about the rapid depletion of global oil resources."],"economic":["Related to money, trade, or the economy.","經濟的","The town faced economic problems after the factory closed."],"emperor":["The sovereign ruler of an empire","皇帝","The powerful emperor commanded a massive army of brave soldiers."],"stolen goods":["Items that have been taken illegally","贓物","The police recovered thousands of dollars worth of stolen goods."],"neutral colors":["Colors such as gray, beige, or white that are not bright.","中性色","She chose neutral colors for the living room."],"mocking":["Making fun of someone or something","嘲弄的","She could no longer tolerate her coworker's mocking comments."],"neutrality":["The state of not supporting either side","中立","The manager maintained complete neutrality during the argument."],"persecution":["Hostility and ill-treatment because of race or beliefs","迫害","Refugees fled to escape severe religious persecution."],"persecutor":["A person who treats someone cruelly or unfairly","迫害者","The courageous witness pointed at her brutal persecutor in court."],"sympathy":["Feelings of pity and sorrow for someone else's misfortune","同情心","The manager expressed her deepest sympathy to the bereaved employee."],"lose one's temper":["To become very angry suddenly","發脾氣","The professional agent refused to lose one's temper despite the shouting."],"take pity on":["To feel sorry for and help someone","對...產生憐憫並伸出援手","The teacher decided to take pity on the student without warm clothing."],"remain neutral":["To stay out of an argument or war","保持中立","I decided to remain neutral to avoid damaging friendships."],"neutrally":["Without favoring either side.","中立地","The judge described the dispute neutrally."],"victoriously":["In a way that shows someone has won.","勝利地","The team raised the trophy victoriously."],"charitably":["In a generous or kind way.","慷慨地；仁慈地","The volunteers acted charitably by sharing food with their neighbors."],"mockingly":["In a way that makes fun of someone","嘲弄地","The bully laughed mockingly at my mistake during the presentation."],"business empire":["A large and powerful group of companies","商業帝國","The retail billionaire established a global business empire."],"cozy atmosphere":["A relaxing and welcoming environment","溫馨的氣氛","The new coffee shop became popular due to its cozy atmosphere."],"charity event":["A gathering to raise money for a good cause","慈善活動","Every student participated in the annual charity event."],"chamber of commerce":["A local association to promote business interests","商會","The chamber of commerce organized a large networking conference."],"depleted":["Emptied of something; greatly reduced","耗盡的","After twelve-hour shifts, the nurses felt completely depleted."],"economical":["Giving good value without wasting money","節約的","Shopping at the open market is more economical than dining out."],"dethrone":["To remove a monarch from power","廢黜","The military generals plotted a coup to dethrone the corrupt king."],"pitiful":["Deserving or arousing pity","可憐的","The thin, starving stray cat looked incredibly pitiful."],"pitiless":["Showing no pity; cruel","無情的","The pitiless landlord kicked the poor family out onto the street."],"mock someone":["To make fun of a person.","嘲弄某人","It is unfair to mock someone for making an honest mistake."],"sympathize":["To feel or express sympathy for someone","同情","Although I can fully sympathize with your difficulties, I cannot help now."],"compassionate":["Feeling or showing sympathy and concern for others","富有同情心的","The compassionate nurse comforted the crying child before surgery."],"raise money for charity":["To collect funds for a good cause","為慈善籌款","The school held a bake sale to raise money for charity."],"take pity on others":["To feel sorry for other people and treat them kindly.","同情他人","The story asks readers to take pity on others who are suffering."],"remain neutral always":["To continue to avoid taking a side at all times.","始終保持中立","In these debates, the chair must remain neutral always, regardless of personal opinions."],"control one's temper":["To keep anger under control.","控制脾氣","It takes practice to control one's temper during an argument."],"write a prescription":["To authorize medicine for a patient","開處方箋","The doctor took out his medical pad to write a prescription."],"promote":["To encourage, support, or help something become more widely known.","推廣；促進","The posters promote healthy eating at school."],"international commerce":["Trade between different countries","國際貿易","New trade agreements encouraged international commerce between nations."],"victory":["An act of defeating an enemy or opponent","勝利","The football team celebrated their historic victory."],"triumph":["A great victory or achievement","勝利","Winning the Olympic gold medal was a magnificent triumph of willpower."],"triumphant":["Having won a battle or contest","勝利的","The triumphant scientists announced their successful vaccine development."],"mock someone's accent":["To imitate how someone speaks to make fun of them","嘲笑某人的口音","It is impolite to mock someone's accent when they are learning a language."],"unite":["To bring together for a common purpose","團結","The charity groups decided to unite their efforts for disaster victims."],"take the throne":["To become king or queen","登上王位","Following the queen's passing, the eldest prince prepared to take the throne."],"lose his temper":["To become angry and stop controlling his reaction.","他發脾氣","He tried not to lose his temper when the game was canceled."],"heed the warning":["To listen to and act on a particular warning.","留意這項警告","The driver chose to heed the warning and slow down."],"reduce the risk":["To lower the chance of danger","降低風險","Wearing a helmet will effectively reduce the risk of head injuries."],"charity worker":["A person employed by a charitable organization","慈善工作者","As a charity worker, Sarah delivers meals to the elderly."],"emperor's palace":["The official home of an emperor.","皇宮","The emperor's palace stood at the center of the old capital."],"commerce and industry":["Business and manufacturing sectors combined","工商業","The government oversees commerce and industry to protect workers."],"calm and fair":["Peaceful and willing to treat people equally.","冷靜而公正","The referee remained calm and fair during the tense match."],"mocking and pitiless":["Making fun of others and showing no sympathy.","嘲弄且無情的","The mocking and pitiless remarks hurt the young player's feelings."],"reduce and deplete":["To make something smaller and gradually use up what is left.","減少並消耗","Long periods of drought reduce and deplete local water supplies."],"strongly condemn":["To disapprove of something intensely","強烈譴責","Environmental organizations strongly condemned the illegal dumping."],"cozy up with":["To get warm and comfortable with someone or something.","舒服地依偎；舒適地窩著","On cold nights, we cozy up with a blanket and a good book."],"remain neutral about":["To continue to avoid taking a side on an issue.","對……保持中立","The teacher chose to remain neutral about the debate topic."],"ozone depletion":["The thinning of the earth's ozone layer","臭氧層破壞","Treaties were signed to ban chemicals causing ozone depletion."],"genetic makeup":["The combination of genes in an organism","基因組成","Eye color is determined entirely by a person's unique genetic makeup."],"publicly condemn":["To state disapproval in front of others","公開譴責","The board decided to publicly condemn the CEO's comments."],"the coronation of the king":["The ceremony in which a king is officially crowned.","國王的加冕典禮","Thousands gathered for the coronation of the king."],"the peace talks":["Meetings where opposing groups discuss how to end a conflict.","和平談判","Both sides sent representatives to the peace talks."],"the charity gala event":["A formal celebration held to raise money for a good cause.","慈善晚會","The charity gala event raised enough money to buy new hospital beds."],"the trade exhibition":["An event where businesses show their products or services.","商展","We met several new suppliers at the trade exhibition."],"prescription":["A doctor's written note for medicine","處方籤","You must hand the prescription to the pharmacist for pain-relief drugs."]};
+function book5Review(host, options, answer, selected) {
+  host.classList.add("b5-review-host");
+  const fragment = document.createDocumentFragment();
+  const heading = document.createElement("h3");
+  heading.className = "b5-review-heading";
+  heading.textContent = "Review all four options · 四個選項解析";
+  fragment.appendChild(heading);
+  const grid = document.createElement("div");
+  grid.className = "b5-review-grid";
+  options.forEach((word, i) => {
+    const entry = BOOK5_REVIEW[word];
+    const card = document.createElement("article");
+    card.className = "b5-review-card" + (word === answer ? " b5-right" : word === selected ? " b5-wrong" : "");
+    const label = document.createElement("div");
+    label.className = "b5-review-label";
+    label.textContent = String.fromCharCode(65 + i) + ". ";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "b5-pronounce";
+    const display = word === "etc" ? "etc." : word;
+    button.textContent = display + " 🔊";
+    button.setAttribute("aria-label", "Pronounce " + display);
+    button.addEventListener("click", () => speak(word === "etc" ? "et cetera" : word));
+    label.appendChild(button);
+    if (word === answer || word === selected) {
+      const state = document.createElement("span");
+      state.className = "b5-review-tag";
+      state.textContent = word === answer ? "✓ Correct answer" : "Your choice";
+      label.appendChild(state);
+    }
+    card.appendChild(label);
+    for (const [name, value, language] of [["English", entry[0], "en"], ["中文", entry[1], "zh-Hant"], ["Example", entry[2], "en"]]) {
+      const p = document.createElement("p");
+      const title = document.createElement("strong");
+      title.textContent = name + ": ";
+      const body = document.createElement("span");
+      body.lang = language;
+      body.textContent = value;
+      p.append(title, body);
+      card.appendChild(p);
+    }
+    const example = document.createElement("button");
+    example.type = "button";
+    example.className = "b5-read-example";
+    example.textContent = "🔊 Read example";
+    example.addEventListener("click", () => speak(entry[2].replace(/\betc\./gi, "et cetera.")));
+    card.appendChild(example);
+    grid.appendChild(card);
+  });
+  fragment.appendChild(grid);
+  host.appendChild(fragment);
+}
+function book5Filled(question, word) {
+  const spoken = word === "etc" ? "etc" : word;
+  return question.replace(/_{3,}/, (_, offset) => offset === 0 ? spoken.charAt(0).toUpperCase() + spoken.slice(1) : spoken);
+}
+
+const BOOK5_UNIT = 22;
+const BOOK5_TITLE = "The Scribe's Warning";
+const BOOK5_ENDPOINT = "https://script.google.com/macros/s/AKfycbyCD78fQsk8mKNTl0fNuRJE6AT0WpS0rAQctBeaDPGoZyd_w3T6MGNJuxnPoBCz9jIb-Q/exec";
+const book5Run = {started:Date.now(), finished:0, answers:[], looked:new Set(), sent:false, sending:false};
+function book5Reset() {
+  book5Run.started=Date.now();book5Run.finished=0;book5Run.answers=[];book5Run.looked.clear();book5Run.sent=false;
+}
+function book5Track(question, selected, answer) {
+  book5Run.answers.push({question,selected,answer,ok:selected===answer});
+}
+function book5Lookup(word) {
+  const value=String(word||"").trim().toLowerCase();
+  if(value)book5Run.looked.add(value);
+}
+function book5Finish() {book5Run.finished=Date.now();}
+function book5LegacyPayload(name, studentId, total) {
+  const answers=book5Run.answers;
+  if(!book5Run.finished||answers.length!==total)throw Error("Finish all questions first.");
+  const score=answers.filter(x=>x.ok).length, wrongAnswers=answers.filter(x=>!x.ok), percentage=score/total;
+  const seconds=Math.max(0,Math.round((book5Run.finished-book5Run.started)/1000));
+  return {
+    testDateTime:new Date(book5Run.finished).toLocaleString("zh-TW",{timeZone:"Asia/Taipei"}),
+    studentName:name,studentId,unit:String(BOOK5_UNIT),unitName:"Level 5 Unit "+BOOK5_UNIT+" - "+BOOK5_TITLE,
+    score,total,percentage,grade:percentage>=.9?"A+":percentage>=.8?"A":percentage>=.7?"B":percentage>=.6?"C":"D",
+    timeTaken:Math.floor(seconds/60)+"m "+seconds%60+"s",
+    answers,wrongAnswers,wrongWords:[...new Set(wrongAnswers.map(x=>x.answer))].join(", ")||"none",
+    lookUpWords:[...book5Run.looked].join(", ")||"none"
+  };
+}
+async function book5Submit(button, status, name, studentId, total) {
+  if(book5Run.sent||book5Run.sending)return;
+  name=String(name||"").trim();studentId=String(studentId||"").trim();
+  if(!name||!studentId){status.textContent="Please enter both your name and student ID.";return;}
+  if(!book5Run.finished||book5Run.answers.length!==total){status.textContent="Please finish all questions first.";return;}
+  book5Run.sending=true;
+  if(button)button.disabled=true;
+  status.textContent="Sending result…";
+  try{
+    const payload=book5LegacyPayload(name,studentId,total);
+    await fetch(BOOK5_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    book5Run.sent=true;
+    status.textContent="Result sent. Ask your teacher to confirm receipt.";
+  }catch{
+    if(button)button.disabled=false;
+    status.textContent="Unable to send. Check your connection and try again.";
+  }finally{book5Run.sending=false;}
+}
+
+
 /* ═══════════════════════════════════════
    ANSWER KEY PATTERN (repeating every 20):
    B C D A D | D A C B A | D B C A C | A D B C B
@@ -183,7 +306,7 @@ const questions = [
   {q:"Many wealthy citizens choose to ________ ________ ________ regularly because they want to support public welfare programs.",options:["reduce stress","heed a warning","donate to charity","mock an accent"],answer:"donate to charity",clues:["wealthy","regularly","support","welfare","programs"]},
   {q:"The rapid advancement of internet technology has caused ________ to grow rapidly over the past decade worldwide.",options:["e-commerce","mock exam","cozy room","neutral ground"],answer:"e-commerce",clues:["internet","technology","grow","decade","worldwide"]},
   {q:"The politician's corrupt actions faced severe public ________, which ultimately forced him to resign from office immediately.",options:["condemnation","hitchhiker","reduction","mockery"],answer:"condemnation",clues:["corrupt","severe","public","resign","office"]},
-  {q:"On freezing Sunday afternoons, Emily loves to ________ ________ with a thick blanket and an interesting novel.",options:["cozy up","heed up","deplete energy","reduce risk"],answer:"cozy up",clues:["freezing","blanket","novel","Emily","afternoons"]},
+  {q:"On freezing Sunday afternoons, Emily loves to ________ ________ with a thick blanket and an interesting novel.",options:["cozy up","speak up","deplete energy","reduce risk"],answer:"cozy up",clues:["freezing","blanket","novel","Emily","afternoons"]},
   {q:"Scientists are constantly warning governments about the rapid ________ of global oil resources over the next fifty years.",options:["depletion","charity","unity","commerce"],answer:"depletion",clues:["scientists","warning","oil","resources","fifty years"]},
   {q:"Developing new tourism projects can provide a massive ________ boost to rural communities by creating hundreds of local jobs.",options:["imperial","economic","neutral","victorious"],answer:"economic",clues:["tourism","projects","rural","communities","jobs"]},
   {q:"The powerful ________ commanded a massive army of brave soldiers, and his laws were obeyed across the land.",options:["victor","scribe","emperor","hitchhiker"],answer:"emperor",clues:["powerful","commanded","army","soldiers","laws"]},
@@ -212,7 +335,7 @@ const questions = [
   {q:"Although I can fully ________ with your current financial difficulties, I cannot lend you any money right now.",options:["sympathize","condemn","reduce","deplete"],answer:"sympathize",clues:["fully","financial","difficulties","lend","money"]},
   {q:"The ________ nurse stayed late at the medical clinic to comfort the crying child before his major surgery began.",options:["compassionate","imperial","neutral","depleted"],answer:"compassionate",clues:["nurse","stayed","clinic","comfort","surgery"]},
   // Q61-80
-  {q:"The school held a massive bake sale last weekend to ________ ________ ________ ________ and improve local school libraries.",options:["raise money for charity","take pity on others","remain neutral always","reduce one's temper"],answer:"raise money for charity",clues:["school","bake sale","weekend","libraries","improve"]},
+  {q:"The school held a massive bake sale last weekend to ________ ________ ________ ________ and improve local school libraries.",options:["raise money for charity","take pity on others","remain neutral always","control one's temper"],answer:"raise money for charity",clues:["school","bake sale","weekend","libraries","improve"]},
   {q:"The doctor took out his medical pad to ________ ________ ________ for some powerful pain-relief pills.",options:["write a prescription","lose one's temper","heed a warning","mock an accent"],answer:"write a prescription",clues:["doctor","medical","pad","pain-relief","pills"]},
   {q:"The company hired a famous celebrity to ________ their new skincare line on various social media platforms.",options:["promote","condemn","reduce","heed"],answer:"promote",clues:["hired","celebrity","skincare","social media","platforms"]},
   {q:"New trade agreements were signed by the presidents to eliminate tariffs and encourage ________ ________ between both nations.",options:["international commerce","business empire","neutral ground","mock exam"],answer:"international commerce",clues:["trade","agreements","presidents","tariffs","nations"]},
@@ -225,13 +348,13 @@ const questions = [
   // Q81-100
   {q:"Following the sudden passing of the beloved queen, the eldest prince prepared to ________ ________ ________ as the new monarch.",options:["take the throne","lose his temper","heed the warning","reduce the risk"],answer:"take the throne",clues:["sudden","queen","eldest","prince","monarch"]},
   {q:"As a dedicated ________ ________, Sarah spends her weekends delivering hot meals to elderly people living alone.",options:["charity worker","mock exam","neutral ground","emperor's palace"],answer:"charity worker",clues:["dedicated","weekends","delivering","meals","elderly"]},
-  {q:"The government established a new department to oversee ________ ________ ________ and protect the rights of workers.",options:["commerce and industry","neutral and charity","mocking and pitiless","reduce and deplete"],answer:"commerce and industry",clues:["government","department","oversee","protect","workers"]},
+  {q:"The government established a new department to oversee ________ ________ ________ and protect the rights of workers.",options:["commerce and industry","calm and fair","mocking and pitiless","reduce and deplete"],answer:"commerce and industry",clues:["government","department","oversee","protect","workers"]},
   {q:"Environmental organizations around the world issued a warning to ________ ________ the illegal dumping of chemical waste.",options:["strongly condemn","take pity on","cozy up with","remain neutral about"],answer:"strongly condemn",clues:["environmental","organizations","warning","illegal","chemical","waste"]},
   {q:"International treaties were successfully signed to ban harmful chemicals that are responsible for causing atmospheric ________ ________.",options:["ozone depletion","neutral colors","business empire","charity event"],answer:"ozone depletion",clues:["treaties","signed","ban","chemicals","atmospheric"]},
   {q:"To prepare for the difficult university entrance examination, students are required to take a ________ ________ every single month.",options:["mock exam","neutral ground","charity event","cozy room"],answer:"mock exam",clues:["university","entrance","examination","students","required"]},
   {q:"A person's physical appearance, such as eye color, is determined entirely by their unique ________ ________.",options:["genetic makeup","neutral ground","mock exam","stolen goods"],answer:"genetic makeup",clues:["physical","appearance","eye color","determined","unique"]},
   {q:"The company board decided to ________ ________ the CEO's inappropriate comments to protect their corporate reputation.",options:["publicly condemn","cozy up with","heed a warning","take pity on"],answer:"publicly condemn",clues:["board","CEO","inappropriate","protect","corporate","reputation"]},
-  {q:"Royal guests from forty different countries arrived at the cathedral to attend ________ ________ ________ ________ ________ today.",options:["the coronation of the king","the neutral ground peace","the charity gala event","the victory commerce show"],answer:"the coronation of the king",clues:["royal","guests","countries","cathedral","attend"]},
+  {q:"Royal guests from forty different countries arrived at the cathedral to attend ________ ________ ________ ________ ________ today.",options:["the coronation of the king","the peace talks","the charity gala event","the trade exhibition"],answer:"the coronation of the king",clues:["royal","guests","countries","cathedral","attend"]},
   {q:"You must hand over this medical ________ to the local pharmacist in order to obtain the necessary pain-relief drugs.",options:["prescription","scribe","commerce","mockery"],answer:"prescription",clues:["hand over","medical","pharmacist","obtain","pain-relief"]}
 ];
 
@@ -319,7 +442,7 @@ const vocabDef = {
   "genetic makeup":{"en":"The combination of genes in an organism","cn":"基因組成","ex":"Eye color is determined entirely by a person's unique genetic makeup."}
 };
 
-const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
 let currentQ = 0, score = 0, answered = false;
 
 function renderQuestion() {
@@ -362,6 +485,7 @@ function selectAnswer(idx) {
     const w = span.getAttribute("data-word").toLowerCase();
     if (q.clues && q.clues.some(c => w.includes(c.toLowerCase()) || c.toLowerCase().includes(w))) span.classList.add("clue-highlight");
   });
+  book5Track(q.q,q.options[idx],q.answer);
   showFeedback(idx);
   document.getElementById("next-btn").classList.add("visible");
   document.getElementById("score-badge").textContent = `Score: ${score}`;
@@ -374,11 +498,9 @@ function showFeedback(chosenIdx) {
   const fh = document.getElementById("feedback-header");
   fh.className = "feedback-header " + (correct ? "correct-header" : "incorrect-header");
   fh.innerHTML = correct ? `<i class="fa-solid fa-circle-check"></i> Correct! The answer is "<strong>${q.answer}</strong>"` : `<i class="fa-solid fa-circle-xmark"></i> The correct answer is "<strong>${q.answer}</strong>"`;
-  const cardsDiv = document.getElementById("vocab-cards");
-  cardsDiv.innerHTML = q.options.map(opt => {
-    const def = vocabDef[opt] || {en:"—",cn:"—",ex:"—"};
-    return `<div class="vocab-card"><div class="vc-word">${opt}<button class="tts-btn" onclick="speak('${opt}')" title="Pronounce"><i class="fa-solid fa-volume-low"></i></button></div><div class="vc-en">${def.en}</div><div class="vc-cn">${def.cn}</div><div class="vc-ex">${def.ex}<button class="tts-btn" onclick="speak(\`${def.ex.replace(/`/g,"'")}\`)" title="Read"><i class="fa-solid fa-volume-low"></i></button></div></div>`;
-  }).join("");
+  const cardsDiv=document.getElementById("vocab-cards");
+  cardsDiv.replaceChildren();
+  book5Review(cardsDiv,q.options,q.answer,q.options[chosenIdx]);
   fb.classList.add("visible");
 }
 
@@ -389,6 +511,7 @@ function nextQuestion() {
 }
 
 function showResults() {
+  book5Finish();
   document.getElementById("quiz-screen").style.display = "none";
   document.getElementById("results-screen").classList.add("visible");
   const pct = Math.round((score/questions.length)*100);
@@ -407,6 +530,7 @@ function showResults() {
 }
 
 function restartQuiz() {
+  book5Reset(); document.querySelector(".submit-btn").disabled=false;
   currentQ=0; score=0; answered=false;
   document.getElementById("results-screen").classList.remove("visible");
   document.getElementById("quiz-screen").style.display = "";
@@ -428,6 +552,7 @@ function speak(text) {
 function readPassage() { speak(questions[currentQ].q.replace(/__________/g,"blank")); }
 
 async function lookupWord(word) {
+  book5Lookup(word);
   if (!word || word.length<2) return;
   const helper = document.getElementById("word-helper");
   document.getElementById("helper-word").textContent = word;
@@ -446,21 +571,12 @@ async function lookupWord(word) {
   } catch { document.getElementById("helper-meaning").textContent = "Definition not found. Try another word."; }
 }
 
-async function submitScore() {
-  const name = document.getElementById("student-name").value.trim();
-  const sid = document.getElementById("student-id").value.trim();
-  const msgEl = document.getElementById("submit-msg");
-  if (!name||!sid){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="Please enter both your name and student ID.";return;}
-  if (GOOGLE_SCRIPT_URL==="YOUR_GOOGLE_APPS_SCRIPT_URL_HERE"){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="⚠️ Teacher: please set the Google Apps Script URL in the HTML file.";return;}
-  msgEl.style.color="#334";msgEl.textContent="Submitting…";
-  try {
-    const payload = {name,studentId:sid,score,total:questions.length,percentage:Math.round((score/questions.length)*100),unit:"Level 5 Unit 22",timestamp:new Date().toLocaleString("zh-TW",{timeZone:"Asia/Taipei"})};
-    await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-    msgEl.style.color="var(--color-correct)";msgEl.textContent=`✅ Score submitted! ${name} — ${score}/${questions.length} (${payload.percentage}%)`;
-  } catch(e){msgEl.style.color="var(--color-incorrect)";msgEl.textContent="Submission failed. Please check your internet connection.";}
+function submitScore() {
+  return book5Submit(document.querySelector(".submit-btn"),document.getElementById("submit-msg"),
+    document.getElementById("student-name").value,document.getElementById("student-id").value,questions.length);
 }
 
-window.speechSynthesis.onvoiceschanged = ()=>{};
+if(window.speechSynthesis)window.speechSynthesis.onvoiceschanged = ()=>{};
 renderQuestion();
 </script>
 </body>

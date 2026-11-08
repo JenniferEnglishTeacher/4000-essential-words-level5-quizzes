@@ -14,6 +14,22 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 @media(max-width:560px){header{padding:17px 14px}header>div{align-items:flex-start}.score{font-size:.8rem;padding:6px 9px}.card{padding:20px 16px}.options{grid-template-columns:1fr}.sentence{font-size:1.08rem}.actions>*{flex:1 1 auto}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 </style>
+<style>
+.b5-review-heading{font:700 1.05rem/1.4 system-ui,sans-serif;margin:1rem 0 .65rem;color:#302018}
+.vocab-cards.b5-review-host,.feedback-grid.b5-review-host{display:block;padding:0 .7rem .45rem}
+#fb.b5-review-host{padding:0 .7rem .45rem}
+.b5-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.35rem 0 .7rem;color:#26303a}
+.b5-review-card{background:#fff;border:1px solid #d9d1c7;border-radius:10px;padding:.75rem;min-width:0;overflow-wrap:anywhere}
+.b5-review-card.b5-right{border-color:#41855e;background:#f0fbf3}.b5-review-card.b5-wrong{border-color:#b96b5e;background:#fff7f5}
+.b5-review-label{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem;font:700 .9rem/1.3 system-ui,sans-serif}
+.b5-review-tag{font-size:.73rem;border-radius:12px;background:#e9ede9;color:#254b34;padding:.2rem .45rem}
+.b5-wrong .b5-review-tag{background:#f9e4df;color:#722e24}
+.b5-pronounce,.b5-read-example{cursor:pointer;min-height:44px;border:1px solid #d3c0ad;border-radius:7px;color:#45291f;background:#fff8ed;font:700 .92rem/1.3 system-ui,sans-serif;padding:.35rem .55rem;text-align:left}
+.b5-pronounce:hover,.b5-read-example:hover{background:#f8e8d2}.b5-pronounce:focus-visible,.b5-read-example:focus-visible{outline:3px solid #a76b19;outline-offset:2px}
+.b5-read-example{font-size:.79rem;margin-top:.2rem}.b5-review-card p{margin:.35rem 0;font:400 .9rem/1.55 system-ui,sans-serif}.b5-review-card p strong{color:#42342c}
+@media(max-width:560px){.b5-review-grid{grid-template-columns:1fr}}
+
+</style>
 </head>
 <body>
 <header><div><div><div class="eyebrow">4000 Essential English Words · Book 5</div><h1>Unit 7</h1><p class="unitTitle">An Architect's Plan</p></div><div class="score" id="score" aria-live="polite">Score: 0</div></div></header>
@@ -47,11 +63,70 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 <div class="actions"><button type="button" class="primary" id="submit">Send result to teacher</button><button type="button" class="secondary" id="download">Save result</button><button type="button" class="secondary" id="retry">Try again</button></div>
 <p id="submissionMessage" class="status" role="status"></p>
 </section>
-<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">Unit 1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html">Unit 2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html">Unit 3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">Unit 4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html">Unit 5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">Unit 6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html" aria-current="page">Unit 7</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-7-an-architect-s-plan" target="_blank" rel="noopener">Book 5 · Unit 7</a>. Practice sentences are written for this quiz.</p></footer>
+<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Book 5 unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">U1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html">U2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html">U3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">U4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html">U5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">U6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html" aria-current="page">U7</a><a href="U8_4000EssentialWords_Interactive_Quiz.html">U8</a><a href="U9_4000EssentialWords_Interactive_Quiz.html">U9</a><a href="U10_4000EssentialWords_Interactive_Quiz.html">U10</a><a href="U11_4000EssentialWords_Interactive_Quiz.html">U11</a><a href="U12_4000EssentialWords_Interactive_Quiz.html">U12</a><a href="U13_4000EssentialWords_Interactive_Quiz.html">U13</a><a href="U14_4000EssentialWords_Interactive_Quiz.html">U14</a><a href="U15_4000EssentialWords_Interactive_Quiz.html">U15</a><a href="U16_4000EssentialWords_Interactive_Quiz.html">U16</a><a href="U17_4000EssentialWords_Interactive_Quiz.html">U17</a><a href="U18_4000EssentialWords_Interactive_Quiz.html">U18</a><a href="U19_4000EssentialWords_Interactive_Quiz.html">U19</a><a href="U20_4000EssentialWords_Interactive_Quiz.html">U20</a><a href="U21_4000EssentialWords_Interactive_Quiz.html">U21</a><a href="U22_4000EssentialWords_Interactive_Quiz.html">U22</a><a href="U23_4000EssentialWords_Interactive_Quiz.html">U23</a><a href="U24_4000EssentialWords_Interactive_Quiz.html">U24</a><a href="U25_4000EssentialWords_Interactive_Quiz.html">U25</a><a href="U26_4000EssentialWords_Interactive_Quiz.html">U26</a><a href="U27_4000EssentialWords_Interactive_Quiz.html">U27</a><a href="U28_4000EssentialWords_Interactive_Quiz.html">U28</a><a href="U29_4000EssentialWords_Interactive_Quiz.html">U29</a><a href="U30_4000EssentialWords_Interactive_Quiz.html">U30</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-7-an-architect-s-plan" target="_blank" rel="noopener">Book 5 · Unit 7</a>. Practice sentences are written for this quiz.</p></footer>
 </main>
 <script>
 
 "use strict";
+const BOOK5_REVIEW = {"account":["An arrangement for keeping money at a bank.","銀行帳戶","I deposited my savings into my bank account."],"architect":["A person who designs buildings.","建築師","The architect drew the plans for the new library."],"conceal":["To hide something.","隱藏","She tried to conceal the key by hiding it inside a drawer."],"crime":["An act punishable by law.","犯罪","Stealing the car was a crime, and the police investigated it."],"deed":["A document proving ownership.","所有權狀","The signed deed proved that she owned the land."],"gratitude":["A feeling of thankfulness.","感激","We expressed our gratitude by thanking the volunteers."],"habitat":["The natural home of a living thing.","棲息地","The wetland is the frog's natural habitat."],"intervene":["To step in to stop a dispute.","介入；調停","The mediator had to intervene between the two arguing groups."],"landmark":["An object marking a location.","地標","Use the tall clock tower as a landmark to find the meeting place."],"legal":["Allowed by or related to law.","合法的","The permit made the construction legal, so it was allowed by law."],"memorable":["Worth remembering for a special reason.","值得紀念的","The wonderful trip was memorable; we still talk about it years later."],"oblige":["To require someone to do something.","要求；迫使","The contract will oblige the company to finish the work on time."],"offense":["A law-breaking action requiring punishment.","違法行為","Parking here is an offense, so the driver must pay a fine."],"proclaim":["To announce publicly.","公開宣布","The mayor will proclaim the news publicly at the ceremony."],"rally":["A large public gathering supporting a cause.","集會","Hundreds attended a rally to support protecting the forest."],"resolve":["To find a solution.","解決","Let's resolve the problem by finding a solution everyone accepts."],"resources":["Available money and useful materials.","資源","The project needs resources, including money, tools, and building materials."],"sentence":["A punishment ordered for a crime.","判刑；刑罰","The judge gave the thief a prison sentence of two years."],"volunteer":["To offer unpaid help.","自願服務","I will volunteer at the shelter, offering my help without payment."],"witness":["Someone seeing a crime or accident.","目擊者","The witness saw the accident and described it to the police."],"fragile":["Easily broken.","易碎的","The fragile glass broke when it fell on the floor."],"remote":["Far away.","偏遠的","They stayed in a remote village far from the city."]};
+function book5Review(host, options, answer, selected) {
+  host.classList.add("b5-review-host");
+  const fragment = document.createDocumentFragment();
+  const heading = document.createElement("h3");
+  heading.className = "b5-review-heading";
+  heading.textContent = "Review all four options · 四個選項解析";
+  fragment.appendChild(heading);
+  const grid = document.createElement("div");
+  grid.className = "b5-review-grid";
+  options.forEach((word, i) => {
+    const entry = BOOK5_REVIEW[word];
+    const card = document.createElement("article");
+    card.className = "b5-review-card" + (word === answer ? " b5-right" : word === selected ? " b5-wrong" : "");
+    const label = document.createElement("div");
+    label.className = "b5-review-label";
+    label.textContent = String.fromCharCode(65 + i) + ". ";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "b5-pronounce";
+    const display = word === "etc" ? "etc." : word;
+    button.textContent = display + " 🔊";
+    button.setAttribute("aria-label", "Pronounce " + display);
+    button.addEventListener("click", () => speak(word === "etc" ? "et cetera" : word));
+    label.appendChild(button);
+    if (word === answer || word === selected) {
+      const state = document.createElement("span");
+      state.className = "b5-review-tag";
+      state.textContent = word === answer ? "✓ Correct answer" : "Your choice";
+      label.appendChild(state);
+    }
+    card.appendChild(label);
+    for (const [name, value, language] of [["English", entry[0], "en"], ["中文", entry[1], "zh-Hant"], ["Example", entry[2], "en"]]) {
+      const p = document.createElement("p");
+      const title = document.createElement("strong");
+      title.textContent = name + ": ";
+      const body = document.createElement("span");
+      body.lang = language;
+      body.textContent = value;
+      p.append(title, body);
+      card.appendChild(p);
+    }
+    const example = document.createElement("button");
+    example.type = "button";
+    example.className = "b5-read-example";
+    example.textContent = "🔊 Read example";
+    example.addEventListener("click", () => speak(entry[2].replace(/\betc\./gi, "et cetera.")));
+    card.appendChild(example);
+    grid.appendChild(card);
+  });
+  fragment.appendChild(grid);
+  host.appendChild(fragment);
+}
+function book5Filled(question, word) {
+  const spoken = word === "etc" ? "etc" : word;
+  return question.replace(/_{3,}/, (_, offset) => offset === 0 ? spoken.charAt(0).toUpperCase() + spoken.slice(1) : spoken);
+}
+
+
 const CONFIG={"unit":7,"title":"An Architect's Plan"};
 const TARGETS=[{"word":"account","cat":"n","def":"An arrangement for keeping money at a bank.","cn":"銀行帳戶","q":"I deposited my savings into my bank ______.","options":["account","architect","crime","deed"]},{"word":"architect","cat":"n","def":"A person who designs buildings.","cn":"建築師","q":"The ______ drew the plans for the new library.","options":["architect","crime","deed","gratitude"]},{"word":"conceal","cat":"v","def":"To hide something.","cn":"隱藏","q":"She tried to ______ the key by hiding it inside a drawer.","options":["conceal","proclaim","resolve","volunteer"]},{"word":"crime","cat":"n","def":"An act punishable by law.","cn":"犯罪","q":"Stealing the car was a ______, and the police investigated it.","options":["crime","gratitude","habitat","landmark"]},{"word":"deed","cat":"n","def":"A document proving ownership.","cn":"所有權狀","q":"The signed ______ proved that she owned the land.","options":["deed","habitat","landmark","offense"]},{"word":"gratitude","cat":"n","def":"A feeling of thankfulness.","cn":"感激","q":"We expressed our ______ by thanking the volunteers.","options":["gratitude","landmark","offense","rally"]},{"word":"habitat","cat":"n","def":"The natural home of a living thing.","cn":"棲息地","q":"The wetland is the frog's natural ______.","options":["habitat","offense","rally","resources"]},{"word":"intervene","cat":"v","def":"To step in to stop a dispute.","cn":"介入；調停","q":"The mediator had to ______ between the two arguing groups.","options":["intervene","proclaim","resolve","volunteer"]},{"word":"landmark","cat":"n","def":"An object marking a location.","cn":"地標","q":"Use the tall clock tower as a ______ to find the meeting place.","options":["landmark","resources","sentence","witness"]},{"word":"legal","cat":"adj","def":"Allowed by or related to law.","cn":"合法的","q":"The permit made the construction ______, so it was allowed by law.","options":["legal","memorable","fragile","remote"]},{"word":"memorable","cat":"adj","def":"Worth remembering for a special reason.","cn":"值得紀念的","q":"The wonderful trip was ______; we still talk about it years later.","options":["memorable","fragile","remote","legal"]},{"word":"oblige","cat":"v","def":"To require someone to do something.","cn":"要求；迫使","q":"The contract will ______ the company to finish the work on time.","options":["oblige","intervene","proclaim","resolve"]},{"word":"offense","cat":"n","def":"A law-breaking action requiring punishment.","cn":"違法行為","q":"Parking here is an ______, so the driver must pay a fine.","options":["offense","deed","gratitude","habitat"]},{"word":"proclaim","cat":"v","def":"To announce publicly.","cn":"公開宣布","q":"The mayor will ______ the news publicly at the ceremony.","options":["proclaim","resolve","volunteer","conceal"]},{"word":"rally","cat":"n","def":"A large public gathering supporting a cause.","cn":"集會","q":"Hundreds attended a ______ to support protecting the forest.","options":["rally","deed","gratitude","habitat"]},{"word":"resolve","cat":"v","def":"To find a solution.","cn":"解決","q":"Let's ______ the problem by finding a solution everyone accepts.","options":["resolve","conceal","intervene","oblige"]},{"word":"resources","cat":"n","def":"Available money and useful materials.","cn":"資源","q":"The project needs ______, including money, tools, and building materials.","options":["resources","habitat","landmark","offense"]},{"word":"sentence","cat":"n","def":"A punishment ordered for a crime.","cn":"判刑；刑罰","q":"The judge gave the thief a prison ______ of two years.","options":["sentence","landmark","offense","rally"]},{"word":"volunteer","cat":"v","def":"To offer unpaid help.","cn":"自願服務","q":"I will ______ at the shelter, offering my help without payment.","options":["volunteer","proclaim","resolve","conceal"]},{"word":"witness","cat":"n","def":"Someone seeing a crime or accident.","cn":"目擊者","q":"The ______ saw the accident and described it to the police.","options":["witness","rally","resources","sentence"]}];
 const EXTRA=[{"word":"fragile","cat":"adj","def":"Easily broken.","cn":"易碎的"},{"word":"remote","cat":"adj","def":"Far away.","cn":"偏遠的"}];
@@ -100,7 +175,7 @@ function speak(text){
  const voice=window.speechSynthesis.getVoices().find(v=>v.lang==="en-US")||window.speechSynthesis.getVoices().find(v=>v.lang.startsWith("en"));
  if(voice)u.voice=voice;window.speechSynthesis.speak(u);
 }
-function readQuestion(){if(!student||completed)return;const q=questions[at];speak(q.q.replace(/_{3,}/g,answered?q.answer:"blank"));}
+function readQuestion(){if(!student||completed)return;const q=questions[at];speak(answered?book5Filled(q.q,q.answer):q.q.replace(/_{3,}/g,"blank"));}
 function startQuiz(event){
  if(event)event.preventDefault();
  if(student)return false;
@@ -123,9 +198,10 @@ function choose(choice){
  $("score").textContent="Score: "+score;
  [...$("options").children].forEach(b=>{b.disabled=true;if(b.dataset.word===q.answer)b.classList.add("correct");else if(b.dataset.word===choice)b.classList.add("wrong");});
  $("feedback").className="feedback "+(ok?"good":"bad");
- $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><p>'+esc(POS[q.cat])+' · '+esc(q.def)+'</p><p class="cn">'+esc(q.cn)+'</p><div class="completedSentence">'+wordHtml(q.q.replace(/_{3,}/g,q.answer))+'</div>';
+ $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><div class="completedSentence">'+wordHtml(book5Filled(q.q,q.answer))+'</div>';
+ book5Review($("feedback"),q.options,q.answer,choice);
  $("feedback").hidden=false;$("next").textContent=at===19?"See results":"Next question →";$("next").hidden=false;
- $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus();return true;
+ $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus({preventScroll:true});return true;
 }
 function nextQuestion(){if(!answered||completed)return false;if(at===19)finish();else{at++;render();}return true;}
 function finish(){

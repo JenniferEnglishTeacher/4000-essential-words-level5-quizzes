@@ -14,6 +14,22 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 @media(max-width:560px){header{padding:17px 14px}header>div{align-items:flex-start}.score{font-size:.8rem;padding:6px 9px}.card{padding:20px 16px}.options{grid-template-columns:1fr}.sentence{font-size:1.08rem}.actions>*{flex:1 1 auto}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
 </style>
+<style>
+.b5-review-heading{font:700 1.05rem/1.4 system-ui,sans-serif;margin:1rem 0 .65rem;color:#302018}
+.vocab-cards.b5-review-host,.feedback-grid.b5-review-host{display:block;padding:0 .7rem .45rem}
+#fb.b5-review-host{padding:0 .7rem .45rem}
+.b5-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:.35rem 0 .7rem;color:#26303a}
+.b5-review-card{background:#fff;border:1px solid #d9d1c7;border-radius:10px;padding:.75rem;min-width:0;overflow-wrap:anywhere}
+.b5-review-card.b5-right{border-color:#41855e;background:#f0fbf3}.b5-review-card.b5-wrong{border-color:#b96b5e;background:#fff7f5}
+.b5-review-label{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem;font:700 .9rem/1.3 system-ui,sans-serif}
+.b5-review-tag{font-size:.73rem;border-radius:12px;background:#e9ede9;color:#254b34;padding:.2rem .45rem}
+.b5-wrong .b5-review-tag{background:#f9e4df;color:#722e24}
+.b5-pronounce,.b5-read-example{cursor:pointer;min-height:44px;border:1px solid #d3c0ad;border-radius:7px;color:#45291f;background:#fff8ed;font:700 .92rem/1.3 system-ui,sans-serif;padding:.35rem .55rem;text-align:left}
+.b5-pronounce:hover,.b5-read-example:hover{background:#f8e8d2}.b5-pronounce:focus-visible,.b5-read-example:focus-visible{outline:3px solid #a76b19;outline-offset:2px}
+.b5-read-example{font-size:.79rem;margin-top:.2rem}.b5-review-card p{margin:.35rem 0;font:400 .9rem/1.55 system-ui,sans-serif}.b5-review-card p strong{color:#42342c}
+@media(max-width:560px){.b5-review-grid{grid-template-columns:1fr}}
+
+</style>
 </head>
 <body>
 <header><div><div><div class="eyebrow">4000 Essential English Words · Book 5</div><h1>Unit 5</h1><p class="unitTitle">The Magic Computer</p></div><div class="score" id="score" aria-live="polite">Score: 0</div></div></header>
@@ -47,11 +63,70 @@ main{max-width:860px;margin:auto;padding:24px 16px 64px}.card{padding:26px;backg
 <div class="actions"><button type="button" class="primary" id="submit">Send result to teacher</button><button type="button" class="secondary" id="download">Save result</button><button type="button" class="secondary" id="retry">Try again</button></div>
 <p id="submissionMessage" class="status" role="status"></p>
 </section>
-<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">Unit 1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html">Unit 2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html">Unit 3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">Unit 4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html" aria-current="page">Unit 5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">Unit 6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html">Unit 7</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-5-the-magic-computer" target="_blank" rel="noopener">Book 5 · Unit 5</a>. Practice sentences are written for this quiz.</p></footer>
+<footer class="footer"><a href="index.html">← Book 5 dashboard</a><nav class="unitNav" aria-label="Book 5 unit quizzes"><a href="U1_4000EssentialWords_Interactive_Quiz.html">U1</a><a href="U2_4000EssentialWords_Interactive_Quiz.html">U2</a><a href="U3_4000EssentialWords_Interactive_Quiz.html">U3</a><a href="U4_4000EssentialWords_Interactive_Quiz.html">U4</a><a href="U5_4000EssentialWords_Interactive_Quiz.html" aria-current="page">U5</a><a href="U6_4000EssentialWords_Interactive_Quiz.html">U6</a><a href="U7_4000EssentialWords_Interactive_Quiz.html">U7</a><a href="U8_4000EssentialWords_Interactive_Quiz.html">U8</a><a href="U9_4000EssentialWords_Interactive_Quiz.html">U9</a><a href="U10_4000EssentialWords_Interactive_Quiz.html">U10</a><a href="U11_4000EssentialWords_Interactive_Quiz.html">U11</a><a href="U12_4000EssentialWords_Interactive_Quiz.html">U12</a><a href="U13_4000EssentialWords_Interactive_Quiz.html">U13</a><a href="U14_4000EssentialWords_Interactive_Quiz.html">U14</a><a href="U15_4000EssentialWords_Interactive_Quiz.html">U15</a><a href="U16_4000EssentialWords_Interactive_Quiz.html">U16</a><a href="U17_4000EssentialWords_Interactive_Quiz.html">U17</a><a href="U18_4000EssentialWords_Interactive_Quiz.html">U18</a><a href="U19_4000EssentialWords_Interactive_Quiz.html">U19</a><a href="U20_4000EssentialWords_Interactive_Quiz.html">U20</a><a href="U21_4000EssentialWords_Interactive_Quiz.html">U21</a><a href="U22_4000EssentialWords_Interactive_Quiz.html">U22</a><a href="U23_4000EssentialWords_Interactive_Quiz.html">U23</a><a href="U24_4000EssentialWords_Interactive_Quiz.html">U24</a><a href="U25_4000EssentialWords_Interactive_Quiz.html">U25</a><a href="U26_4000EssentialWords_Interactive_Quiz.html">U26</a><a href="U27_4000EssentialWords_Interactive_Quiz.html">U27</a><a href="U28_4000EssentialWords_Interactive_Quiz.html">U28</a><a href="U29_4000EssentialWords_Interactive_Quiz.html">U29</a><a href="U30_4000EssentialWords_Interactive_Quiz.html">U30</a></nav><p>Vocabulary reference: <a href="https://www.essentialenglish.review/book/4000-essential-english-words-5-2nd-edition/unit-5-the-magic-computer" target="_blank" rel="noopener">Book 5 · Unit 5</a>. Practice sentences are written for this quiz.</p></footer>
 </main>
 <script>
 
 "use strict";
+const BOOK5_REVIEW = {"awhile":["For a short time.","一會兒","She stayed only awhile—for a short time—before returning home."],"cyberspace":["The Internet's virtual space.","網路空間","The online game's players meet in cyberspace, the virtual world of the Internet."],"edit":["To correct writing for publication.","編輯；修改","Before publication, please edit the draft to correct its spelling and grammar."],"essay":["A short text on one subject.","文章；短論文","For homework, write a short essay explaining your opinion on school uniforms."],"evaluate":["To assess before deciding.","評估","We need to evaluate the plan, carefully judging whether it will work."],"faint":["To lose consciousness.","昏倒","Without enough food, he felt he might faint and lose consciousness."],"global":["Involving the whole world.","全球的","Air pollution affects countries everywhere, making it a global problem."],"gymnasium":["A building for exercise.","體育館；健身房","The school's gymnasium has exercise machines and an indoor basketball court."],"highlight":["To mark with noticeable color.","標示；強調","Use a colored marker to highlight the important words so they stand out."],"ignorant":["Lacking knowledge.","無知的；不了解的","She was ignorant about the subject and knew nothing about it."],"index":["An alphabetical guide to book contents.","索引","Look in the book's index for an alphabetical list of topics and page numbers."],"lecture":["An educational talk.","講座；演講","The scientist gave a long educational lecture to the students."],"moral":["A story's lesson.","寓意；道德教訓","The moral of the fable is the lesson that kindness matters."],"operate":["To function or work.","操作；運作","This engine cannot operate until someone repairs it; it will not function."],"private":["For one person or group only.","私人的；私密的","This diary is private, intended for its owner alone."],"recent":["Having happened shortly before now.","最近的","The discovery is recent; the researchers announced it only yesterday."],"resolution":["A firm personal decision.","決心；決議","My New Year's resolution is a firm personal decision to read daily."],"semester":["One division of a school year.","學期","This semester is one part of our school year and ends in January."],"typewritten":["Written using a keyboard.","打字的","The report must be typewritten, produced on a computer rather than written by hand."],"weird":["Strange or unusual.","奇怪的","A purple carrot that glowed in the dark would be very weird and unusual."],"silently":["Without making a sound.","安靜地","The class read silently for ten minutes."],"everywhere":["In all places.","到處","We looked everywhere for the missing key."],"never":["At no time.","從不","I never leave my bike out in the rain."]};
+function book5Review(host, options, answer, selected) {
+  host.classList.add("b5-review-host");
+  const fragment = document.createDocumentFragment();
+  const heading = document.createElement("h3");
+  heading.className = "b5-review-heading";
+  heading.textContent = "Review all four options · 四個選項解析";
+  fragment.appendChild(heading);
+  const grid = document.createElement("div");
+  grid.className = "b5-review-grid";
+  options.forEach((word, i) => {
+    const entry = BOOK5_REVIEW[word];
+    const card = document.createElement("article");
+    card.className = "b5-review-card" + (word === answer ? " b5-right" : word === selected ? " b5-wrong" : "");
+    const label = document.createElement("div");
+    label.className = "b5-review-label";
+    label.textContent = String.fromCharCode(65 + i) + ". ";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "b5-pronounce";
+    const display = word === "etc" ? "etc." : word;
+    button.textContent = display + " 🔊";
+    button.setAttribute("aria-label", "Pronounce " + display);
+    button.addEventListener("click", () => speak(word === "etc" ? "et cetera" : word));
+    label.appendChild(button);
+    if (word === answer || word === selected) {
+      const state = document.createElement("span");
+      state.className = "b5-review-tag";
+      state.textContent = word === answer ? "✓ Correct answer" : "Your choice";
+      label.appendChild(state);
+    }
+    card.appendChild(label);
+    for (const [name, value, language] of [["English", entry[0], "en"], ["中文", entry[1], "zh-Hant"], ["Example", entry[2], "en"]]) {
+      const p = document.createElement("p");
+      const title = document.createElement("strong");
+      title.textContent = name + ": ";
+      const body = document.createElement("span");
+      body.lang = language;
+      body.textContent = value;
+      p.append(title, body);
+      card.appendChild(p);
+    }
+    const example = document.createElement("button");
+    example.type = "button";
+    example.className = "b5-read-example";
+    example.textContent = "🔊 Read example";
+    example.addEventListener("click", () => speak(entry[2].replace(/\betc\./gi, "et cetera.")));
+    card.appendChild(example);
+    grid.appendChild(card);
+  });
+  fragment.appendChild(grid);
+  host.appendChild(fragment);
+}
+function book5Filled(question, word) {
+  const spoken = word === "etc" ? "etc" : word;
+  return question.replace(/_{3,}/, (_, offset) => offset === 0 ? spoken.charAt(0).toUpperCase() + spoken.slice(1) : spoken);
+}
+
+
 const CONFIG={"unit":5,"title":"The Magic Computer"};
 const TARGETS=[{"word":"awhile","cat":"adv","def":"For a short time.","cn":"一會兒","q":"She stayed only ______—for a short time—before returning home.","options":["awhile","silently","everywhere","never"]},{"word":"cyberspace","cat":"n","def":"The Internet's virtual space.","cn":"網路空間","q":"The online game's players meet in ______, the virtual world of the Internet.","options":["cyberspace","gymnasium","index","lecture"]},{"word":"edit","cat":"v","def":"To correct writing for publication.","cn":"編輯；修改","q":"Before publication, please ______ the draft to correct its spelling and grammar.","options":["edit","highlight","operate","evaluate"]},{"word":"essay","cat":"n","def":"A short text on one subject.","cn":"文章；短論文","q":"For homework, write a short ______ explaining your opinion on school uniforms.","options":["essay","lecture","moral","resolution"]},{"word":"evaluate","cat":"v","def":"To assess before deciding.","cn":"評估","q":"We need to ______ the plan, carefully judging whether it will work.","options":["evaluate","edit","faint","highlight"]},{"word":"faint","cat":"v","def":"To lose consciousness.","cn":"昏倒","q":"Without enough food, he felt he might ______ and lose consciousness.","options":["faint","evaluate","highlight","operate"]},{"word":"global","cat":"adj","def":"Involving the whole world.","cn":"全球的","q":"Air pollution affects countries everywhere, making it a ______ problem.","options":["global","private","recent","typewritten"]},{"word":"gymnasium","cat":"n","def":"A building for exercise.","cn":"體育館；健身房","q":"The school's ______ has exercise machines and an indoor basketball court.","options":["gymnasium","cyberspace","essay","index"]},{"word":"highlight","cat":"v","def":"To mark with noticeable color.","cn":"標示；強調","q":"Use a colored marker to ______ the important words so they stand out.","options":["highlight","edit","evaluate","faint"]},{"word":"ignorant","cat":"adj","def":"Lacking knowledge.","cn":"無知的；不了解的","q":"She was ______ about the subject and knew nothing about it.","options":["ignorant","weird","global","private"]},{"word":"index","cat":"n","def":"An alphabetical guide to book contents.","cn":"索引","q":"Look in the book's ______ for an alphabetical list of topics and page numbers.","options":["index","lecture","moral","resolution"]},{"word":"lecture","cat":"n","def":"An educational talk.","cn":"講座；演講","q":"The scientist gave a long educational ______ to the students.","options":["lecture","moral","resolution","semester"]},{"word":"moral","cat":"n","def":"A story's lesson.","cn":"寓意；道德教訓","q":"The ______ of the fable is the lesson that kindness matters.","options":["moral","resolution","semester","cyberspace"]},{"word":"operate","cat":"v","def":"To function or work.","cn":"操作；運作","q":"This engine cannot ______ until someone repairs it; it will not function.","options":["operate","evaluate","faint","highlight"]},{"word":"private","cat":"adj","def":"For one person or group only.","cn":"私人的；私密的","q":"This diary is ______, intended for its owner alone.","options":["private","weird","global","ignorant"]},{"word":"recent","cat":"adj","def":"Having happened shortly before now.","cn":"最近的","q":"The discovery is ______; the researchers announced it only yesterday.","options":["recent","global","ignorant","private"]},{"word":"resolution","cat":"n","def":"A firm personal decision.","cn":"決心；決議","q":"My New Year's ______ is a firm personal decision to read daily.","options":["resolution","gymnasium","index","lecture"]},{"word":"semester","cat":"n","def":"One division of a school year.","cn":"學期","q":"This ______ is one part of our school year and ends in January.","options":["semester","index","lecture","moral"]},{"word":"typewritten","cat":"adj","def":"Written using a keyboard.","cn":"打字的","q":"The report must be ______, produced on a computer rather than written by hand.","options":["typewritten","recent","weird","global"]},{"word":"weird","cat":"adj","def":"Strange or unusual.","cn":"奇怪的","q":"A purple carrot that glowed in the dark would be very ______ and unusual.","options":["weird","typewritten","global","ignorant"]}];
 const EXTRA=[{"word":"silently","cat":"adv","def":"Without making a sound.","cn":"安靜地"},{"word":"everywhere","cat":"adv","def":"In all places.","cn":"到處"},{"word":"never","cat":"adv","def":"At no time.","cn":"從不"}];
@@ -100,7 +175,7 @@ function speak(text){
  const voice=window.speechSynthesis.getVoices().find(v=>v.lang==="en-US")||window.speechSynthesis.getVoices().find(v=>v.lang.startsWith("en"));
  if(voice)u.voice=voice;window.speechSynthesis.speak(u);
 }
-function readQuestion(){if(!student||completed)return;const q=questions[at];speak(q.q.replace(/_{3,}/g,answered?q.answer:"blank"));}
+function readQuestion(){if(!student||completed)return;const q=questions[at];speak(answered?book5Filled(q.q,q.answer):q.q.replace(/_{3,}/g,"blank"));}
 function startQuiz(event){
  if(event)event.preventDefault();
  if(student)return false;
@@ -123,9 +198,10 @@ function choose(choice){
  $("score").textContent="Score: "+score;
  [...$("options").children].forEach(b=>{b.disabled=true;if(b.dataset.word===q.answer)b.classList.add("correct");else if(b.dataset.word===choice)b.classList.add("wrong");});
  $("feedback").className="feedback "+(ok?"good":"bad");
- $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><p>'+esc(POS[q.cat])+' · '+esc(q.def)+'</p><p class="cn">'+esc(q.cn)+'</p><div class="completedSentence">'+wordHtml(q.q.replace(/_{3,}/g,q.answer))+'</div>';
+ $("feedback").innerHTML='<strong>'+(ok?"Correct!":"Correct answer: "+esc(q.answer))+'</strong><div class="completedSentence">'+wordHtml(book5Filled(q.q,q.answer))+'</div>';
+ book5Review($("feedback"),q.options,q.answer,choice);
  $("feedback").hidden=false;$("next").textContent=at===19?"See results":"Next question →";$("next").hidden=false;
- $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus();return true;
+ $("progress").value=at+1;$("progressText").textContent=(at+1)+" / 20 completed";$("next").focus({preventScroll:true});return true;
 }
 function nextQuestion(){if(!answered||completed)return false;if(at===19)finish();else{at++;render();}return true;}
 function finish(){
